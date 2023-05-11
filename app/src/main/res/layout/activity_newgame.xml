@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/ic_launcher_background"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/text_whatname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/kosugimaru"
+        android:text="あなたのなまえは？"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="34sp" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="161dp"
+        android:layout_height="165dp"
+        android:contentDescription="game_image"
+        android:src="@drawable/rose" />
+
+    <EditText
+        android:id="@+id/text_name"
+        android:layout_width="315dp"
+        android:layout_height="wrap_content"
+        android:autofillHints="にゅうりょくしてね"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:minHeight="48dp" />
+
+    <Button
+        android:id="@+id/button_start"
+        android:layout_width="313dp"
+        android:layout_height="wrap_content"
+        android:text="すたーと！"
+        android:textSize="24sp" />
+
+
+</LinearLayout>
