@@ -55,22 +55,35 @@ class MainActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
-        // なまえを取得
-        var getName = this.intent.getStringExtra("LABEL_NAME") //設定したkeyで取り出す
+        //intentから取り出す
+//        var getName = this.intent.getStringExtra("LABEL_NAME") //設定したkeyで取り出す
+//        if (getName == "") {
+//            getName = "ななしのごんべ"//Assign default string
+//        }
 
-        if(getName == ""){
-            getName = "ななしのごんべ";//Assign default string
-        }
+
+        // 読み出すボタン押下時の挙動。
+//        val buf: BufferedReader = readFile("contents.txt")
+//        val result = buf.use { it.readText() }
+//        binding.labelName.text = "$result　ちゃん"
 
         // なまえテキストに表示する
-        binding.labelName.text = "$getName　ちゃん"
+        val prefs = getSharedPreferences("userName", MODE_PRIVATE)
+        val name = prefs.getString("userName", "ななしのごんべ")
+        binding.labelName.text = "$name ちゃん"
 
         quizData.shuffle()
         showNextQuiz()
     }
 
+    // 読み出し処理。
+//    private fun readFile(file: String): BufferedReader {
+//        val readFile = File(applicationContext.filesDir, file)
+//        return readFile.bufferedReader()
+//    }
+
     // クイズを出題する
-   private fun showNextQuiz() {
+    private fun showNextQuiz() {
 
         // カウントラベルの更新
         binding.quizNum.text = getString(R.string.question_num, quizCount)
