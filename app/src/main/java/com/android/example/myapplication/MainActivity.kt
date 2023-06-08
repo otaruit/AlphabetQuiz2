@@ -9,7 +9,9 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.android.example.myapplication.databinding.ActivityMainBinding
 
-class MainActivity : AppCompatActivity() {
+
+class MainActivity : AppCompatActivity(){
+
 
     private lateinit var binding: ActivityMainBinding
 
