@@ -16,7 +16,6 @@ class NewgameActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-
         binding = ActivityNewgameBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
@@ -52,7 +51,6 @@ class NewgameActivity : AppCompatActivity() {
             //次のActivityへ
             startActivity(Intent(this@NewgameActivity, MainActivity::class.java))
         }
-    }
 
 //    // 保存処理。
 //    private fun saveFile(file: String, str: String) {
@@ -67,8 +65,9 @@ class NewgameActivity : AppCompatActivity() {
 //        return readFile.bufferedReader()
 //    }
 
-}
 
+    }
+}
 
 
 
