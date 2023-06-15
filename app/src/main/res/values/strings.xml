@@ -15,5 +15,8 @@
     <string name="five_question">5もんちゅう</string>
     <string name="text_name">%sちゃん</string>
     <string name="whatName">あなたのなまえは？</string>
+    <string name="gameImage">game_image</string>
+    <string name="start">すたーと！</string>
+    <string name="textFileName">quiz_data.txt</string>
 
 </resources>
