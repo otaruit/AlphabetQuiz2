@@ -18,6 +18,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
 
+
     private var rightAnswer: String? = null
     private var questionAlphabet: String? = null
     private var rightAnswerCount = 0
@@ -36,7 +37,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(view)
 
         // カウントラベルの更新
-        binding.quizNum.text = "だい" + quizCount.toString() + "もん"
+        binding.quizNum.text = "$quizCount"
 
         // なまえテキストに表示する
         val prefs = getSharedPreferences("userName", MODE_PRIVATE)
@@ -63,7 +64,6 @@ class MainActivity : AppCompatActivity() {
                 while (br.readLine().also { str = it } != null) {
                     listPortion = listOf(*str.split(",").toTypedArray()).toMutableList()
                     quizData.add(listPortion)
-                    println(quizData)
                 }
 
             } finally {
@@ -77,7 +77,6 @@ class MainActivity : AppCompatActivity() {
 
     // クイズを出題する
     private fun showNextQuiz() {
-
         // quiz_data.txtからクイズデータ読み取り
         readFile(getString(R.string.textFileName))
         quizData.shuffle()
@@ -116,17 +115,36 @@ class MainActivity : AppCompatActivity() {
         // どの解答ボタンが押されたか
         val answerBtn: Button = findViewById(view.id)
         val btnText = answerBtn.text.toString()
+        val btnId = view.id.toString()
+        println("ボタンのIDは$btnId")
+        binding.answer1.setBackgroundResource(R.drawable.white_bg)
+
+        var correctBtnColor = answerBtn.solidColor
+        binding.answer1
 
         // ダイアログのタイトルを作成
         val alertTitle: String
         if (btnText == rightAnswer) {
+            //正解の時の挙動　正解アニメーション表示
+
+            //正解の選択肢のボタンの背景色を青に
+
+
             alertTitle = "せいかい!"
             rightAnswerCount++
         } else {
+            //不正解の時の挙動　不正解アニメーション表示
+
+            //選択したの選択肢のボタンの背景色を赤に
+
+            //正解の選択肢のボタンの背景色を青に
             alertTitle = "ざんねん、はずれ..."
         }
 
         // ダイアログを作成
+//        var correct:LottieAnimationView = findViewById(R.id.correct)
+//        correct.animate().translationX(2000f).setDuration(2000).startDelay=2900
+
         AlertDialog.Builder(this)
             .setTitle(alertTitle)
             .setMessage("こたえ : $questionAlphabet は $rightAnswer でした！")

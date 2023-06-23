@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">My Application</string>
-    <string name="question_num">もんだい%d</string>
+    <string name="question_num">%d</string>
     <string name="question_alphabet">%s</string>
     <string name="question_text">は おおもじ でどれ？</string>
     <string name="answer_1">A</string>
@@ -18,5 +18,7 @@
     <string name="gameImage">game_image</string>
     <string name="start">すたーと！</string>
     <string name="textFileName">quiz_data.txt</string>
+    <string name="incorrect_num_str">はずれ　%dもん</string>
+    <string name="correct_num_str">せいかい　%dもん</string>
 
 </resources>
