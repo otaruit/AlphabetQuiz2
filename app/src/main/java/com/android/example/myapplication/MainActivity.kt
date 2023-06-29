@@ -13,6 +13,8 @@ import com.android.example.myapplication.databinding.ActivityMainBinding
 import java.io.BufferedReader
 import java.io.InputStream
 import java.io.InputStreamReader
+import java.lang.Character.isLowerCase
+import java.lang.Character.isUpperCase
 
 
 class MainActivity : AppCompatActivity() {
@@ -78,10 +80,6 @@ class MainActivity : AppCompatActivity() {
     // クイズを出題する
     @SuppressLint("SetTextI18n")
     private fun showNextQuiz() {
-        // カウントラベルの更新
-        binding.quizNum.text = quizCount.toString()
-        binding.correctAnswerNum.text = "せいかい　${rightAnswerCount}もん"
-        binding.wrongAnswerNum.text = "はずれ　${(quizCount - rightAnswerCount - 1)}もん"
 
         // quiz_data.txtからクイズデータ読み取り
         readFile(getString(R.string.textFileName))
@@ -90,16 +88,35 @@ class MainActivity : AppCompatActivity() {
         // クイズを１問取り出す
         val quiz: MutableList<String> = quizData[0]
 
-        //おおもじかこもじか判断
-        val question = quiz[0]
+        // ラベル更新
+        updateCountLabel(quiz)
 
+        // 出題したクイズを削除する
+        quizData.removeAt(0)
+
+
+    }
+
+    // ラベルの更新
+    private fun updateCountLabel(quiz: MutableList<String>) {
+
+        binding.quizNum.text = quizCount.toString()
+        binding.correctAnswerNum.text = "せいかい　${rightAnswerCount}もん"
+        binding.wrongAnswerNum.text = "はずれ　${(quizCount - rightAnswerCount - 1)}もん"
+
+        //おおもじかこもじか判断
+        if (isUpperCase(quiz[0].first())) {
+            binding.textQuestion.text = "は こもじ でどれ？"
+        } else {
+            binding.textQuestion.text = "は おおもじ でどれ？"
+        }
 
         // 問題をセット
         binding.quizText.text = quiz[0]
-        questionAlphabet = quiz[0]
 
         // 正解をセット
         rightAnswer = quiz[1]
+        println(rightAnswer)
 
         // 正解を削除
         quiz.removeAt(0)
@@ -109,15 +126,14 @@ class MainActivity : AppCompatActivity() {
 
         // 選択肢をセット
         binding.answer1.text = quiz[0]
+        println(quiz[0])
         binding.answer2.text = quiz[1]
+        println(quiz[1])
         binding.answer3.text = quiz[2]
         binding.answer4.text = quiz[3]
 
-        // 出題したクイズを削除する
-        quizData.removeAt(0)
 
     }
-
 
     // 解答ボタンが押されたら呼ばれる
     @RequiresApi(Build.VERSION_CODES.O)
@@ -203,13 +219,13 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-// totalScore保存
-    private fun addScore(){
-    val prefs = getSharedPreferences("userInformation", MODE_PRIVATE)
-    val totalScore = prefs.getInt("totalScore", 0) + rightAnswerCount
-    val editor: SharedPreferences.Editor = prefs.edit()
-    editor.putInt("totalScore", totalScore)
-    editor.apply()
+    // totalScore保存
+    private fun addScore() {
+        val prefs = getSharedPreferences("userInformation", MODE_PRIVATE)
+        val totalScore = prefs.getInt("totalScore", 0) + rightAnswerCount
+        val editor: SharedPreferences.Editor = prefs.edit()
+        editor.putInt("totalScore", totalScore)
+        editor.apply()
     }
 
     // 保存処理

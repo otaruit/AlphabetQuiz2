@@ -2,11 +2,9 @@ package com.android.example.myapplication
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.animation.Transformation
 import android.widget.ProgressBar
 import androidx.appcompat.app.AppCompatActivity
 import com.android.example.myapplication.databinding.ActivityResultBinding
-import com.google.android.material.color.utilities.Score
 
 
 class ResultActivity : AppCompatActivity() {
@@ -50,7 +48,7 @@ class ResultActivity : AppCompatActivity() {
         bar.max = 50
 
         val anim = ProgressBarAnimation(bar, (totalScore - score).toFloat(), totalScore.toFloat())
-        anim.duration = 2000
+        anim.duration = 1000
         bar.startAnimation(anim)
 
 

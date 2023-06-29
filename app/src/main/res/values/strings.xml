@@ -2,11 +2,8 @@
     <string name="app_name">My Application</string>
     <string name="question_num">%d</string>
     <string name="question_alphabet">%s</string>
-    <string name="question_text">は おおもじ でどれ？</string>
-    <string name="answer_1">A</string>
-    <string name="answer_2">B</string>
-    <string name="answer_3">C</string>
-    <string name="answer_4">D</string>
+    <string name="question_text">は %s でどれ？</string>
+    <string name="selection">%s</string>
 
     <!-- 結果画面 -->
     <string name="result_title">けっかはっぴょう</string>
@@ -22,6 +19,7 @@
     <string name="correct_num_str">せいかい　%dもん</string>
     <string name="name_hint">なまえをにゅうりょくしてね</string>
     <string name="str_correct_q_num">もんせいかい</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="dummy_button">Dummy Button</string>
