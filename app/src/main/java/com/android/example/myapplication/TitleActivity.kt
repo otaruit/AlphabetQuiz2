@@ -16,13 +16,14 @@ class TitleActivity : AppCompatActivity() {
         setContentView(view)
 
         // 「つづきから」ボタン
-        binding.buttonContinue.setOnClickListener {
+        binding.buttonOneAlfabet.setOnClickListener {
             startActivity(Intent(this@TitleActivity, MainActivity::class.java))
         }
 
         // 「あたらしくはじめる」ボタン
-        binding.buttonStart.setOnClickListener {
+        binding.buttonNewGame.setOnClickListener {
             startActivity(Intent(this@TitleActivity, NewgameActivity::class.java))
         }
+
     }
 }

@@ -6,6 +6,5 @@ plugins {
 }
 
 ext {
-    room_version = "2.5.0"
     lottieVersion = "3.4.0"
 }

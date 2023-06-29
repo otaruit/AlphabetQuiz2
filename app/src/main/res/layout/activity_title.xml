@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/ic_launcher_background"
+    android:background="@drawable/quiz_bg"
     android:gravity="center"
     android:orientation="vertical">
 
@@ -11,32 +14,68 @@
         android:id="@+id/text_whatname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
         android:fontFamily="@font/kosugimaru"
         android:text="おおもじ or こもじ？"
         android:textAlignment="center"
         android:textColor="@color/black"
-        android:textSize="34sp" />
-
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="221dp"
-        android:layout_height="301dp"
-        android:src="@drawable/rose"
-        android:contentDescription="game_image" />
+        android:textSize="34sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.619"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/button_continue"
-        android:layout_width="313dp"
+        android:id="@+id/button_one_alfabet"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="つづきから"
-        android:textSize="24sp" />
+        android:layout_marginTop="48dp"
+        android:layout_marginBottom="16dp"
+        android:text="いちもじ"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/button_word"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_whatname"
+        app:layout_constraintVertical_bias="0.0" />
 
     <Button
-        android:id="@+id/button_start"
-        android:layout_width="313dp"
+        android:id="@+id/button_word"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="4dp"
+        android:text="たんご"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/button_new_game"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_one_alfabet" />
+
+    <Button
+        android:id="@+id/button_new_game"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
         android:text="あたらしくはじめる"
-        android:textSize="24sp" />
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_word" />
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/lottie_result_anime"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:layout_marginTop="32dp"
+        android:elevation="5dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_new_game"
+        app:lottie_autoPlay="true"
+        app:lottie_rawRes="@raw/alien_sending" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
 
 
-</LinearLayout>
