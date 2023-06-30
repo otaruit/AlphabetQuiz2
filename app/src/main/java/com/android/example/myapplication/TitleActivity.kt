@@ -15,9 +15,14 @@ class TitleActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
-        // 「つづきから」ボタン
+        // 「いちもじ」ボタン
         binding.buttonOneAlfabet.setOnClickListener {
             startActivity(Intent(this@TitleActivity, MainActivity::class.java))
+        }
+
+        // 「たんご」ボタン
+        binding.buttonWord.setOnClickListener {
+            startActivity(Intent(this@TitleActivity, WordTestActivity::class.java))
         }
 
         // 「あたらしくはじめる」ボタン

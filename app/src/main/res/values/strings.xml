@@ -1,11 +1,12 @@
 <resources>
-    <string name="app_name">My Application</string>
+    <string name="app_name">おおもじこもじ</string>
     <string name="question_num">%d</string>
     <string name="question_alphabet">%s</string>
     <string name="question_text">は %s でどれ？</string>
+    <string name="question_word_text">%s</string>
     <string name="selection">%s</string>
 
-    <!-- 結果画面 -->
+    <string name="submit_text">こたえる！</string>
     <string name="result_title">けっかはっぴょう</string>
     <string name="result_score">%d</string>
     <string name="btn_try_again">もういっかい</string>
@@ -15,6 +16,8 @@
     <string name="gameImage">game_image</string>
     <string name="start">すたーと！</string>
     <string name="textFileName">quiz_data.txt</string>
+    <string name="wordTextFileName">word_quiz_data.txt</string>
+
     <string name="incorrect_num_str">はずれ　%dもん</string>
     <string name="correct_num_str">せいかい　%dもん</string>
     <string name="name_hint">なまえをにゅうりょくしてね</string>
@@ -24,5 +27,6 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="answer_hint">ここににゅうりょくしてね</string>
 
 </resources>

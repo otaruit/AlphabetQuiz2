@@ -13,18 +13,14 @@ import com.android.example.myapplication.databinding.ActivityMainBinding
 import java.io.BufferedReader
 import java.io.InputStream
 import java.io.InputStreamReader
-import java.lang.Character.isLowerCase
 import java.lang.Character.isUpperCase
 
 
 class MainActivity : AppCompatActivity() {
 
-
     private lateinit var binding: ActivityMainBinding
 
-
     private var rightAnswer: String? = null
-    private var questionAlphabet: String? = null
     private var rightAnswerCount = 0
     private var quizCount = 1
     private val maxQuizCount = 5
@@ -40,11 +36,15 @@ class MainActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
-
         // なまえテキストに表示する
         val prefs = getSharedPreferences("userInformation", MODE_PRIVATE)
         val name = prefs.getString("userName", "ななしのごんべ")
         binding.labelName.text = "$name ちゃん"
+
+        // quiz_data.txtからクイズデータ読み取り
+        readFile(getString(R.string.textFileName))
+        quizData.shuffle()
+
 
         showNextQuiz()
     }
@@ -81,10 +81,6 @@ class MainActivity : AppCompatActivity() {
     @SuppressLint("SetTextI18n")
     private fun showNextQuiz() {
 
-        // quiz_data.txtからクイズデータ読み取り
-        readFile(getString(R.string.textFileName))
-        quizData.shuffle()
-
         // クイズを１問取り出す
         val quiz: MutableList<String> = quizData[0]
 
@@ -116,7 +112,6 @@ class MainActivity : AppCompatActivity() {
 
         // 正解をセット
         rightAnswer = quiz[1]
-        println(rightAnswer)
 
         // 正解を削除
         quiz.removeAt(0)
@@ -126,9 +121,7 @@ class MainActivity : AppCompatActivity() {
 
         // 選択肢をセット
         binding.answer1.text = quiz[0]
-        println(quiz[0])
         binding.answer2.text = quiz[1]
-        println(quiz[1])
         binding.answer3.text = quiz[2]
         binding.answer4.text = quiz[3]
 
