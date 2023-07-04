@@ -28,5 +28,7 @@
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
     <string name="answer_hint">ここににゅうりょくしてね</string>
+    <string name="numberOfQuestion">だい</string>
+    <string name="mon">もん</string>
 
 </resources>

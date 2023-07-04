@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -32,24 +31,28 @@
 
             <Button
                 android:id="@+id/answer1"
+                style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_marginBottom="15dp"
-                android:textAllCaps="false"
                 android:background="@drawable/select_btn_bg"
                 android:onClick="checkAnswer"
                 android:text="@string/selection"
-                android:textSize="48sp" />
+                android:textAllCaps="false"
+
+                android:textSize="48sp"
+                tools:ignore="DuplicateSpeakableTextCheck" />
 
             <Button
                 android:id="@+id/answer2"
+                style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_marginStart="15dp"
-                android:textAllCaps="false"
                 android:background="@drawable/select_btn_bg"
                 android:onClick="checkAnswer"
                 android:text="@string/selection"
+                android:textAllCaps="false"
                 android:textSize="48sp" />
 
         </LinearLayout>
@@ -65,8 +68,8 @@
                 android:layout_height="100dp"
                 android:background="@drawable/select_btn_bg"
                 android:onClick="checkAnswer"
-                android:textAllCaps="false"
                 android:text="@string/selection"
+                android:textAllCaps="false"
                 android:textSize="48sp" />
 
             <FrameLayout
@@ -83,8 +86,8 @@
                 android:layout_marginStart="15dp"
                 android:background="@drawable/select_btn_bg"
                 android:onClick="checkAnswer"
-                android:textAllCaps="false"
                 android:text="@string/selection"
+                android:textAllCaps="false"
                 android:textSize="48sp" />
         </LinearLayout>
 
@@ -98,6 +101,7 @@
         android:fontFamily="@font/kosugimaru"
         android:gravity="center_horizontal"
         android:text="@string/question_text"
+        android:textColor="#AD1457"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -144,7 +148,8 @@
             android:id="@+id/mon2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="だい" />
+            android:text="@string/numberOfQuestion"
+            android:textColor="#263238" />
 
         <TextView
             android:id="@+id/quiz_num"
@@ -162,7 +167,8 @@
             android:id="@+id/mon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="もん" />
+            android:text="@string/mon"
+            android:textColor="#004D40" />
 
     </LinearLayout>
 
@@ -194,6 +200,27 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/correct_answer_num" />
 
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/judge_lottie"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:layout_marginTop="30dp"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:lottie_autoPlay="true"
+        app:lottie_enableMergePathsForKitKatAndAbove="true" />
+
+    <Button
+        android:id="@+id/next_activity_btn"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:alpha="0.0"
+        android:onClick="showNextQuiz"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

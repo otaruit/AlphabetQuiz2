@@ -33,7 +33,7 @@
         android:layout_marginEnd="6dp"
         android:layout_marginBottom="24dp"
         android:elevation="5dp"
-        app:layout_constraintBottom_toTopOf="@+id/text_answer"
+        app:layout_constraintBottom_toTopOf="@+id/text_whatname"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/text_whatname"

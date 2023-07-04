@@ -5,10 +5,14 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Build
 import android.os.Bundle
+import android.view.MotionEvent
 import android.view.View
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import android.widget.Button
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import com.airbnb.lottie.LottieAnimationView
 import com.android.example.myapplication.databinding.ActivityMainBinding
 import java.io.BufferedReader
 import java.io.InputStream
@@ -136,7 +140,7 @@ class MainActivity : AppCompatActivity() {
         //リソースからボタンのリソースを取得(ここではbtn_sampleとする)
         val answerBtn: Button = findViewById(view.id)
         val btnText = answerBtn.text.toString()
-        val btnId = view.id
+//        val answerBtnId = answerBtn.id.toString()
 
         //リソースから作成したDrawableのリソースを取得
 //        val btn_color = ResourcesCompat.getDrawable(resources, R.drawable.correct_btn_color, null)
@@ -148,14 +152,17 @@ class MainActivity : AppCompatActivity() {
 
 
         if (btnText == rightAnswer) {
-            //正解の時の挙動　正解アニメーション表示
-
+            //test
+//            val judgeAnimation: LottieAnimationView = findViewById(R.id.judge_lottie)
+//            judgeAnimation.setAnimation(R.raw.heart1)
+//            judgeAnimation.enableMergePathsForKitKatAndAbove(true)
+//            val animation: Animation = AnimationUtils.loadAnimation(this, R.anim.popup_view_anim)
+//            judgeAnimation.startAnimation(animation)
 
             //正解の選択肢のボタンの背景色を青に
-
+            answerBtn.setBackgroundColor(R.drawable.correct_btn_color)
 
             rightAnswerCount++
-            println("正解数は${rightAnswerCount}")
 
         } else {
             //不正解の時の挙動　不正解アニメーション表示
@@ -172,32 +179,14 @@ class MainActivity : AppCompatActivity() {
 //        transaction.add(R.id.main_fragment, fragment)
 //        transaction.commit()
 
-
         checkQuizCount()
-
     }
-    // タッチしたら起きるイベント
-//    @RequiresApi(Build.VERSION_CODES.O)
-//    override fun onTouchEvent(event:MotionEvent): Boolean {
-//        when (event.action) {
-//            MotionEvent.ACTION_DOWN -> {checkQuizCount()}
-//        }
-//        return false
-//    }
+
 
     // 出題数をチェックする
     @RequiresApi(Build.VERSION_CODES.O)
     private fun checkQuizCount() {
         if (quizCount == maxQuizCount) {
-
-            // スコアファイル削除
-//            val path = "../data/data/com.android.example.myapplication/files/score.txt"
-//            deleteFile(path)
-
-            //　スコアをファイルに保存　(/data/data/パッケージ名/files 以下)
-//            val filename = "score"
-//            val date = LocalDateTime.now()
-//            saveFile(filename, "$date,$rightAnswerCount")
 
             // SharedPreferencesにスコアを保存
             addScore()
@@ -208,7 +197,7 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         } else {
             quizCount++
-            showNextQuiz()
+
         }
     }
 
@@ -220,25 +209,5 @@ class MainActivity : AppCompatActivity() {
         editor.putInt("totalScore", totalScore)
         editor.apply()
     }
-
-    // 保存処理
-//    private fun saveFile(file: String, str: String) {
-//        applicationContext.openFileOutput(file, Context.MODE_PRIVATE).use {
-//            it.write(str.toByteArray())
-//        }
 }
 
-// 削除処理
-//    @RequiresApi(Build.VERSION_CODES.O)
-//    override fun deleteFile(path: String) {
-//        val path1 = Paths.get(path, "score.txt")
-//        if (Files.exists(path1)) {
-//
-//            println("存在します")
-//            try {
-//                Files.deleteIfExists(path1)
-//            } catch (e: IOException) {
-//                e.printStackTrace()
-//            }
-//        }
-//    }
