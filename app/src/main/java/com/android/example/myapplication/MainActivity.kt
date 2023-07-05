@@ -1,17 +1,20 @@
 package com.android.example.myapplication
 
 import android.annotation.SuppressLint
+import android.content.Context.MODE_PRIVATE
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Build
 import android.os.Bundle
 import android.view.MotionEvent
 import android.view.View
-import android.view.animation.Animation
-import android.view.animation.AnimationUtils
+import android.view.View.OnTouchListener
 import android.widget.Button
+import android.widget.LinearLayout
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat.startActivity
+import androidx.core.view.isVisible
 import com.airbnb.lottie.LottieAnimationView
 import com.android.example.myapplication.databinding.ActivityMainBinding
 import java.io.BufferedReader
@@ -133,31 +136,18 @@ class MainActivity : AppCompatActivity() {
     }
 
     // 解答ボタンが押されたら呼ばれる
+    @SuppressLint("ClickableViewAccessibility")
     @RequiresApi(Build.VERSION_CODES.O)
     fun checkAnswer(view: View) {
 
-        // どの解答ボタンが押されたか
-        //リソースからボタンのリソースを取得(ここではbtn_sampleとする)
         val answerBtn: Button = findViewById(view.id)
         val btnText = answerBtn.text.toString()
-//        val answerBtnId = answerBtn.id.toString()
-
-        //リソースから作成したDrawableのリソースを取得
-//        val btn_color = ResourcesCompat.getDrawable(resources, R.drawable.correct_btn_color, null)
-//        //ボタンにDrawableを適用する
-//        answerBtn.background = btn_color
-
-
-//        answerBtn.setOnClickListener { v -> v.isSelected = !v.isSelected }
-
+        val judgeAnimation: LottieAnimationView = findViewById(R.id.lottie_judge)
 
         if (btnText == rightAnswer) {
-            //test
-//            val judgeAnimation: LottieAnimationView = findViewById(R.id.judge_lottie)
-//            judgeAnimation.setAnimation(R.raw.heart1)
-//            judgeAnimation.enableMergePathsForKitKatAndAbove(true)
-//            val animation: Animation = AnimationUtils.loadAnimation(this, R.anim.popup_view_anim)
-//            judgeAnimation.startAnimation(animation)
+
+            judgeAnimation.setAnimation(R.raw.heart1)
+            judgeAnimation.visibility = View.VISIBLE
 
             //正解の選択肢のボタンの背景色を青に
             answerBtn.setBackgroundColor(R.drawable.correct_btn_color)
@@ -166,22 +156,28 @@ class MainActivity : AppCompatActivity() {
 
         } else {
             //不正解の時の挙動　不正解アニメーション表示
+            judgeAnimation.setAnimation(R.raw.heart1)
+            judgeAnimation.visibility = View.VISIBLE
 
             //選択したの選択肢のボタンの背景色を赤に
+            answerBtn.setBackgroundColor(R.drawable.correct_btn_color)
 
             //正解の選択肢のボタンの背景色を青に
         }
 
+        // 画面タップのイベント
+        var view = binding.tapView
+        view.visibility = View.VISIBLE
 
-        // Fragmentを作成します
-//        val fragment = SelectAnswerFragment()
-//        val transaction: FragmentTransaction = supportFragmentManager.beginTransaction()
-//        transaction.add(R.id.main_fragment, fragment)
-//        transaction.commit()
 
-        checkQuizCount()
+        view.setOnClickListener { toggleVisibility() }
+
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun toggleVisibility() {
+        checkQuizCount()
+    }
 
     // 出題数をチェックする
     @RequiresApi(Build.VERSION_CODES.O)
@@ -197,7 +193,7 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         } else {
             quizCount++
-
+            showNextQuiz()
         }
     }
 
@@ -210,4 +206,5 @@ class MainActivity : AppCompatActivity() {
         editor.apply()
     }
 }
+
 
