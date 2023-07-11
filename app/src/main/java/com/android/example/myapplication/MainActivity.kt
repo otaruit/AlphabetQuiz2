@@ -1,20 +1,17 @@
 package com.android.example.myapplication
 
 import android.annotation.SuppressLint
-import android.content.Context.MODE_PRIVATE
 import android.content.Intent
 import android.content.SharedPreferences
+import android.media.MediaPlayer
 import android.os.Build
 import android.os.Bundle
-import android.view.MotionEvent
 import android.view.View
-import android.view.View.OnTouchListener
 import android.widget.Button
 import android.widget.LinearLayout
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat.startActivity
-import androidx.core.view.isVisible
+import androidx.core.net.toUri
 import com.airbnb.lottie.LottieAnimationView
 import com.android.example.myapplication.databinding.ActivityMainBinding
 import java.io.BufferedReader
@@ -32,6 +29,7 @@ class MainActivity : AppCompatActivity() {
     private var quizCount = 1
     private val maxQuizCount = 5
 
+
     //クイズデータ
     private var quizData = mutableListOf<MutableList<String>>()
 
@@ -43,6 +41,7 @@ class MainActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
+
         // なまえテキストに表示する
         val prefs = getSharedPreferences("userInformation", MODE_PRIVATE)
         val name = prefs.getString("userName", "ななしのごんべ")
@@ -51,7 +50,6 @@ class MainActivity : AppCompatActivity() {
         // quiz_data.txtからクイズデータ読み取り
         readFile(getString(R.string.textFileName))
         quizData.shuffle()
-
 
         showNextQuiz()
     }
@@ -88,11 +86,18 @@ class MainActivity : AppCompatActivity() {
     @SuppressLint("SetTextI18n")
     private fun showNextQuiz() {
 
+        // 正解/不正解フレームを非表示に
+        val frame: LinearLayout = findViewById(R.id.correct_incorecct_frame)
+        frame.setVisibility(View.INVISIBLE)
+
         // クイズを１問取り出す
         val quiz: MutableList<String> = quizData[0]
 
         // ラベル更新
         updateCountLabel(quiz)
+
+        // ボタンを有効化
+        btnNotEnabled(true)
 
         // 出題したクイズを削除する
         quizData.removeAt(0)
@@ -100,8 +105,46 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    // 音声再生
+    @SuppressLint("DiscouragedApi")
+    fun soundPlay(view: View) {
+        var alphabetNum = 0
+
+        val uppercaseAlphabet = rightAnswer!!.toCharArray()[0]?.uppercaseChar()
+        if (uppercaseAlphabet in 'A'..'Z') {
+            if (uppercaseAlphabet != null) {
+                alphabetNum = uppercaseAlphabet - 'A' + 1
+            }
+        }
+
+        // ボタンを押すと音声再生(あみたろの声素材工房(https://amitaro.net/)の音声を使用しました)
+
+        val alphabetSoundResource = "R.raw.alphabet$alphabetNum"
+        var uri = alphabetSoundResource.toUri()
+
+//        val resourceId = resources.getIdentifier(alphabetNum.toString(),"raw","R"  )
+
+
+        var mediaPlayer = MediaPlayer.create(this, uri)
+        if (mediaPlayer.isPlaying) {
+            mediaPlayer.pause()
+            mediaPlayer.seekTo(0)
+        } else {
+            mediaPlayer.start()
+        }
+
+        super.onDestroy();
+        if (mediaPlayer != null) {
+            mediaPlayer.release();
+            mediaPlayer = null;
+        }
+    }
+
     // ラベルの更新
     private fun updateCountLabel(quiz: MutableList<String>) {
+
+        val judgeAnimation: LottieAnimationView = findViewById(R.id.lottie_judge)
+        judgeAnimation.visibility = View.INVISIBLE
 
         binding.quizNum.text = quizCount.toString()
         binding.correctAnswerNum.text = "せいかい　${rightAnswerCount}もん"
@@ -140,24 +183,26 @@ class MainActivity : AppCompatActivity() {
     @RequiresApi(Build.VERSION_CODES.O)
     fun checkAnswer(view: View) {
 
-        val answerBtn: Button = findViewById(view.id)
-        val btnText = answerBtn.text.toString()
-        val judgeAnimation: LottieAnimationView = findViewById(R.id.lottie_judge)
+        var nextBtn = binding.nextBtn
+        val judgeAnimation: LottieAnimationView = binding.lottieJudge
+
 
         if (btnText == rightAnswer) {
 
             judgeAnimation.setAnimation(R.raw.heart1)
             judgeAnimation.visibility = View.VISIBLE
+            judgeAnimation.playAnimation()
 
             //正解の選択肢のボタンの背景色を青に
-            answerBtn.setBackgroundColor(R.drawable.correct_btn_color)
+            answerBtn.setBackgroundResource(R.drawable.correct_btn_color)
 
             rightAnswerCount++
 
         } else {
             //不正解の時の挙動　不正解アニメーション表示
-            judgeAnimation.setAnimation(R.raw.heart1)
+            judgeAnimation.setAnimation(R.raw.alien_crying)
             judgeAnimation.visibility = View.VISIBLE
+            judgeAnimation.playAnimation()
 
             //選択したの選択肢のボタンの背景色を赤に
             answerBtn.setBackgroundColor(R.drawable.correct_btn_color)
@@ -165,23 +210,36 @@ class MainActivity : AppCompatActivity() {
             //正解の選択肢のボタンの背景色を青に
         }
 
-        // 画面タップのイベント
-        var view = binding.tapView
-        view.visibility = View.VISIBLE
 
+        btnNotEnabled(false)
 
-        view.setOnClickListener { toggleVisibility() }
+        val answerBtn: Button = findViewById(view.id)
+        val btnText = answerBtn.text.toString()
+
+        // 正解/不正解フレームを表示
+        val frame: LinearLayout = findViewById(R.id.correct_incorecct_frame)
+        frame.setVisibility(View.VISIBLE)
+
 
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
-    private fun toggleVisibility() {
-        checkQuizCount()
+
+    private fun btnNotEnabled(boolean: Boolean) {
+        if (boolean) {
+            binding.answer1.isEnabled = true
+            binding.answer2.isEnabled = true
+            binding.answer3.isEnabled = true
+            binding.answer4.isEnabled = true
+        } else {
+            binding.answer1.isEnabled = false
+            binding.answer2.isEnabled = false
+            binding.answer3.isEnabled = false
+            binding.answer4.isEnabled = false
+        }
     }
 
     // 出題数をチェックする
-    @RequiresApi(Build.VERSION_CODES.O)
-    private fun checkQuizCount() {
+    fun checkQuizCount(view: View) {
         if (quizCount == maxQuizCount) {
 
             // SharedPreferencesにスコアを保存
@@ -205,6 +263,7 @@ class MainActivity : AppCompatActivity() {
         editor.putInt("totalScore", totalScore)
         editor.apply()
     }
+
 }
 
 
