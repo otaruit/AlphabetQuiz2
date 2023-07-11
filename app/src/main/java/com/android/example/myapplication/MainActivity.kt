@@ -88,7 +88,7 @@ class MainActivity : AppCompatActivity() {
 
         // 正解/不正解フレームを非表示に
         val frame: LinearLayout = findViewById(R.id.correct_incorecct_frame)
-        frame.setVisibility(View.INVISIBLE)
+        frame.visibility = View.INVISIBLE
 
         // クイズを１問取り出す
         val quiz: MutableList<String> = quizData[0]
@@ -110,22 +110,20 @@ class MainActivity : AppCompatActivity() {
     fun soundPlay(view: View) {
         var alphabetNum = 0
 
-        val uppercaseAlphabet = rightAnswer!!.toCharArray()[0]?.uppercaseChar()
+        val uppercaseAlphabet = rightAnswer!!.toCharArray()[0].uppercaseChar()
         if (uppercaseAlphabet in 'A'..'Z') {
-            if (uppercaseAlphabet != null) {
-                alphabetNum = uppercaseAlphabet - 'A' + 1
-            }
+            alphabetNum = uppercaseAlphabet - 'A' + 1
         }
 
         // ボタンを押すと音声再生(あみたろの声素材工房(https://amitaro.net/)の音声を使用しました)
 
         val alphabetSoundResource = "R.raw.alphabet$alphabetNum"
-        var uri = alphabetSoundResource.toUri()
+        val uri = alphabetSoundResource.toUri()
 
 //        val resourceId = resources.getIdentifier(alphabetNum.toString(),"raw","R"  )
 
 
-        var mediaPlayer = MediaPlayer.create(this, uri)
+        val mediaPlayer = MediaPlayer.create(this, uri)
         if (mediaPlayer.isPlaying) {
             mediaPlayer.pause()
             mediaPlayer.seekTo(0)
@@ -133,11 +131,8 @@ class MainActivity : AppCompatActivity() {
             mediaPlayer.start()
         }
 
-        super.onDestroy();
-        if (mediaPlayer != null) {
-            mediaPlayer.release();
-            mediaPlayer = null;
-        }
+        super.onDestroy()
+        mediaPlayer?.release()
     }
 
     // ラベルの更新
@@ -183,9 +178,9 @@ class MainActivity : AppCompatActivity() {
     @RequiresApi(Build.VERSION_CODES.O)
     fun checkAnswer(view: View) {
 
-        var nextBtn = binding.nextBtn
         val judgeAnimation: LottieAnimationView = binding.lottieJudge
-
+        val answerBtn: Button = findViewById(view.id)
+        val btnText = answerBtn.text.toString()
 
         if (btnText == rightAnswer) {
 
@@ -210,15 +205,11 @@ class MainActivity : AppCompatActivity() {
             //正解の選択肢のボタンの背景色を青に
         }
 
-
         btnNotEnabled(false)
-
-        val answerBtn: Button = findViewById(view.id)
-        val btnText = answerBtn.text.toString()
 
         // 正解/不正解フレームを表示
         val frame: LinearLayout = findViewById(R.id.correct_incorecct_frame)
-        frame.setVisibility(View.VISIBLE)
+        frame.visibility = View.VISIBLE
 
 
     }
