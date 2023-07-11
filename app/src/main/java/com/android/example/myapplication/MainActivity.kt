@@ -117,11 +117,9 @@ class MainActivity : AppCompatActivity() {
         val alphabetSoundResource = "R.raw.alphabet$alphabetNum"
         val uri = alphabetSoundResource.toUri()
 
-//        val resourceId = resources.getIdentifier(alphabetNum.toString(),"raw","R"  )
         val mediaResource = resources.getIdentifier("alphabet$alphabetNum", "raw", packageName)
-        val mediaPlayer = MediaPlayer.create(applicationContext, R.raw.alphabet1)
-//        val mediaPlayer = MediaPlayer.create(this, uri)
-
+        val mediaPlayer = MediaPlayer.create(applicationContext, mediaResource)
+        mediaPlayer.setVolume(1.0f, 1.0f)
 
         if (mediaPlayer.isPlaying) {
             mediaPlayer.pause()
