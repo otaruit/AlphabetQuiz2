@@ -8,7 +8,6 @@ import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
-import android.widget.LinearLayout
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.net.toUri
@@ -87,8 +86,6 @@ class MainActivity : AppCompatActivity() {
     private fun showNextQuiz() {
 
         // 正解/不正解フレームを非表示に
-        val frame: LinearLayout = findViewById(R.id.correct_incorecct_frame)
-        frame.visibility = View.INVISIBLE
 
         // クイズを１問取り出す
         val quiz: MutableList<String> = quizData[0]
@@ -121,9 +118,11 @@ class MainActivity : AppCompatActivity() {
         val uri = alphabetSoundResource.toUri()
 
 //        val resourceId = resources.getIdentifier(alphabetNum.toString(),"raw","R"  )
+        val mediaResource = resources.getIdentifier("alphabet$alphabetNum", "raw", packageName)
+        val mediaPlayer = MediaPlayer.create(applicationContext, R.raw.alphabet1)
+//        val mediaPlayer = MediaPlayer.create(this, uri)
 
 
-        val mediaPlayer = MediaPlayer.create(this, uri)
         if (mediaPlayer.isPlaying) {
             mediaPlayer.pause()
             mediaPlayer.seekTo(0)
@@ -131,8 +130,8 @@ class MainActivity : AppCompatActivity() {
             mediaPlayer.start()
         }
 
-        super.onDestroy()
-        mediaPlayer?.release()
+//        super.onDestroy()
+//        mediaPlayer?.release()
     }
 
     // ラベルの更新
@@ -178,9 +177,15 @@ class MainActivity : AppCompatActivity() {
     @RequiresApi(Build.VERSION_CODES.O)
     fun checkAnswer(view: View) {
 
+        btnNotEnabled(false)
+
         val judgeAnimation: LottieAnimationView = binding.lottieJudge
         val answerBtn: Button = findViewById(view.id)
         val btnText = answerBtn.text.toString()
+
+        // 「つぎへ」ボタン表示
+        val nextBtn: Button = findViewById(R.id.next_btn)
+        nextBtn.visibility = View.VISIBLE
 
         if (btnText == rightAnswer) {
 
@@ -205,11 +210,7 @@ class MainActivity : AppCompatActivity() {
             //正解の選択肢のボタンの背景色を青に
         }
 
-        btnNotEnabled(false)
 
-        // 正解/不正解フレームを表示
-        val frame: LinearLayout = findViewById(R.id.correct_incorecct_frame)
-        frame.visibility = View.VISIBLE
 
 
     }
