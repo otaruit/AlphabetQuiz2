@@ -1,0 +1,7 @@
+apple
+banana
+arm
+hand
+cake
+cat
+dog

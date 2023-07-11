@@ -1,44 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/top_layout"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/ic_launcher_background"
-    android:padding="15dp">
-
-
     <LinearLayout
-        android:id="@+id/correct_incorecct_frame"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/top_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <com.airbnb.lottie.LottieAnimationView
-            android:id="@+id/lottie_judge"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center|center_vertical"
-            android:visibility="invisible"
-            tools:visibility="invisible" />
-
-        <Button
-            android:id="@+id/next_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal|center_vertical"
-            android:onClick="checkQuizCount"
-            android:text="つぎへ"
-            android:visibility="invisible"
-            tools:visibility="visible" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:background="@drawable/ic_launcher_background"
+        android:padding="15dp"
         android:orientation="vertical">
 
         <TextView
@@ -263,4 +234,3 @@
         </LinearLayout>
 
     </LinearLayout>
-</FrameLayout>
