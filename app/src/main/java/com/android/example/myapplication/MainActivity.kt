@@ -6,12 +6,8 @@ import android.content.SharedPreferences
 import android.media.MediaPlayer
 import android.os.Build
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Button
-import android.widget.ImageView
-import android.widget.LinearLayout
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.net.toUri
@@ -89,6 +85,8 @@ class MainActivity : AppCompatActivity() {
     @SuppressLint("SetTextI18n")
     private fun showNextQuiz() {
 
+        // 正解/不正解フレームを非表示に
+
         // クイズを１問取り出す
         val quiz: MutableList<String> = quizData[0]
 
@@ -119,10 +117,10 @@ class MainActivity : AppCompatActivity() {
         val alphabetSoundResource = "R.raw.alphabet$alphabetNum"
         val uri = alphabetSoundResource.toUri()
 
-//        val resourceId = resources.getIdentifier(alphabetNum.toString(),"raw","R"  )
+        val mediaResource = resources.getIdentifier("alphabet$alphabetNum", "raw", packageName)
+        val mediaPlayer = MediaPlayer.create(applicationContext, mediaResource)
+        mediaPlayer.setVolume(1.0f, 1.0f)
 
-
-        val mediaPlayer = MediaPlayer.create(this, uri)
         if (mediaPlayer.isPlaying) {
             mediaPlayer.pause()
             mediaPlayer.seekTo(0)
@@ -130,12 +128,15 @@ class MainActivity : AppCompatActivity() {
             mediaPlayer.start()
         }
 
-        super.onDestroy()
-        mediaPlayer?.release()
+//        super.onDestroy()
+//        mediaPlayer?.release()
     }
 
     // ラベルの更新
     private fun updateCountLabel(quiz: MutableList<String>) {
+
+        val judgeAnimation: LottieAnimationView = findViewById(R.id.lottie_judge)
+        judgeAnimation.visibility = View.INVISIBLE
 
         binding.quizNum.text = quizCount.toString()
         binding.correctAnswerNum.text = "せいかい　${rightAnswerCount}もん"
@@ -169,67 +170,46 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-//    // 解答ボタンが押されたら呼ばれる
-//fun checkAnswer(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-//        // フラグメントのレイアウトをインフレートします
-//        val view = inflater.inflate(R.layout.fragment_next_quiz, container, false)
-//
-//        // アニメーションを表示するImageViewを取得します
-//        val animationImageView :LottieAnimationView = view.findViewById<ImageView>(R.id.lottie_judge) as LottieAnimationView
-//
-//        // アニメーションを開始します
-//        animationImageView.setAnimation(R.raw.heart1)
-//        animationImageView.playAnimation()
-//
-//        return view
-//    }
-
-
     // 解答ボタンが押されたら呼ばれる
     @SuppressLint("ClickableViewAccessibility")
     @RequiresApi(Build.VERSION_CODES.O)
     fun checkAnswer(view: View) {
 
-
         btnNotEnabled(false)
 
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.fragment_container, NextQuizFragment())
-            .commit()
-//        val judgeAnimation: LottieAnimationView = binding.lottieJudge
-//        val answerBtn: Button = findViewById(view.id)
-//        val btnText = answerBtn.text.toString()
+        val judgeAnimation: LottieAnimationView = binding.lottieJudge
+        val answerBtn: Button = findViewById(view.id)
+        val btnText = answerBtn.text.toString()
 
-//        // 正解/不正解フレームを表示
-//        val forwardFrame: LinearLayout = findViewById(R.id.correct_incorecct_frame)
-//        forwardFrame.visibility = View.VISIBLE
-//
-//        // 後ろのフレームを薄く
-////        val behindFrame: LinearLayout = findViewById(R.id.question_frame)
-////        behindFrame.visibility = View.INVISIBLE
-//
-//        if (btnText == rightAnswer) {
-//
-//            judgeAnimation.setAnimation(R.raw.heart1)
-////            judgeAnimation.visibility = View.VISIBLE
-//            judgeAnimation.playAnimation()
-//
-//            //正解の選択肢のボタンの背景色を青に
-//            answerBtn.setBackgroundResource(R.drawable.correct_btn_color)
-//
-//            rightAnswerCount++
-//
-//        } else {
-//            //不正解の時の挙動　不正解アニメーション表示
-//            judgeAnimation.setAnimation(R.raw.alien_crying)
-////            judgeAnimation.visibility = View.VISIBLE
-//            judgeAnimation.playAnimation()
-//
-//            //選択したの選択肢のボタンの背景色を赤に
-//            answerBtn.setBackgroundColor(R.drawable.correct_btn_color)
-//
-//            //正解の選択肢のボタンの背景色を青に
-//        }
+        // 「つぎへ」ボタン表示
+        val nextBtn: Button = findViewById(R.id.next_btn)
+        nextBtn.visibility = View.VISIBLE
+
+        if (btnText == rightAnswer) {
+
+            judgeAnimation.setAnimation(R.raw.heart1)
+            judgeAnimation.visibility = View.VISIBLE
+            judgeAnimation.playAnimation()
+
+            //正解の選択肢のボタンの背景色を青に
+            answerBtn.setBackgroundResource(R.drawable.correct_btn_color)
+
+            rightAnswerCount++
+
+        } else {
+            //不正解の時の挙動　不正解アニメーション表示
+            judgeAnimation.setAnimation(R.raw.alien_crying)
+            judgeAnimation.visibility = View.VISIBLE
+            judgeAnimation.playAnimation()
+
+            //選択したの選択肢のボタンの背景色を赤に
+            answerBtn.setBackgroundColor(R.drawable.correct_btn_color)
+
+            //正解の選択肢のボタンの背景色を青に
+        }
+
+
+
 
     }
 
