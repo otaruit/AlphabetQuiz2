@@ -41,7 +41,8 @@ class MainActivity : AppCompatActivity() {
         // なまえテキストに表示する
         val prefs = getSharedPreferences("userInformation", MODE_PRIVATE)
         val name = prefs.getString("userName", "ななしのごんべ")
-        binding.labelName.text = "$name ちゃん"
+        val setName = name + "ちゃん"
+        binding.labelName.text = setName
 
         // quiz_data.txtからクイズデータ読み取り
         readFile(getString(R.string.textFileName))
