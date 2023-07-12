@@ -64,6 +64,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="start"
+            android:layout_marginBottom="10dp"
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.1"
@@ -110,52 +111,64 @@
                 android:orientation="vertical">
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:orientation="horizontal">
+                    android:background="@drawable/btn_selector"
+                    android:orientation="vertical"
+                    android:padding="10dp">
 
-                    <TextView
-                        android:id="@+id/quiz_text"
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:layout_marginTop="8dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/quiz_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="8dp"
+                            android:elevation="1dp"
+                            android:fontFamily="@font/kosugimaru"
+                            android:gravity="center_horizontal"
+                            android:text="@string/question_alphabet"
+                            android:textColor="@color/white"
+                            android:textSize="60sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+                            tools:visibility="visible" />
+
+                        <Button
+                            android:id="@+id/sound_btn"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_gravity="bottom|left"
+                            android:background="@drawable/volume"
+                            android:contentDescription="alphabet voice"
+                            android:onClick="soundPlay" />
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/text_question"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
                         android:fontFamily="@font/kosugimaru"
                         android:gravity="center_horizontal"
-                        android:text="@string/question_alphabet"
-                        android:textSize="60sp"
+                        android:text="@string/question_text"
+                        android:textColor="@color/yellow"
+                        android:textSize="24sp"
                         app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.0"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+                        app:layout_constraintTop_toBottomOf="@+id/quiz_text"
                         tools:visibility="visible" />
 
-                    <Button
-                        android:id="@+id/sound_btn"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:layout_gravity="bottom|left"
-                        android:background="@drawable/volume"
-                        android:contentDescription="alphabet voice"
-                        android:onClick="soundPlay" />
-
                 </LinearLayout>
-
-                <TextView
-                    android:id="@+id/text_question"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:fontFamily="@font/kosugimaru"
-                    android:gravity="center_horizontal"
-                    android:text="@string/question_text"
-                    android:textColor="#AD1457"
-                    android:textSize="24sp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/quiz_text"
-                    tools:visibility="visible" />
 
                 <LinearLayout
                     android:id="@+id/linearLayout2"

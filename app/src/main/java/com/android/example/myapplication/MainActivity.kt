@@ -182,9 +182,13 @@ class MainActivity : AppCompatActivity() {
         val nextBtn: Button = findViewById(R.id.next_btn)
         nextBtn.visibility = View.VISIBLE
 
+
+        var soundResource :String? = null
+
+
         if (btnText == rightAnswer) {
             judgeAnimation.setAnimation(R.raw.heart1)
-
+            soundResource = "correct"
             //正解の選択肢のボタンの背景色を青に
             answerBtn.setBackgroundResource(R.drawable.correct_btn_color)
 
@@ -192,12 +196,16 @@ class MainActivity : AppCompatActivity() {
 
         } else {
             judgeAnimation.setAnimation(R.raw.alien_crying)
-
+             soundResource = "incorrect"
             //選択したの選択肢のボタンの背景色を赤に
             answerBtn.setBackgroundColor(R.drawable.incorrect_btn_color)
 
             //正解の選択肢のボタンの背景色を青に
         }
+
+        val mediaResource = resources.getIdentifier(soundResource, "raw", packageName)
+        val mediaPlayer = MediaPlayer.create(applicationContext, mediaResource)
+        mediaPlayer.start()
 
         judgeAnimation.visibility = View.VISIBLE
         judgeAnimation.playAnimation()

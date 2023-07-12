@@ -59,16 +59,16 @@ class ResultActivity : AppCompatActivity() {
     private fun displayScore(score: Int) {
 
         //アニメのviewを取得
-        var lottie = binding.lottieResultAnime
+//        var lottie = binding.lottieResultAnime
 
-        when (score) {
-            0 -> lottie.setAnimation(R.raw.alien_crying)
-            1 -> lottie.setAnimation(R.raw.alien_rain)
-            2 -> lottie.setAnimation(R.raw.alien_reading)
-            3 -> lottie.setAnimation(R.raw.alien_star_eye)
-            4 -> lottie.setAnimation(R.raw.alien_going_space)
-            else -> lottie.setAnimation(R.raw.alien_love)
-        }
+//        when (score) {
+//            0 -> lottie.setAnimation(R.raw.alien_crying)
+//            1 -> lottie.setAnimation(R.raw.alien_rain)
+//            2 -> lottie.setAnimation(R.raw.alien_reading)
+//            3 -> lottie.setAnimation(R.raw.alien_star_eye)
+//            4 -> lottie.setAnimation(R.raw.alien_going_space)
+//            else -> lottie.setAnimation(R.raw.alien_love)
+//        }
 
         // スコアをセット
         binding.resultLabel.text = getString(R.string.result_score, score)

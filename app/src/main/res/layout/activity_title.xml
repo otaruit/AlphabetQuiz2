@@ -1,81 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/quiz_bg"
-    android:gravity="center"
-    android:orientation="vertical">
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:background="@drawable/quiz_bg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+    android:padding="15dp"
+        android:orientation="vertical">
 
     <TextView
-        android:id="@+id/text_whatname"
+        android:id="@+id/appTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_gravity="center"
         android:fontFamily="@font/kosugimaru"
-        android:text="おおもじ or こもじ？"
+        android:text="@string/appTitle"
+        android:layout_marginBottom="16dp"
         android:textAlignment="center"
         android:textColor="@color/black"
-        android:textSize="34sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.619"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:textSize="34sp" />
+
+    <ImageView
+        android:id="@+id/your_character"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="32dp"
+        android:elevation="5dp"
+        android:src="@drawable/woman" />
+
+    <ImageView
+        android:id="@+id/background"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="@drawable/green_center" />
 
     <Button
-        android:id="@+id/button_one_alfabet"
-        android:layout_width="wrap_content"
+        android:id="@+id/button_one_alphabet"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
         android:layout_marginBottom="16dp"
+        android:background="@drawable/btn_selector"
         android:text="いちもじ"
         android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/button_word"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_whatname"
-        app:layout_constraintVertical_bias="0.0" />
+        app:backgroundTint="@null"
+    />
 
     <Button
         android:id="@+id/button_word"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="4dp"
-        android:text="たんご"
+        android:background="@drawable/btn_selector"
+        android:text="@string/oneWord"
+        android:layout_marginBottom="16dp"
         android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/button_new_game"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_one_alfabet" />
+        app:backgroundTint="@null" />
 
     <Button
         android:id="@+id/button_new_game"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:text="あたらしくはじめる"
+        android:background="@drawable/btn_selector"
+
+        android:text="@string/newGame"
         android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_word" />
+        app:backgroundTint="@null" />
 
-    <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/lottie_result_anime"
-        android:layout_width="250dp"
-        android:layout_height="250dp"
-        android:layout_marginTop="32dp"
-        android:elevation="5dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_new_game"
-        app:lottie_autoPlay="true"
-        app:lottie_rawRes="@raw/alien_sending" />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>
 
 
