@@ -126,6 +126,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:background="@drawable/select_btn_bg"
+        app:backgroundTint="@null"
         android:onClick="submit"
         android:text="@string/submit_text"
         android:textAllCaps="false"

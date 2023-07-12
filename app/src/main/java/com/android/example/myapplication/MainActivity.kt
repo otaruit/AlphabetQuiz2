@@ -36,10 +36,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        val view = binding.root
-        setContentView(view)
-
+        viewActivity()
 
         // なまえテキストに表示する
         val prefs = getSharedPreferences("userInformation", MODE_PRIVATE)
@@ -51,6 +48,13 @@ class MainActivity : AppCompatActivity() {
         quizData.shuffle()
 
         showNextQuiz()
+    }
+
+    // レイアウトを再描画
+    private fun viewActivity() {
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
     }
 
     // テキストファイルからクイズを取得
@@ -84,9 +88,6 @@ class MainActivity : AppCompatActivity() {
     // クイズを出題する
     @SuppressLint("SetTextI18n")
     private fun showNextQuiz() {
-
-        // 正解/不正解フレームを非表示に
-
         // クイズを１問取り出す
         val quiz: MutableList<String> = quizData[0]
 
@@ -98,8 +99,6 @@ class MainActivity : AppCompatActivity() {
 
         // 出題したクイズを削除する
         quizData.removeAt(0)
-
-
     }
 
     // 音声再生
@@ -135,8 +134,6 @@ class MainActivity : AppCompatActivity() {
     // ラベルの更新
     private fun updateCountLabel(quiz: MutableList<String>) {
 
-        val judgeAnimation: LottieAnimationView = findViewById(R.id.lottie_judge)
-        judgeAnimation.visibility = View.INVISIBLE
 
         binding.quizNum.text = quizCount.toString()
         binding.correctAnswerNum.text = "せいかい　${rightAnswerCount}もん"
@@ -186,10 +183,7 @@ class MainActivity : AppCompatActivity() {
         nextBtn.visibility = View.VISIBLE
 
         if (btnText == rightAnswer) {
-
             judgeAnimation.setAnimation(R.raw.heart1)
-            judgeAnimation.visibility = View.VISIBLE
-            judgeAnimation.playAnimation()
 
             //正解の選択肢のボタンの背景色を青に
             answerBtn.setBackgroundResource(R.drawable.correct_btn_color)
@@ -197,19 +191,16 @@ class MainActivity : AppCompatActivity() {
             rightAnswerCount++
 
         } else {
-            //不正解の時の挙動　不正解アニメーション表示
             judgeAnimation.setAnimation(R.raw.alien_crying)
-            judgeAnimation.visibility = View.VISIBLE
-            judgeAnimation.playAnimation()
 
             //選択したの選択肢のボタンの背景色を赤に
-            answerBtn.setBackgroundColor(R.drawable.correct_btn_color)
+            answerBtn.setBackgroundColor(R.drawable.incorrect_btn_color)
 
             //正解の選択肢のボタンの背景色を青に
         }
 
-
-
+        judgeAnimation.visibility = View.VISIBLE
+        judgeAnimation.playAnimation()
 
     }
 
@@ -240,7 +231,11 @@ class MainActivity : AppCompatActivity() {
             intent.putExtra("RIGHT_ANSWER_COUNT", rightAnswerCount)
             startActivity(intent)
         } else {
+
             quizCount++
+
+            viewActivity()
+
             showNextQuiz()
         }
     }
