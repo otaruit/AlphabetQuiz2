@@ -143,8 +143,8 @@
 
                         <Button
                             android:id="@+id/sound_btn"
-                            android:layout_width="30dp"
-                            android:layout_height="30dp"
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
                             android:layout_gravity="bottom|left"
                             android:background="@drawable/volume"
                             android:contentDescription="alphabet voice"

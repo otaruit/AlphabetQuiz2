@@ -4,17 +4,14 @@ import android.annotation.SuppressLint
 import android.content.Context.MODE_PRIVATE
 import android.content.Intent
 import android.content.SharedPreferences
-import android.graphics.Color
 import android.media.MediaPlayer
 import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
-import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat.startActivity
-import androidx.core.net.toUri
 import com.airbnb.lottie.LottieAnimationView
 import com.android.example.myapplication.databinding.ActivityMainBinding
 import java.io.BufferedReader
@@ -57,12 +54,6 @@ class MainActivity : AppCompatActivity() {
         readFile(getString(R.string.textFileName))
         quizData.shuffle()
 
-        option1Button = binding.answer1
-        option2Button = binding.answer2
-        option3Button = binding.answer3
-        option4Button = binding.answer4
-
-
         showNextQuiz()
     }
 
@@ -71,6 +62,11 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
+
+        option1Button = binding.answer1
+        option2Button = binding.answer2
+        option3Button = binding.answer3
+        option4Button = binding.answer4
     }
 
     // テキストファイルからクイズを取得
@@ -222,7 +218,7 @@ class MainActivity : AppCompatActivity() {
                 else -> binding.answer1
             }
             correctButton.setBackgroundResource(R.drawable.correct_btn_color)
-            selectBtn.setBackgroundColor(R.drawable.incorrect_btn_color)
+            selectBtn.setBackgroundResource(R.drawable.incorrect_btn_color)
 
             judgeAnimation.setAnimation(R.raw.incorrect_animation)
             soundResource = "incorrect"
@@ -234,6 +230,8 @@ class MainActivity : AppCompatActivity() {
 
         judgeAnimation.visibility = View.VISIBLE
         judgeAnimation.playAnimation()
+        // 1秒後にフェードアウトを開始する
+
 
         // 「つぎへ」ボタン表示
         val nextBtn: Button = findViewById(R.id.next_btn)
