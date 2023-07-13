@@ -193,14 +193,8 @@ class MainActivity : AppCompatActivity() {
 
         val judgeAnimation: LottieAnimationView = binding.lottieJudge
         val selectBtn: Button = findViewById(view.id)
-
-//        val answerBtnIndex = correctAnswerIndex+1
-//        val answerId = "R.id.answer$answerBtnIndex".toString()
-
         var soundResource: String? = null
 
-//        println("これ"+selectedId)
-//        println("これ"+answerId)
         val selectedIndex = when(view){
             //選択肢
             option1Button -> 0
@@ -234,30 +228,11 @@ class MainActivity : AppCompatActivity() {
             soundResource = "incorrect"
         }
 
-
-//        if (btnText == rightAnswer) {
-//            judgeAnimation.setAnimation(R.raw.heart1)
-//            soundResource = "correct"
-//            //正解の選択肢のボタンの背景色を青に
-//            selectBtn.setBackgroundResource(R.drawable.correct_btn_color)
-//
-//            rightAnswerCount++
-//
-//        } else {
-//            judgeAnimation.setAnimation(R.raw.incorrect_animation)
-//             soundResource = "incorrect"
-//            //選択したの選択肢のボタンの背景色を赤に
-//            selectBtn.setBackgroundColor(R.drawable.incorrect_btn_color)
-//
-//            //正解の選択肢のボタンの背景色を青に
-//        }
-
         val mediaResource = resources.getIdentifier(soundResource, "raw", packageName)
         val mediaPlayer = MediaPlayer.create(applicationContext, mediaResource)
         mediaPlayer.start()
 
         judgeAnimation.visibility = View.VISIBLE
-//        judgeAnimation.setAnimation(R.anim.popup_view_anim)
         judgeAnimation.playAnimation()
 
         // 「つぎへ」ボタン表示
