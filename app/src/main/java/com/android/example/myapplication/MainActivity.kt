@@ -37,10 +37,10 @@ class MainActivity : AppCompatActivity() {
     //クイズデータ
     private var quizData = mutableListOf<MutableList<String>>()
 
-    private  var option1Button= binding.answer1
-    private  var option2Button= binding.answer1
-    private  var option3Button= binding.answer1
-    private  var option4Button= binding.answer1
+    private var option1Button: Button? = null
+    private var option2Button: Button? = null
+    private var option3Button: Button? = null
+    private var option4Button: Button? = null
 
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -58,10 +58,10 @@ class MainActivity : AppCompatActivity() {
         readFile(getString(R.string.textFileName))
         quizData.shuffle()
 
-        val option1Button = binding.answer1
-        val option2Button = binding.answer2
-        val option3Button = binding.answer3
-        val option4Button = binding.answer4
+        option1Button = binding.answer1
+        option2Button = binding.answer2
+        option3Button = binding.answer3
+        option4Button = binding.answer4
 
 
         showNextQuiz()
@@ -178,10 +178,10 @@ class MainActivity : AppCompatActivity() {
         correctAnswerIndex = options.indexOf(correctSelection)
 
         // 選択肢をセット
-        option1Button.text  = quiz[0]
-        option2Button.text = quiz[1]
-        option3Button.text = quiz[2]
-        option4Button.text = quiz[3]
+        option1Button?.text = quiz[0]
+        option2Button?.text = quiz[1]
+        option3Button?.text = quiz[2]
+        option4Button?.text = quiz[3]
 
     }
 
