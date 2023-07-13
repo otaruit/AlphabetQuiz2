@@ -1,15 +1,19 @@
 package com.android.example.myapplication
 
 import android.annotation.SuppressLint
+import android.content.Context.MODE_PRIVATE
 import android.content.Intent
 import android.content.SharedPreferences
+import android.graphics.Color
 import android.media.MediaPlayer
 import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
+import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat.startActivity
 import androidx.core.net.toUri
 import com.airbnb.lottie.LottieAnimationView
 import com.android.example.myapplication.databinding.ActivityMainBinding
@@ -27,10 +31,16 @@ class MainActivity : AppCompatActivity() {
     private var rightAnswerCount = 0
     private var quizCount = 1
     private val maxQuizCount = 5
-
+    private val options = mutableListOf("Option 1", "Option 2", "Option 3", "Option 4")
+    private var correctAnswerIndex: Int = 1 // 正解の選択肢のインデックス（0から始まる）
 
     //クイズデータ
     private var quizData = mutableListOf<MutableList<String>>()
+
+    private  var option1Button= binding.answer1
+    private  var option2Button= binding.answer1
+    private  var option3Button= binding.answer1
+    private  var option4Button= binding.answer1
 
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -47,6 +57,12 @@ class MainActivity : AppCompatActivity() {
         // quiz_data.txtからクイズデータ読み取り
         readFile(getString(R.string.textFileName))
         quizData.shuffle()
+
+        val option1Button = binding.answer1
+        val option2Button = binding.answer2
+        val option3Button = binding.answer3
+        val option4Button = binding.answer4
+
 
         showNextQuiz()
     }
@@ -113,10 +129,6 @@ class MainActivity : AppCompatActivity() {
         }
 
         // ボタンを押すと音声再生(あみたろの声素材工房(https://amitaro.net/)の音声を使用しました)
-
-        val alphabetSoundResource = "R.raw.alphabet$alphabetNum"
-        val uri = alphabetSoundResource.toUri()
-
         val mediaResource = resources.getIdentifier("alphabet$alphabetNum", "raw", packageName)
         val mediaPlayer = MediaPlayer.create(applicationContext, mediaResource)
         mediaPlayer.setVolume(1.0f, 1.0f)
@@ -153,63 +165,105 @@ class MainActivity : AppCompatActivity() {
         // 正解をセット
         rightAnswer = quiz[1]
 
-        // 正解を削除
+        // 問題を削除
         quiz.removeAt(0)
+
+        //正解の選択肢をセット
+        val correctSelection = quiz[0]
 
         // 正解と選択肢３つをシャッフル
         quiz.shuffle()
 
-        // 選択肢をセット
-        binding.answer1.text = quiz[0]
-        binding.answer2.text = quiz[1]
-        binding.answer3.text = quiz[2]
-        binding.answer4.text = quiz[3]
+        // 正解の選択肢のインデックスを更新
+        correctAnswerIndex = options.indexOf(correctSelection)
 
+        // 選択肢をセット
+        option1Button.text  = quiz[0]
+        option2Button.text = quiz[1]
+        option3Button.text = quiz[2]
+        option4Button.text = quiz[3]
 
     }
 
     // 解答ボタンが押されたら呼ばれる
-    @SuppressLint("ClickableViewAccessibility")
+    @SuppressLint("ClickableViewAccessibility", "ResourceType")
     @RequiresApi(Build.VERSION_CODES.O)
     fun checkAnswer(view: View) {
 
         btnNotEnabled(false)
 
         val judgeAnimation: LottieAnimationView = binding.lottieJudge
-        val answerBtn: Button = findViewById(view.id)
-        val btnText = answerBtn.text.toString()
+        val selectBtn: Button = findViewById(view.id)
 
-        // 「つぎへ」ボタン表示
-        val nextBtn: Button = findViewById(R.id.next_btn)
-        nextBtn.visibility = View.VISIBLE
+//        val answerBtnIndex = correctAnswerIndex+1
+//        val answerId = "R.id.answer$answerBtnIndex".toString()
 
+        var soundResource: String? = null
 
-        var soundResource :String? = null
+//        println("これ"+selectedId)
+//        println("これ"+answerId)
+        val selectedIndex = when (view) {
+            //選択肢
+            option1Button -> 0
+            option2Button -> 1
+            option3Button -> 2
+            option4Button -> 3
+            else -> -1
+        }
+        println("これ" + selectedIndex)
+        println("これ" + correctAnswerIndex)
 
-
-        if (btnText == rightAnswer) {
-            judgeAnimation.setAnimation(R.raw.heart1)
-            soundResource = "correct"
-            //正解の選択肢のボタンの背景色を青に
-            answerBtn.setBackgroundResource(R.drawable.correct_btn_color)
-
+        if (selectedIndex == correctAnswerIndex) {
             rightAnswerCount++
 
+            judgeAnimation.setAnimation(R.raw.heart1)
+            soundResource = "correct"
+            selectBtn.setBackgroundResource(R.drawable.correct_btn_color)
         } else {
-            judgeAnimation.setAnimation(R.raw.alien_crying)
-             soundResource = "incorrect"
-            //選択したの選択肢のボタンの背景色を赤に
-            answerBtn.setBackgroundColor(R.drawable.incorrect_btn_color)
+            // 不正解の場合、正解のボタンを緑色に変える
+            val correctButton = when (correctAnswerIndex) {
+                0 -> binding.answer1
+                1 -> binding.answer2
+                2 -> binding.answer3
+                3 -> binding.answer4
+                else -> binding.answer1
+            }
+            correctButton.setBackgroundResource(R.drawable.correct_btn_color)
+            selectBtn.setBackgroundColor(R.drawable.incorrect_btn_color)
 
-            //正解の選択肢のボタンの背景色を青に
+            judgeAnimation.setAnimation(R.raw.incorrect_animation)
+            soundResource = "incorrect"
         }
+
+
+//        if (btnText == rightAnswer) {
+//            judgeAnimation.setAnimation(R.raw.heart1)
+//            soundResource = "correct"
+//            //正解の選択肢のボタンの背景色を青に
+//            selectBtn.setBackgroundResource(R.drawable.correct_btn_color)
+//
+//            rightAnswerCount++
+//
+//        } else {
+//            judgeAnimation.setAnimation(R.raw.incorrect_animation)
+//             soundResource = "incorrect"
+//            //選択したの選択肢のボタンの背景色を赤に
+//            selectBtn.setBackgroundColor(R.drawable.incorrect_btn_color)
+//
+//            //正解の選択肢のボタンの背景色を青に
+//        }
 
         val mediaResource = resources.getIdentifier(soundResource, "raw", packageName)
         val mediaPlayer = MediaPlayer.create(applicationContext, mediaResource)
         mediaPlayer.start()
 
         judgeAnimation.visibility = View.VISIBLE
+//        judgeAnimation.setAnimation(R.anim.popup_view_anim)
         judgeAnimation.playAnimation()
+
+        // 「つぎへ」ボタン表示
+        val nextBtn: Button = findViewById(R.id.next_btn)
+        nextBtn.visibility = View.VISIBLE
 
     }
 
