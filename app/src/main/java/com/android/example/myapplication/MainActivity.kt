@@ -31,16 +31,15 @@ class MainActivity : AppCompatActivity() {
     private var rightAnswerCount = 0
     private var quizCount = 1
     private val maxQuizCount = 5
-    private val options = mutableListOf("Option 1", "Option 2", "Option 3", "Option 4")
     private var correctAnswerIndex: Int = 1 // 正解の選択肢のインデックス（0から始まる）
 
     //クイズデータ
     private var quizData = mutableListOf<MutableList<String>>()
 
-    private var option1Button: Button? = null
-    private var option2Button: Button? = null
-    private var option3Button: Button? = null
-    private var option4Button: Button? = null
+    private lateinit var option1Button: Button
+    private lateinit var option2Button: Button
+    private lateinit var option3Button: Button
+    private lateinit var option4Button: Button
 
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -175,7 +174,7 @@ class MainActivity : AppCompatActivity() {
         quiz.shuffle()
 
         // 正解の選択肢のインデックスを更新
-        correctAnswerIndex = options.indexOf(correctSelection)
+        correctAnswerIndex = quiz.indexOf(correctSelection)
 
         // 選択肢をセット
         option1Button?.text = quiz[0]
@@ -202,7 +201,7 @@ class MainActivity : AppCompatActivity() {
 
 //        println("これ"+selectedId)
 //        println("これ"+answerId)
-        val selectedIndex = when (view) {
+        val selectedIndex = when(view){
             //選択肢
             option1Button -> 0
             option2Button -> 1
