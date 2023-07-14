@@ -1,7 +1,6 @@
 package com.android.example.myapplication
 
 import android.annotation.SuppressLint
-import android.content.Context.MODE_PRIVATE
 import android.content.Intent
 import android.content.SharedPreferences
 import android.media.MediaPlayer
@@ -11,7 +10,6 @@ import android.view.View
 import android.widget.Button
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat.startActivity
 import com.airbnb.lottie.LottieAnimationView
 import com.android.example.myapplication.databinding.ActivityMainBinding
 import java.io.BufferedReader
@@ -199,13 +197,15 @@ class MainActivity : AppCompatActivity() {
             option4Button -> 3
             else -> -1
         }
-        println("これ" + selectedIndex)
-        println("これ" + correctAnswerIndex)
 
         if (selectedIndex == correctAnswerIndex) {
             rightAnswerCount++
 
-            judgeAnimation.setAnimation(R.raw.heart1)
+            judgeAnimation.setAnimation(R.raw.correct_answer)
+            judgeAnimation.layoutParams.width = 700 // 幅を指定
+            judgeAnimation.layoutParams.height = 700 // 高さを指定
+            judgeAnimation.requestLayout() // レイアウトの再計算を要求
+
             soundResource = "correct"
             selectBtn.setBackgroundResource(R.drawable.correct_btn_color)
         } else {
@@ -228,14 +228,22 @@ class MainActivity : AppCompatActivity() {
         val mediaPlayer = MediaPlayer.create(applicationContext, mediaResource)
         mediaPlayer.start()
 
-        judgeAnimation.visibility = View.VISIBLE
+        // アニメーションの開始
         judgeAnimation.playAnimation()
-        // 1秒後にフェードアウトを開始する
 
+        judgeAnimation.postDelayed({
+            judgeAnimation.cancelAnimation()
+            judgeAnimation.animate()
+                .alpha(0f)
+                .setDuration(300)
+                .withEndAction {
+                    judgeAnimation.visibility = View.GONE
+                }
+        }, 1500)
 
         // 「つぎへ」ボタン表示
-        val nextBtn: Button = findViewById(R.id.next_btn)
-        nextBtn.visibility = View.VISIBLE
+        val afterAnsweredView : View = findViewById(R.id.after_answered)
+        afterAnsweredView.visibility = View.VISIBLE
 
     }
 
