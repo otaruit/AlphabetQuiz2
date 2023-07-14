@@ -11,12 +11,12 @@
     android:padding="15dp">
 
 
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/after_answered"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:elevation="1dp"
+        android:visibility="invisible"
         tools:visibility="invisible">
 
         <com.airbnb.lottie.LottieAnimationView
@@ -37,8 +37,7 @@
             android:text="つぎへ"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-       />
+            app:layout_constraintStart_toStartOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <LinearLayout
