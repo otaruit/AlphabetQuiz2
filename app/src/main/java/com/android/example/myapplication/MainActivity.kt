@@ -22,6 +22,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
 
+    private lateinit var player : Player
     private var rightAnswer: String? = null
     private var rightAnswerCount = 0
     private var quizCount = 1
@@ -42,11 +43,15 @@ class MainActivity : AppCompatActivity() {
 
         viewActivity()
 
-        // なまえテキストに表示する
-        val prefs = getSharedPreferences("userInformation", MODE_PRIVATE)
-        val name = prefs.getString("userName", "ななしのごんべ")
-        val setName = name + "ちゃん"
+        // プレイヤー表示
+//        val prefs = getSharedPreferences("userInformation", MODE_PRIVATE)
+//        var name = prefs.getString("userName", "ななしのごんべ")
+//        if (name == null) {name = "ななしのごんべ"}
+//        player = Player(name)
+        val setName ="ちゃん"
+//        val setName = name + "ちゃん"
         binding.labelName.text = setName
+
 
         // quiz_data.txtからクイズデータ読み取り
         readFile(getString(R.string.textFileName))

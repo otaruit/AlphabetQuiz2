@@ -30,11 +30,15 @@ class NewgameActivity : AppCompatActivity() {
                 name = "ななしのごんべ"//Assign default string
             }
 
+            val systemFile = applicationContext as SystemFile
+            systemFile.player = Player(name,0)
+
             // SharedPreferencesに名前を保存
             val prefs = getSharedPreferences("userInformation", MODE_PRIVATE)
             val editor: SharedPreferences.Editor = prefs.edit()
             editor.putString("userName", name)
             editor.putInt("totalScore", 0)
+            editor.putInt("characterNum", 0)
             editor.apply()
 
 

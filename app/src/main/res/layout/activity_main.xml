@@ -7,7 +7,7 @@
     android:id="@+id/top_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/quiz_bg"
+    android:background="@drawable/green_background"
     android:padding="15dp">
 
 
@@ -130,7 +130,7 @@
                             android:fontFamily="@font/kosugimaru"
                             android:gravity="center_horizontal"
                             android:text="@string/question_alphabet"
-                            android:textColor="@color/white"
+                            android:textColor="@color/purple_700"
                             android:textSize="60sp"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
@@ -156,7 +156,7 @@
                         android:fontFamily="@font/kosugimaru"
                         android:gravity="center_horizontal"
                         android:text="@string/question_text"
-                        android:textColor="@color/yellow"
+                        android:textColor="@color/purple_700"
                         android:textSize="24sp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.0"
@@ -164,86 +164,85 @@
                         app:layout_constraintTop_toBottomOf="@+id/quiz_text"
                         tools:visibility="visible" />
 
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/linearLayout2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="16dp"
-                    android:orientation="vertical"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/text_question"
-                    tools:visibility="visible">
-
                     <LinearLayout
+                        android:id="@+id/linearLayout2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal">
+                        android:layout_gravity="center"
+                        android:layout_marginTop="16dp"
+                        android:orientation="vertical"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/text_question"
+                        tools:visibility="visible">
 
-                        <Button
-                            android:id="@+id/answer1"
-                            android:layout_width="100dp"
-                            android:layout_height="100dp"
-                            android:layout_marginBottom="15dp"
-                            android:background="@drawable/select_btn_bg"
-                            android:onClick="checkAnswer"
-                            android:text="@string/selection"
-                            android:textAllCaps="false"
-                            android:textSize="48sp"
-                            app:backgroundTint="@null" />
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
 
-                        <Button
-                            android:id="@+id/answer2"
-                            android:layout_width="100dp"
-                            android:layout_height="100dp"
-                            android:layout_marginStart="15dp"
-                            android:background="@drawable/select_btn_bg"
-                            android:onClick="checkAnswer"
-                            android:text="@string/selection"
-                            android:textAllCaps="false"
-                            android:textSize="48sp"
-                            app:backgroundTint="@null"
-                    />
+                            <Button
+                                android:id="@+id/answer1"
+                                android:layout_width="100dp"
+                                android:layout_height="100dp"
+                                android:layout_marginBottom="15dp"
+                                android:background="@drawable/select_btn_bg"
+                                android:onClick="checkAnswer"
+                                android:text="@string/selection"
+                                android:textAllCaps="false"
+                                android:textSize="48sp"
+                                app:backgroundTint="@null" />
 
-                    </LinearLayout>
+                            <Button
+                                android:id="@+id/answer2"
+                                android:layout_width="100dp"
+                                android:layout_height="100dp"
+                                android:layout_marginStart="15dp"
+                                android:background="@drawable/select_btn_bg"
+                                android:onClick="checkAnswer"
+                                android:text="@string/selection"
+                                android:textAllCaps="false"
+                                android:textSize="48sp"
+                                app:backgroundTint="@null" />
 
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
+                        </LinearLayout>
 
-                        <Button
-                            android:id="@+id/answer3"
-                            android:layout_width="100dp"
-                            android:layout_height="100dp"
-                            android:background="@drawable/select_btn_bg"
-                            android:onClick="checkAnswer"
-                            android:text="@string/selection"
-                            android:textAllCaps="false"
-                            android:textSize="48sp"
-                            app:backgroundTint="@null" />
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
 
-                        <FrameLayout
-                            android:id="@+id/main_fragment"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent">
+                            <Button
+                                android:id="@+id/answer3"
+                                android:layout_width="100dp"
+                                android:layout_height="100dp"
+                                android:background="@drawable/select_btn_bg"
+                                android:onClick="checkAnswer"
+                                android:text="@string/selection"
+                                android:textAllCaps="false"
+                                android:textSize="48sp"
+                                app:backgroundTint="@null" />
 
-                        </FrameLayout>
+                            <FrameLayout
+                                android:id="@+id/main_fragment"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
 
-                        <Button
-                            android:id="@+id/answer4"
-                            android:layout_width="100dp"
-                            android:layout_height="100dp"
-                            android:layout_marginStart="15dp"
-                            android:background="@drawable/select_btn_bg"
-                            android:onClick="checkAnswer"
-                            android:text="@string/selection"
-                            android:textAllCaps="false"
-                            android:textSize="48sp"
-                            app:backgroundTint="@null" />
+                            </FrameLayout>
+
+                            <Button
+                                android:id="@+id/answer4"
+                                android:layout_width="100dp"
+                                android:layout_height="100dp"
+                                android:layout_marginStart="15dp"
+                                android:background="@drawable/select_btn_bg"
+                                android:onClick="checkAnswer"
+                                android:text="@string/selection"
+                                android:textAllCaps="false"
+                                android:textSize="48sp"
+                                app:backgroundTint="@null" />
+                        </LinearLayout>
+
                     </LinearLayout>
 
                 </LinearLayout>

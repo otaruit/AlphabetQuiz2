@@ -1,22 +1,19 @@
 package com.android.example.myapplication
 
-import android.animation.ObjectAnimator
-import android.animation.PropertyValuesHolder
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
 import android.view.animation.AnimationUtils
-import android.view.animation.DecelerateInterpolator
-import android.view.animation.LinearInterpolator
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
-import com.airbnb.lottie.LottieDrawable.RepeatMode
 import com.android.example.myapplication.databinding.ActivityTitleBinding
-import kotlinx.coroutines.NonCancellable.start
 
 class TitleActivity : AppCompatActivity() {
+
+    private lateinit var player: Player
     private lateinit var binding: ActivityTitleBinding
 
+    @SuppressLint("DiscouragedApi")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -24,7 +21,21 @@ class TitleActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
+        // プレイヤー表示
+        val systemFile = applicationContext as SystemFile
+        systemFile.player = Player()
+
+        val prefs = getSharedPreferences("userInformation", MODE_PRIVATE)
+        val name = prefs.getString("userName","ななしのごんべ") + "ちゃん"
+        val characterNum = prefs.getInt("characterNum",0)
+        val score = prefs.getInt("totalScore",0)
+
+        player = Player(name,0)
+        val resourceId = resources.getIdentifier(player.avator.toString(), "drawable", packageName)
+        binding.yourCharacter.setImageResource(resourceId)
+
         characterMove()
+
 
         // 「いちもじ」ボタン
         binding.buttonOneAlphabet.setOnClickListener {
@@ -42,12 +53,11 @@ class TitleActivity : AppCompatActivity() {
         }
 
 
-
     }
 
     // キャラクターを動かす
-    private fun characterMove(){
-        val character : ImageView = binding.yourCharacter
+    private fun characterMove() {
+        val character: ImageView = binding.yourCharacter
         val animation = AnimationUtils.loadAnimation(this, R.anim.character_move_anim)
         character.startAnimation(animation)
 //        val translationX = PropertyValuesHolder.ofFloat(View.TRANSLATION_X, 0F)
@@ -62,5 +72,6 @@ class TitleActivity : AppCompatActivity() {
     }
 
 
-
 }
+
+

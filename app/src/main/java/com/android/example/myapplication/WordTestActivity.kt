@@ -8,10 +8,10 @@ import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.view.KeyEvent
-import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.LinearLayout
 import android.widget.TextView
+import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import com.android.example.myapplication.databinding.ActivityWordTestBinding
@@ -57,13 +57,34 @@ class WordTestActivity : AppCompatActivity() {
         quizData.shuffle()
 
         keyboardLayout = findViewById(R.id.keyboardLayout)
-        word="AB"
 
-        keyboardLayout.setOnKeyListener { v, keyCode, event ->
-            onKey(v, keyCode, event)
-        }
+
         keyboardLayout.isFocusableInTouchMode = true
         keyboardLayout.requestFocus()
+
+        keyboardLayout.setOnKeyListener { v, keyCode, event ->
+                if (event.action == KeyEvent.ACTION_DOWN) {
+                    val pressedKey = getPressedKey(event)
+                    if (pressedKey.isLowerCase()) {
+                        // 小文字のキーが押された場合の処理
+                        // 例: Toast.makeText(this, "小文字：$pressedKey", Toast.LENGTH_SHORT).show()
+                    } else if (pressedKey.isUpperCase()) {
+                        // 大文字のキーが押された場合の処理
+                        // 例: Toast.makeText(this, "大文字：$pressedKey", Toast.LENGTH_SHORT).show()
+                    } else {
+                        // その他の文字（数字や記号など）が押された場合の処理
+                        // 例: Toast.makeText(this, "その他：$pressedKey", Toast.LENGTH_SHORT).show()
+                    }
+                }
+                false
+            }
+
+
+
+//        keyboardLayout.setOnKeyListener { v, keyCode, event ->
+//            onKey(v, keyCode, event)
+//        }
+
 
 
         // キーボードを表示する
@@ -71,7 +92,11 @@ class WordTestActivity : AppCompatActivity() {
         imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0)
 
 
-    showNextQuiz()
+        showNextQuiz()
+    }
+
+    private fun getPressedKey(event: KeyEvent): Char {
+        return event.unicodeChar.toChar()
     }
 
     // テキストファイルからクイズを取得
@@ -105,6 +130,7 @@ class WordTestActivity : AppCompatActivity() {
     @SuppressLint("SetTextI18n")
     private fun showNextQuiz() {
 
+
         // ラベル更新
         updateCountLabel()
 
@@ -128,42 +154,67 @@ class WordTestActivity : AppCompatActivity() {
             binding.quizText.text = lowerCaseWords
         }
 
+        word = rightAnswer as String
+        for (char in word) {
+            val textView = TextView(this)
+            textView.text = char.toString()
+            textView.textSize = 30F
+            keyboardLayout.addView(textView)
+        }
         // 出題したクイズを削除する
         quizData.removeAt(0)
 
     }
 
-    private fun onKey(v: View?, keyCode: Int, event: KeyEvent?): Boolean {
-        val keyPressed = event?.displayLabel?.toString()
 
-        if (keyCode == KeyEvent.KEYCODE_DEL) {
-            // バックスペースが押された場合
-            if (currentIndex > 0) {
-                currentIndex--
-                resetTextColor()
-            }
-        } else if (keyPressed != null && currentIndex < word.length) {
-            // 他のキーが押された場合
-            val currentChar = word[currentIndex].toString()
-            val textView = keyboardLayout.getChildAt(currentIndex) as TextView
+    override fun dispatchKeyEvent(e: KeyEvent): Boolean {
+        // キーコードを表示する
 
-            if (keyPressed == currentChar) {
-                // 正解の場合
-                textView.setTextColor(Color.RED)
-                currentIndex++
-
-                if (currentIndex == word.length) {
-                    // 全文字入力済みの場合、ゲームクリア処理を実行
-                    gameClear()
-                }
-            } else {
-                // 不正解の場合
-                textView.setTextColor(Color.BLACK)
+        val str = "コード「" + java.lang.String.valueOf(e.keyCode) + "」のキーが押されました"
+        println("KeyCode:" + str )
+        // 検索ボタンが押されたとき
+        if (e.keyCode == KeyEvent.KEYCODE_SEARCH) {
+            // ボタンが押し込まれたとき
+            if (e.action == KeyEvent.ACTION_DOWN) {
+                // 背景色を赤色にする
+                println(Color.RED)
+            } else if (e.action == KeyEvent.ACTION_UP) {
+                // 背景色を青色にする
+                println(Color.BLUE)
             }
         }
-
-        return false
+        return super.dispatchKeyEvent(e)
     }
+//
+//    @RequiresApi(Build.VERSION_CODES.O)
+//    private fun onKey(v: View?, keyCode: Int, event: KeyEvent?): Boolean {
+//        val keyPressed = event?.displayLabel?.toString()
+//
+//        if (keyCode == KeyEvent.KEYCODE_DEL) {
+//            // バックスペースが押された場合
+//            if (currentIndex > 0) {
+//                currentIndex--
+//                resetTextColor()
+//            }
+//        } else if (keyPressed != null && currentIndex < word.length) {
+//            val currentChar = word[currentIndex].toString()
+//            val textView = keyboardLayout.getChildAt(currentIndex) as TextView
+//
+//            if (keyPressed == currentChar) {
+//                textView.setTextColor(Color.RED)
+//                currentIndex++
+//
+//                if (currentIndex == word.length) {
+//                    rightAnswerCount++
+//                    checkQuizCount()
+//                }
+//            } else {
+//                textView.setTextColor(Color.BLACK)
+//            }
+//        }
+//
+//        return true
+//    }
 
     private fun resetTextColor() {
         for (i in 0 until keyboardLayout.childCount) {
@@ -173,8 +224,8 @@ class WordTestActivity : AppCompatActivity() {
     }
 
     private fun gameClear() {
-        // ゲームクリア時の処理を実装
-        // 例えば、新しい単語を表示する、スコアを更新するなど
+        keyboardLayout.removeAllViews()
+        currentIndex = 0
     }
 
 
@@ -185,30 +236,6 @@ class WordTestActivity : AppCompatActivity() {
         binding.wrongAnswerNum.text = "はずれ　${(quizCount - rightAnswerCount - 1)}もん"
     }
 
-    // 解答ボタンが押されたら呼ばれる
-    @RequiresApi(Build.VERSION_CODES.O)
-    fun submit(view: View) {
-
-        val answerText = binding.textAnswer.text.toString()
-
-        if (answerText == rightAnswer) {
-            //正解の時の挙動　正解アニメーション表示
-
-            //正解の選択肢のボタンの背景色を青に
-
-            rightAnswerCount++
-        } else {
-            //不正解の時の挙動　不正解アニメーション表示
-
-            //選択したの選択肢のボタンの背景色を赤に
-
-            //正解の選択肢のボタンの背景色を青に
-        }
-
-        binding.textAnswer.setText("")
-        checkQuizCount()
-
-    }
 
     // 出題数をチェックする
     @RequiresApi(Build.VERSION_CODES.O)
@@ -222,6 +249,7 @@ class WordTestActivity : AppCompatActivity() {
             intent.putExtra("RIGHT_ANSWER_COUNT", rightAnswerCount)
             startActivity(intent)
         } else {
+            gameClear()
             quizCount++
             showNextQuiz()
         }
