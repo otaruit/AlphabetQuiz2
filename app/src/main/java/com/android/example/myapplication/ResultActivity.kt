@@ -1,14 +1,19 @@
 package com.android.example.myapplication
 
+import Player
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.widget.ProgressBar
 import androidx.appcompat.app.AppCompatActivity
 import com.android.example.myapplication.databinding.ActivityResultBinding
+import kotlin.properties.Delegates
 
 
 class ResultActivity : AppCompatActivity() {
     private lateinit var binding: ActivityResultBinding
+    private lateinit var systemFile: SystemFile
+    private var totalScore by Delegates.notNull<Int>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,8 +44,9 @@ class ResultActivity : AppCompatActivity() {
 
     // トータルスコア表示
     private fun displayTotalScore(score: Int) {
-        val prefs = getSharedPreferences("userInformation", MODE_PRIVATE)
-        val totalScore = prefs.getInt("totalScore", 0)
+
+        systemFile = applicationContext as SystemFile
+        totalScore = systemFile.player?.score!!
         binding.totalScore.text = "ぜんぶで $totalScore てん かくとく！"
 
         // プログレスバー設定

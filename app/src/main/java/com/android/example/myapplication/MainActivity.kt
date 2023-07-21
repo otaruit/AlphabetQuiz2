@@ -1,8 +1,8 @@
 package com.android.example.myapplication
 
+import Player
 import android.annotation.SuppressLint
 import android.content.Intent
-import android.content.SharedPreferences
 import android.media.MediaPlayer
 import android.os.Build
 import android.os.Bundle
@@ -20,9 +20,11 @@ import java.lang.Character.isUpperCase
 
 class MainActivity : AppCompatActivity() {
 
+    private lateinit var systemFile: SystemFile
+    private lateinit var player: Player
+
     private lateinit var binding: ActivityMainBinding
 
-    private lateinit var player : Player
     private var rightAnswer: String? = null
     private var rightAnswerCount = 0
     private var quizCount = 1
@@ -37,21 +39,11 @@ class MainActivity : AppCompatActivity() {
     private lateinit var option3Button: Button
     private lateinit var option4Button: Button
 
-    @SuppressLint("SetTextI18n")
+    @SuppressLint("SetTextI18n", "DiscouragedApi")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         viewActivity()
-
-        // プレイヤー表示
-//        val prefs = getSharedPreferences("userInformation", MODE_PRIVATE)
-//        var name = prefs.getString("userName", "ななしのごんべ")
-//        if (name == null) {name = "ななしのごんべ"}
-//        player = Player(name)
-        val setName ="ちゃん"
-//        val setName = name + "ちゃん"
-        binding.labelName.text = setName
-
 
         // quiz_data.txtからクイズデータ読み取り
         readFile(getString(R.string.textFileName))
@@ -65,6 +57,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
+
 
         option1Button = binding.answer1
         option2Button = binding.answer2
@@ -144,7 +137,18 @@ class MainActivity : AppCompatActivity() {
 
     // ラベルの更新
     private fun updateCountLabel(quiz: MutableList<String>) {
+        // プレイヤー表示
+        systemFile = applicationContext as SystemFile
+//        val prefs = getSharedPreferences("userInformation", MODE_PRIVATE)
+        player = systemFile.player!!
 
+        val setName = player.name + "ちゃん"
+        binding.labelName.text = setName
+
+        val resourceId =
+            resources.getIdentifier(systemFile.player!!.avatar, "drawable", packageName)
+//        binding.yourCharacter.setImageResource(resourceId)
+//        characterMove()
 
         binding.quizNum.text = quizCount.toString()
         binding.correctAnswerNum.text = "せいかい　${rightAnswerCount}もん"
@@ -194,7 +198,7 @@ class MainActivity : AppCompatActivity() {
         val selectBtn: Button = findViewById(view.id)
         var soundResource: String? = null
 
-        val selectedIndex = when(view){
+        val selectedIndex = when (view) {
             //選択肢
             option1Button -> 0
             option2Button -> 1
@@ -247,7 +251,7 @@ class MainActivity : AppCompatActivity() {
         }, 1500)
 
         // 「つぎへ」ボタン表示
-        val afterAnsweredView : View = findViewById(R.id.after_answered)
+        val afterAnsweredView: View = findViewById(R.id.after_answered)
         afterAnsweredView.visibility = View.VISIBLE
 
     }
@@ -271,13 +275,15 @@ class MainActivity : AppCompatActivity() {
     fun checkQuizCount(view: View) {
         if (quizCount == maxQuizCount) {
 
-            // SharedPreferencesにスコアを保存
-            addScore()
+            // スコアを保存
+            player.savePlayerScore(rightAnswerCount)
+            systemFile.player = player
 
             // 結果画面を表示
             val intent = Intent(this@MainActivity, ResultActivity::class.java)
             intent.putExtra("RIGHT_ANSWER_COUNT", rightAnswerCount)
             startActivity(intent)
+
         } else {
 
             quizCount++
@@ -288,14 +294,6 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    // totalScore保存
-    private fun addScore() {
-        val prefs = getSharedPreferences("userInformation", MODE_PRIVATE)
-        val totalScore = prefs.getInt("totalScore", 0) + rightAnswerCount
-        val editor: SharedPreferences.Editor = prefs.edit()
-        editor.putInt("totalScore", totalScore)
-        editor.apply()
-    }
 
 }
 

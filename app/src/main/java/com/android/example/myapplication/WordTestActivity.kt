@@ -1,17 +1,15 @@
 package com.android.example.myapplication
 
 import android.annotation.SuppressLint
-import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
-import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
-import android.view.KeyEvent
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.inputmethod.InputMethodManager
-import android.widget.LinearLayout
+import android.widget.EditText
 import android.widget.TextView
-import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import com.android.example.myapplication.databinding.ActivityWordTestBinding
@@ -21,7 +19,7 @@ import java.io.InputStreamReader
 import java.util.*
 
 
-class WordTestActivity : AppCompatActivity() {
+class WordTestActivity : AppCompatActivity(), TextWatcher {
 
     private lateinit var binding: ActivityWordTestBinding
     private var rightAnswer: String? = null
@@ -34,7 +32,7 @@ class WordTestActivity : AppCompatActivity() {
 
     private lateinit var word: String
     private var currentIndex = 0
-    private lateinit var keyboardLayout: LinearLayout
+    private lateinit var answerEditor: EditText
 
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -56,48 +54,59 @@ class WordTestActivity : AppCompatActivity() {
         readFile(getString(R.string.wordTextFileName))
         quizData.shuffle()
 
-        keyboardLayout = findViewById(R.id.keyboardLayout)
+
+//        keyboardLayout = findViewById(R.id.keyboardLayout)
+        answerEditor = findViewById(R.id.answer_section)
+
+        answerEditor.isFocusableInTouchMode = true
+        answerEditor.requestFocus()
+
+        answerEditor.addTextChangedListener(this)
 
 
-        keyboardLayout.isFocusableInTouchMode = true
-        keyboardLayout.requestFocus()
-
-        keyboardLayout.setOnKeyListener { v, keyCode, event ->
-                if (event.action == KeyEvent.ACTION_DOWN) {
-                    val pressedKey = getPressedKey(event)
-                    if (pressedKey.isLowerCase()) {
-                        // 小文字のキーが押された場合の処理
-                        // 例: Toast.makeText(this, "小文字：$pressedKey", Toast.LENGTH_SHORT).show()
-                    } else if (pressedKey.isUpperCase()) {
-                        // 大文字のキーが押された場合の処理
-                        // 例: Toast.makeText(this, "大文字：$pressedKey", Toast.LENGTH_SHORT).show()
-                    } else {
-                        // その他の文字（数字や記号など）が押された場合の処理
-                        // 例: Toast.makeText(this, "その他：$pressedKey", Toast.LENGTH_SHORT).show()
-                    }
-                }
-                false
-            }
-
-
-
-//        keyboardLayout.setOnKeyListener { v, keyCode, event ->
-//            onKey(v, keyCode, event)
-//        }
-
-
-
-        // キーボードを表示する
-        val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0)
+//        // キーボードを表示する
+//        val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+//        imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0)
 
 
         showNextQuiz()
     }
 
-    private fun getPressedKey(event: KeyEvent): Char {
-        return event.unicodeChar.toChar()
+    override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+        TODO("Not yet implemented")
     }
+
+    override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+        TODO("Not yet implemented")
+    }
+
+    override fun afterTextChanged(s: Editable?) {
+
+//        val answer = answerEditor.toString()
+//        val currentQuestion = questions[currentQuestionIndex]
+//
+//        if (answer == currentQuestion) {
+//            // 回答が正解の場合
+//            currentQuestionIndex++
+//            if (currentQuestionIndex < questions.size) {
+//                displayQuestion()
+//            } else {
+//                // 全ての問題を終了した場合の処理
+//                questionTextView.text = "全ての問題を終了しました。"
+//                inputEditText.isEnabled = false
+//            }
+//        } else {
+//            // 回答が不正解の場合
+//            // ここに不正解の処理を追加する（例: エラーメッセージの表示など）
+//        }
+    }
+
+
+//
+//
+//private fun getPressedKey(event: KeyEvent): Char {
+//    return event.unicodeChar.toChar()
+//}
 
     // テキストファイルからクイズを取得
     private fun readFile(file: String) {
@@ -159,7 +168,7 @@ class WordTestActivity : AppCompatActivity() {
             val textView = TextView(this)
             textView.text = char.toString()
             textView.textSize = 30F
-            keyboardLayout.addView(textView)
+//        answerEditor.addView(textView)
         }
         // 出題したクイズを削除する
         quizData.removeAt(0)
@@ -167,66 +176,17 @@ class WordTestActivity : AppCompatActivity() {
     }
 
 
-    override fun dispatchKeyEvent(e: KeyEvent): Boolean {
-        // キーコードを表示する
-
-        val str = "コード「" + java.lang.String.valueOf(e.keyCode) + "」のキーが押されました"
-        println("KeyCode:" + str )
-        // 検索ボタンが押されたとき
-        if (e.keyCode == KeyEvent.KEYCODE_SEARCH) {
-            // ボタンが押し込まれたとき
-            if (e.action == KeyEvent.ACTION_DOWN) {
-                // 背景色を赤色にする
-                println(Color.RED)
-            } else if (e.action == KeyEvent.ACTION_UP) {
-                // 背景色を青色にする
-                println(Color.BLUE)
-            }
-        }
-        return super.dispatchKeyEvent(e)
-    }
-//
-//    @RequiresApi(Build.VERSION_CODES.O)
-//    private fun onKey(v: View?, keyCode: Int, event: KeyEvent?): Boolean {
-//        val keyPressed = event?.displayLabel?.toString()
-//
-//        if (keyCode == KeyEvent.KEYCODE_DEL) {
-//            // バックスペースが押された場合
-//            if (currentIndex > 0) {
-//                currentIndex--
-//                resetTextColor()
-//            }
-//        } else if (keyPressed != null && currentIndex < word.length) {
-//            val currentChar = word[currentIndex].toString()
-//            val textView = keyboardLayout.getChildAt(currentIndex) as TextView
-//
-//            if (keyPressed == currentChar) {
-//                textView.setTextColor(Color.RED)
-//                currentIndex++
-//
-//                if (currentIndex == word.length) {
-//                    rightAnswerCount++
-//                    checkQuizCount()
-//                }
-//            } else {
-//                textView.setTextColor(Color.BLACK)
-//            }
-//        }
-//
-//        return true
+//private fun resetTextColor() {
+//    for (i in 0 until answerEditor.childCount) {
+//        val textView = answerEditor.getChildAt(i) as TextView
+//        textView.setTextColor(Color.BLACK)
 //    }
-
-    private fun resetTextColor() {
-        for (i in 0 until keyboardLayout.childCount) {
-            val textView = keyboardLayout.getChildAt(i) as TextView
-            textView.setTextColor(Color.BLACK)
-        }
-    }
-
-    private fun gameClear() {
-        keyboardLayout.removeAllViews()
-        currentIndex = 0
-    }
+//}
+//
+//private fun gameClear() {
+//    answerEditor.removeAllViews()
+//    currentIndex = 0
+//}
 
 
     // ラベルの更新
@@ -249,7 +209,7 @@ class WordTestActivity : AppCompatActivity() {
             intent.putExtra("RIGHT_ANSWER_COUNT", rightAnswerCount)
             startActivity(intent)
         } else {
-            gameClear()
+//            gameClear()
             quizCount++
             showNextQuiz()
         }

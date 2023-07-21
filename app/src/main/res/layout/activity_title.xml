@@ -4,10 +4,10 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:scaleType="centerInside"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/green_background">
+    android:background="@color/orange"
+    android:scaleType="centerInside">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -40,6 +40,66 @@
             android:textAlignment="center"
             android:textColor="@color/black"
             android:textSize="34sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/button_one_alphabet"
+                android:layout_width="167dp"
+                android:layout_height="66dp"
+                android:layout_marginBottom="16dp"
+                android:alpha="0.8"
+                android:background="@drawable/btn_selector"
+                android:rotation="-9"
+                android:rotationX="17"
+                android:rotationY="17"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ichimoji"
+                android:text="いちもじ"
+                android:textColor="@color/black"
+                android:textSize="24sp"
+                app:backgroundTint="@null" />
+
+            <Button
+                android:id="@+id/button_word"
+                android:layout_width="160dp"
+                android:layout_height="65dp"
+                android:layout_marginBottom="16dp"
+                android:alpha="0.8"
+                android:background="@drawable/btn_selector"
+                android:rotation="-9"
+                android:rotationX="34"
+                android:rotationY="16"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ichimoji"
+                android:text="@string/oneWord"
+                android:textColor="@color/black"
+                android:textSize="24sp"
+                android:translationX="30dp"
+                app:backgroundTint="@null" />
+
+            <Button
+                android:id="@+id/button_new_game"
+                android:layout_width="wrap_content"
+                android:layout_height="66dp"
+                android:layout_marginBottom="16dp"
+                android:alpha="0.8"
+                android:background="@drawable/btn_selector"
+                android:rotation="-12"
+                android:rotationX="16"
+                android:rotationY="12"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ichimoji"
+                android:text="@string/newGame"
+                android:textColor="@color/black"
+                android:textSize="24sp"
+                android:translationX="60dp"
+                app:backgroundTint="@null" />
+
+        </LinearLayout>
 
         <ImageView
             android:id="@+id/your_character"
@@ -80,49 +140,6 @@
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:src="@drawable/maptile_jimen_sogen_02_right" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <Button
-                android:id="@+id/button_one_alphabet"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                android:background="@drawable/btn_selector"
-                app:backgroundTint="@null"
-                android:textColor="@color/black"
-                android:alpha="0.8"
-                android:text="いちもじ"
-                android:textSize="24sp" />
-
-            <Button
-                android:id="@+id/button_word"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                android:background="@drawable/btn_selector"
-                android:text="@string/oneWord"
-                android:textColor="@color/black"
-                android:alpha="0.8"
-                android:textSize="24sp"
-                app:backgroundTint="@null" />
-
-            <Button
-                android:id="@+id/button_new_game"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="end"
-                android:textColor="@color/black"
-                android:background="@drawable/btn_selector"
-                android:text="@string/newGame"
-                android:alpha="0.8"
-                android:textSize="24sp"
-                app:backgroundTint="@null" />
-
         </LinearLayout>
 
     </LinearLayout>

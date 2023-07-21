@@ -1,60 +1,74 @@
-package com.android.example.myapplication
-
-import androidx.appcompat.app.AppCompatActivity
 import android.content.Context
-import android.os.Bundle
+import android.content.SharedPreferences
+import android.content.res.Resources
+import android.widget.ImageView
+import com.android.example.myapplication.R
 
-class Player: AppCompatActivity(){
-    var avator: String = "character_ningyo_01_blue_purple"
-    private var characterNum: Int = 0
+class Player(private val prefs: SharedPreferences) {
+
     var name: String = "ななしのごんべ"
-    var score: Int = 0
+    var avatar: String = "character_ningyo_01_blue_purple"
+   var score: Int = 0
+    private val characterNum = 0
+
+    var avatarImg: ImageView? = null
+//    var avatarImg: ImageView = ImageView(context)
+
     var level: Int = 1
 
     init {
         getPlayerInformation()
-
-        if (this.characterNum == 0) {
-            when (level) {
-                0 -> this.avator = "character_ningyo_01_blue_purple"
-//            1 -> lottie.setAnimation(R.raw.alien_rain)
-//            2 -> lottie.setAnimation(R.raw.alien_reading)
-//            3 -> lottie.setAnimation(R.raw.alien_star_eye)
-//            4 -> lottie.setAnimation(R.raw.alien_going_space)
-//            else -> lottie.setAnimation(R.raw.alien_love)
-            }
-        } else {
-            when (level) {
-                0 -> this.avator = "character_ningyo_01_blue_purple"
-//            1 -> lottie.setAnimation(R.raw.alien_rain)
-//            2 -> lottie.setAnimation(R.raw.alien_reading)
-//            3 -> lottie.setAnimation(R.raw.alien_star_eye)
-//            4 -> lottie.setAnimation(R.raw.alien_going_space)
-//            else -> lottie.setAnimation(R.raw.alien_love)
-            }
-        }
         checkLevelUp()
     }
 
-
-//    fun increaseScore(points: Int) {
-//        score += points
-//        checkLevelUp()
-//    }
-
+    fun increaseScore(points: Int) {
+        score += points
+        checkLevelUp()
+    }
 
     private fun checkLevelUp() {
-        val levelThresholds = listOf(10, 30, 60, 120, 200) // レベルごとの必要経験値のリスト
+        val levelThresholds = listOf(10, 30, 60, 120, 200)
 
         while (level < levelThresholds.size && score >= levelThresholds[level - 1]) {
             level++
         }
     }
 
-    private fun getPlayerInformation() {
-        val prefs = getSharedPreferences("userInformation", MODE_PRIVATE)
+    private fun selectAvatarImage() {
+        when (characterNum) {
+            0 -> avatar = "character_ningyo_01_blue_purple"
+            // 必要に応じて、他のcharacterNum値とそれに対応するアバターのケースを追加してください。
+            else -> avatar = "character_ningyo_01_blue_purple" // デフォルトのアバター
+        }
+//        val resourceId = context.resources.getIdentifier(avatar, "drawable", context.packageName)
+//        avatarImg?.setImageResource(resourceId)
+    }
+
+    fun getPlayerInformation() {
         name = prefs.getString("userName", "ななしのごんべ").toString()
-        characterNum = prefs.getInt("characterNum", 0)
+
+        selectAvatarImage()
+
         score = prefs.getInt("totalScore", 0)
+    }
+
+    fun savePlayerInformation() {
+        val editor: SharedPreferences.Editor = prefs.edit()
+        if(name=="") name = "ななしのごんべ"
+        editor.putString("userName", name)
+        editor.putInt("totalScore", score)
+        editor.putInt("characterNum", characterNum)
+        editor.apply()
+    }
+
+    fun savePlayerScore(score:Int) {
+        increaseScore(score)
+
+        val editor: SharedPreferences.Editor = prefs.edit()
+        if(name=="") name = "ななしのごんべ"
+        editor.putString("userName", name)
+        editor.putInt("totalScore", score)
+        editor.putInt("characterNum", characterNum)
+        editor.apply()
     }
 }

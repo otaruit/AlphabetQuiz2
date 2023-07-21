@@ -1,5 +1,6 @@
 package com.android.example.myapplication
 
+import Player
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
@@ -10,7 +11,7 @@ import com.android.example.myapplication.databinding.ActivityTitleBinding
 
 class TitleActivity : AppCompatActivity() {
 
-    private lateinit var player: Player
+    private lateinit var systemFile: SystemFile
     private lateinit var binding: ActivityTitleBinding
 
     @SuppressLint("DiscouragedApi")
@@ -21,21 +22,7 @@ class TitleActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
-        // プレイヤー表示
-        val systemFile = applicationContext as SystemFile
-        systemFile.player = Player()
-
-        val prefs = getSharedPreferences("userInformation", MODE_PRIVATE)
-        val name = prefs.getString("userName","ななしのごんべ") + "ちゃん"
-        val characterNum = prefs.getInt("characterNum",0)
-        val score = prefs.getInt("totalScore",0)
-
-        player = Player(name,0)
-        val resourceId = resources.getIdentifier(player.avator.toString(), "drawable", packageName)
-        binding.yourCharacter.setImageResource(resourceId)
-
-        characterMove()
-
+        getPlayer()
 
         // 「いちもじ」ボタン
         binding.buttonOneAlphabet.setOnClickListener {
@@ -53,6 +40,18 @@ class TitleActivity : AppCompatActivity() {
         }
 
 
+    }
+
+    private fun getPlayer() {      // プレイヤー表示
+        systemFile = applicationContext as SystemFile
+        val prefs = getSharedPreferences("userInformation", MODE_PRIVATE)
+        systemFile.player = Player(prefs)
+
+
+        val resourceId =
+            resources.getIdentifier(systemFile.player!!.avatar, "drawable", packageName)
+        binding.yourCharacter.setImageResource(resourceId)
+        characterMove()
     }
 
     // キャラクターを動かす

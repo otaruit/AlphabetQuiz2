@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/quiz_bg"
+    android:background="@color/orange"
     android:gravity="center_horizontal|center_vertical"
     android:orientation="vertical"
     android:padding="15dp"
@@ -136,6 +136,17 @@
             android:textSize="20sp" />
 
     </LinearLayout>
+
+    <EditText
+        android:id="@+id/answer_section"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

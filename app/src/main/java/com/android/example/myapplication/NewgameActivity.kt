@@ -1,17 +1,20 @@
 package com.android.example.myapplication
 
+import Player
 import android.content.Intent
-import android.content.SharedPreferences
+import android.graphics.drawable.AnimatedVectorDrawable
 import android.os.Bundle
+import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import com.android.example.myapplication.databinding.ActivityNewgameBinding
-import java.io.*
+
+
+//import java.io.*
 
 
 class NewgameActivity : AppCompatActivity() {
     private lateinit var binding: ActivityNewgameBinding
-
-    private var file: File? = null
+//    private var file: File? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,26 +23,38 @@ class NewgameActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
+        var animImage: ImageView = binding.animatedBackground
+        val animation = animImage.drawable as AnimatedVectorDrawable
+        animation.start()
+
 
         // スタートボタン
         binding.buttonStart.setOnClickListener {
 
             // なまえを取得
-            var name: String = binding.textName.text.toString()
-            if (name == "") {
-                name = "ななしのごんべ"//Assign default string
-            }
+            val name: String = binding.textName.text.toString()
 
             val systemFile = applicationContext as SystemFile
-            systemFile.player = Player(name,0)
-
-            // SharedPreferencesに名前を保存
             val prefs = getSharedPreferences("userInformation", MODE_PRIVATE)
-            val editor: SharedPreferences.Editor = prefs.edit()
-            editor.putString("userName", name)
-            editor.putInt("totalScore", 0)
-            editor.putInt("characterNum", 0)
-            editor.apply()
+            systemFile.player = Player(prefs)
+            systemFile.player!!.name = name
+            systemFile.player!!.savePlayerInformation()
+
+
+
+////            val back:ImageView= findViewById(R.id.animatedBackground)
+////            back.setImageResource(R.drawable.avd_anim_minus_to_plus)
+////            val animation = avdImage.drawable as AnimatedVectorDrawable
+////            animation.start()
+//
+//            val imageView = findViewById<ImageView>(R.id.animatedBackground)
+////            back.setImageResource(R.drawable.vector)
+////            imageView.setImageDrawable(animatedVectorDrawable)
+////            animatedVectorDrawable.start()
+//
+//            imageView.setImageResource(R.drawable.)
+//            val animation = imageView.drawable as AnimatedVectorDrawable
+//            animation.start()
 
 
             //次のActivityへ

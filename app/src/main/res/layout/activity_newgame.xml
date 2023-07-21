@@ -1,76 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/flame"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/quiz_bg">
+    android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/text_whatname"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="53dp"
-        android:layout_marginTop="43dp"
-        android:layout_marginEnd="53dp"
-        android:fontFamily="@font/kosugimaru"
-        android:text="@string/whatName"
-        android:textAlignment="center"
-        android:textColor="@color/black"
-        android:textSize="34sp"
+    <LinearLayout
 
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:elevation="10dp"
+        android:orientation="vertical">
 
-    <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/lottie"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="40dp"
-        android:layout_marginEnd="6dp"
-        android:layout_marginBottom="24dp"
-        android:elevation="5dp"
-        app:layout_constraintBottom_toTopOf="@+id/text_whatname"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_whatname"
-        app:lottie_autoPlay="true"
-        app:lottie_rawRes="@raw/cat" />
+        <EditText
+            android:id="@+id/text_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:autofillHints="にゅうりょくしてね"
+            android:background="@drawable/white_bg"
+            android:hint="@string/name_hint"
+            android:inputType="textPersonName"
+            android:padding="10dp" />
 
-    <EditText
-        android:id="@+id/text_name"
-        android:layout_width="315dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="43dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="53dp"
-        android:autofillHints="にゅうりょくしてね"
-        android:background="@drawable/white_bg"
-        android:ems="10"
-        android:hint="@string/name_hint"
-        android:inputType="textPersonName"
-        android:minHeight="48dp"
-        android:padding="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lottie"
-        tools:ignore="LabelFor" />
+        <Button
+            android:id="@+id/button_start"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
 
-    <Button
-        android:id="@+id/button_start"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+            android:text="@string/start"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="parent" />
 
-        android:layout_marginTop="16dp"
-        android:text="@string/start"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_name"
-        app:layout_constraintWidth_percent=".8" />
+        <TextView
+            android:id="@+id/text_whatname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="53dp"
+            android:layout_marginTop="43dp"
+            android:layout_marginEnd="53dp"
+            android:fontFamily="@font/kosugimaru"
+            android:text="@string/whatName"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="34sp"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/animatedBackground"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:srcCompat="@drawable/animatorvectordrawable" />
+
+
+</FrameLayout>
