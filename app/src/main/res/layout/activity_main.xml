@@ -7,7 +7,7 @@
     android:id="@+id/top_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/green_background"
+    android:background="@color/orange"
     android:padding="15dp">
 
 
@@ -17,7 +17,7 @@
         android:layout_height="match_parent"
         android:elevation="1dp"
         android:visibility="invisible"
-        tools:visibility="invisible">
+        tools:visibility="visible">
 
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/lottie_judge"
@@ -33,8 +33,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="32dp"
+            android:background="@drawable/correct_btn_color"
             android:onClick="checkQuizCount"
             android:text="つぎへ"
+            app:backgroundTint="@null"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
@@ -51,9 +53,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:fontFamily="@font/kosugimaru"
             android:text="@string/text_name"
-            android:textColor="#304FFE"
-            android:textSize="24sp" />
+            android:textColor="@color/black"
+            android:textSize="24sp"
+            android:textStyle="bold" />
 
         <LinearLayout
             android:id="@+id/linearLayout"
@@ -72,8 +76,10 @@
                 android:id="@+id/mon2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/kosugimaru"
                 android:text="@string/numberOfQuestion"
-                android:textColor="#263238" />
+                android:textColor="#263238"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/quiz_num"
@@ -82,6 +88,7 @@
                 android:width="50dp"
                 android:height="50dp"
                 android:background="@drawable/question_num_btn_bg"
+                android:fontFamily="sans-serif"
                 android:text="@string/question_num"
                 android:textAlignment="center"
                 android:textSize="34sp"
@@ -91,8 +98,10 @@
                 android:id="@+id/mon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/kosugimaru"
                 android:text="@string/mon"
-                android:textColor="#004D40" />
+                android:textColor="#004D40"
+                android:textStyle="bold" />
 
         </LinearLayout>
 
@@ -110,7 +119,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:background="@drawable/btn_selector"
+                    android:background="@drawable/white_bg"
                     android:orientation="vertical"
                     android:padding="10dp">
 
@@ -127,11 +136,12 @@
                             android:layout_gravity="center"
                             android:layout_marginTop="8dp"
                             android:elevation="1dp"
-                            android:fontFamily="@font/kosugimaru"
+                            android:fontFamily="sans-serif"
                             android:gravity="center_horizontal"
                             android:text="@string/question_alphabet"
-                            android:textColor="@color/purple_700"
+                            android:textColor="@color/black"
                             android:textSize="60sp"
+                            android:textStyle="bold"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/linearLayout"
@@ -142,6 +152,7 @@
                             android:layout_width="48dp"
                             android:layout_height="48dp"
                             android:layout_gravity="bottom|left"
+                            app:backgroundTint="@null"
                             android:background="@drawable/volume"
                             android:contentDescription="alphabet voice"
                             android:onClick="soundPlay" />
@@ -156,8 +167,9 @@
                         android:fontFamily="@font/kosugimaru"
                         android:gravity="center_horizontal"
                         android:text="@string/question_text"
-                        android:textColor="@color/purple_700"
+                        android:textColor="@color/black"
                         android:textSize="24sp"
+                        android:textStyle="bold"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.0"
                         app:layout_constraintStart_toStartOf="parent"
@@ -187,10 +199,12 @@
                                 android:layout_height="100dp"
                                 android:layout_marginBottom="15dp"
                                 android:background="@drawable/select_btn_bg"
+                                android:fontFamily="sans-serif"
                                 android:onClick="checkAnswer"
                                 android:text="@string/selection"
                                 android:textAllCaps="false"
                                 android:textSize="48sp"
+                                android:textStyle="bold"
                                 app:backgroundTint="@null" />
 
                             <Button
@@ -199,10 +213,12 @@
                                 android:layout_height="100dp"
                                 android:layout_marginStart="15dp"
                                 android:background="@drawable/select_btn_bg"
+                                android:fontFamily="sans-serif"
                                 android:onClick="checkAnswer"
                                 android:text="@string/selection"
                                 android:textAllCaps="false"
                                 android:textSize="48sp"
+                                android:textStyle="bold"
                                 app:backgroundTint="@null" />
 
                         </LinearLayout>
@@ -217,10 +233,12 @@
                                 android:layout_width="100dp"
                                 android:layout_height="100dp"
                                 android:background="@drawable/select_btn_bg"
+                                android:fontFamily="sans-serif"
                                 android:onClick="checkAnswer"
                                 android:text="@string/selection"
                                 android:textAllCaps="false"
                                 android:textSize="48sp"
+                                android:textStyle="bold"
                                 app:backgroundTint="@null" />
 
                             <FrameLayout
@@ -236,10 +254,12 @@
                                 android:layout_height="100dp"
                                 android:layout_marginStart="15dp"
                                 android:background="@drawable/select_btn_bg"
+                                android:fontFamily="sans-serif"
                                 android:onClick="checkAnswer"
                                 android:text="@string/selection"
                                 android:textAllCaps="false"
                                 android:textSize="48sp"
+                                android:textStyle="bold"
                                 app:backgroundTint="@null" />
                         </LinearLayout>
 
@@ -256,6 +276,7 @@
                     android:fontFamily="@font/kosugimaru"
                     android:text="@string/correct_num_str"
                     android:textSize="20sp"
+                    android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.44"
                     app:layout_constraintStart_toStartOf="parent"
@@ -271,6 +292,7 @@
                     android:fontFamily="@font/kosugimaru"
                     android:text="@string/incorrect_num_str"
                     android:textSize="20sp"
+                    android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.4"
                     app:layout_constraintStart_toStartOf="parent"

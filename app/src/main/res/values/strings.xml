@@ -12,7 +12,8 @@
     <string name="btn_try_again">もういっかい</string>
     <string name="five_question">5もんちゅう</string>
     <string name="text_name">%sちゃん</string>
-    <string name="whatName">あなたのなまえは？</string>
+    <string name="inputName">あなたのなまえをおしえてね</string>
+    <string name="chooseCharacter">すきなキャラクターをえらんでね</string>
     <string name="gameImage">game_image</string>
     <string name="start">すたーと！</string>
     <string name="textFileName">quiz_data.txt</string>
@@ -33,5 +34,14 @@
     <string name="newGame">にゅーげーむ</string>
     <string name="oneWord">たんご</string>
     <string name="appTitle">あるふぁぺっと</string>
+    <string name="title_activity_input_name">InputNameActivity</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
 
 </resources>

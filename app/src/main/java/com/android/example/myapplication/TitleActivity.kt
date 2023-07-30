@@ -36,21 +36,18 @@ class TitleActivity : AppCompatActivity() {
 
         // 「あたらしくはじめる」ボタン
         binding.buttonNewGame.setOnClickListener {
-            startActivity(Intent(this@TitleActivity, NewgameActivity::class.java))
+            startActivity(Intent(this@TitleActivity, InputNameActivity::class.java))
         }
-
 
     }
 
+    @SuppressLint("DiscouragedApi")
     private fun getPlayer() {      // プレイヤー表示
         systemFile = applicationContext as SystemFile
         val prefs = getSharedPreferences("userInformation", MODE_PRIVATE)
         systemFile.player = Player(prefs)
 
-
-        val resourceId =
-            resources.getIdentifier(systemFile.player!!.avatar, "drawable", packageName)
-        binding.yourCharacter.setImageResource(resourceId)
+        binding.yourCharacter.setImageResource(systemFile.player!!.imgResources)
         characterMove()
     }
 

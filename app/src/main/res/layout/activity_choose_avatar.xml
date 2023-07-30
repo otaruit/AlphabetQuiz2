@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/orange"
+    android:gravity="center_horizontal|center_vertical"
+    android:orientation="vertical"
+    android:padding="15dp">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/white_bg"
+        android:orientation="vertical"
+        android:padding="10dp" >
+
+        <TextView
+            android:id="@+id/text_whatname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/kosugimaru"
+            android:text="@string/chooseCharacter"
+            android:textAlignment="center"
+
+            android:textColor="@color/black"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/white_bg"
+        android:orientation="vertical"
+        android:paddingTop="30dp"
+        android:paddingBottom="30dp">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/avatar1"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_margin="10dp"
+                android:clickable="true"
+                android:contentDescription="TODO"
+                android:onClick="getAvatarId"
+                app:srcCompat="@drawable/character_ningyo_01_blue_purple" />
+
+            <ImageView
+                android:id="@+id/avatar2"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_margin="10dp"
+                android:clickable="true"
+                android:contentDescription="TODO"
+                android:onClick="getAvatarId"
+                app:srcCompat="@drawable/woman" />
+
+            <ImageView
+                android:id="@+id/avatar3"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_margin="10dp"
+                android:clickable="true"
+                android:contentDescription="TODO"
+                android:onClick="getAvatarId"
+                app:srcCompat="@drawable/crown_02_gold_blue" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="bottom"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/button_next"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:onClick="goToNextActivity"
+            android:clickable="true"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/green_oval"
+            app:srcCompat="@android:drawable/ic_media_ff" />
+    </LinearLayout>
+
+
+</LinearLayout>
+
+
+

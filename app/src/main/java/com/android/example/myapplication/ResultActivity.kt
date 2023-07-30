@@ -4,6 +4,8 @@ import Player
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.view.animation.AnimationUtils
+import android.widget.ImageView
 import android.widget.ProgressBar
 import androidx.appcompat.app.AppCompatActivity
 import com.android.example.myapplication.databinding.ActivityResultBinding
@@ -28,6 +30,7 @@ class ResultActivity : AppCompatActivity() {
 
         displayScore(score)
         displayTotalScore(score)
+        getPlayer()
 
         // 「もう一度」ボタン
         binding.tryAgainBtn.setOnClickListener {
@@ -81,5 +84,34 @@ class ResultActivity : AppCompatActivity() {
 
         //アニメーション表示
         binding.resultLabel.animate().translationY(-500f).setDuration(1000).startDelay = 0
+    }
+
+    @SuppressLint("DiscouragedApi")
+    private fun getPlayer() {      // プレイヤー表示
+        systemFile = applicationContext as SystemFile
+        val prefs = getSharedPreferences("userInformation", MODE_PRIVATE)
+        systemFile.player = Player(prefs)
+
+        val setName = systemFile.player?.name + "ちゃん"
+        binding.labelName.text = setName
+
+        binding.yourAvatar.setImageResource(systemFile.player!!.imgResources)
+        characterMove()
+    }
+
+    // キャラクターを動かす
+    private fun characterMove() {
+        val character: ImageView = binding.yourAvatar
+        val animation = AnimationUtils.loadAnimation(this, R.anim.character_move_anim)
+        character.startAnimation(animation)
+//        val translationX = PropertyValuesHolder.ofFloat(View.TRANSLATION_X, 0F)
+//        val translationY = PropertyValuesHolder.ofFloat(View.TRANSLATION_Y,100F )
+//        val animator = ObjectAnimator.ofPropertyValuesHolder(character, translationX, translationY).apply {
+//            duration = 500
+//            interpolator = LinearInterpolator() // 急速に開始し、その後減速しながら変化させる
+//        }
+//        animator.repeatCount=-1
+//        animator.start()
+
     }
 }

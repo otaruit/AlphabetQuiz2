@@ -1,19 +1,12 @@
-import android.content.Context
 import android.content.SharedPreferences
-import android.content.res.Resources
-import android.widget.ImageView
 import com.android.example.myapplication.R
 
 class Player(private val prefs: SharedPreferences) {
 
     var name: String = "ななしのごんべ"
-    var avatar: String = "character_ningyo_01_blue_purple"
-   var score: Int = 0
-    private val characterNum = 0
-
-    var avatarImg: ImageView? = null
-//    var avatarImg: ImageView = ImageView(context)
-
+    var avatar: Int = 0
+    var score: Int = 0
+    var imgResources: Int = R.drawable.vikinghelmet_blue
     var level: Int = 1
 
     init {
@@ -21,7 +14,7 @@ class Player(private val prefs: SharedPreferences) {
         checkLevelUp()
     }
 
-    fun increaseScore(points: Int) {
+    private fun increaseScore(points: Int) {
         score += points
         checkLevelUp()
     }
@@ -34,11 +27,11 @@ class Player(private val prefs: SharedPreferences) {
         }
     }
 
-    private fun selectAvatarImage() {
-        when (characterNum) {
-            0 -> avatar = "character_ningyo_01_blue_purple"
-            // 必要に応じて、他のcharacterNum値とそれに対応するアバターのケースを追加してください。
-            else -> avatar = "character_ningyo_01_blue_purple" // デフォルトのアバター
+    private fun setAvatarImage() {
+        when (avatar) {
+            0 -> imgResources = R.drawable.character_ningyo_01_blue_purple
+            1 -> imgResources = R.drawable.woman
+            2 -> imgResources = R.drawable.vikinghelmet_blue
         }
 //        val resourceId = context.resources.getIdentifier(avatar, "drawable", context.packageName)
 //        avatarImg?.setImageResource(resourceId)
@@ -46,29 +39,25 @@ class Player(private val prefs: SharedPreferences) {
 
     fun getPlayerInformation() {
         name = prefs.getString("userName", "ななしのごんべ").toString()
-
-        selectAvatarImage()
-
+        avatar = prefs.getInt("avatarNum", 0)
+        setAvatarImage()
         score = prefs.getInt("totalScore", 0)
     }
 
     fun savePlayerInformation() {
         val editor: SharedPreferences.Editor = prefs.edit()
-        if(name=="") name = "ななしのごんべ"
+        if (name == "") name = "ななしのごんべ"
         editor.putString("userName", name)
         editor.putInt("totalScore", score)
-        editor.putInt("characterNum", characterNum)
+        editor.putInt("avatarNum", avatar)
         editor.apply()
     }
 
-    fun savePlayerScore(score:Int) {
+    fun savePlayerScore(score: Int) {
         increaseScore(score)
 
         val editor: SharedPreferences.Editor = prefs.edit()
-        if(name=="") name = "ななしのごんべ"
-        editor.putString("userName", name)
         editor.putInt("totalScore", score)
-        editor.putInt("characterNum", characterNum)
         editor.apply()
     }
 }

@@ -1,6 +1,7 @@
 package com.android.example.myapplication
 
 import Player
+import android.animation.Animator
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.media.MediaPlayer
@@ -139,14 +140,13 @@ class MainActivity : AppCompatActivity() {
     private fun updateCountLabel(quiz: MutableList<String>) {
         // プレイヤー表示
         systemFile = applicationContext as SystemFile
-//        val prefs = getSharedPreferences("userInformation", MODE_PRIVATE)
         player = systemFile.player!!
 
         val setName = player.name + "ちゃん"
         binding.labelName.text = setName
 
-        val resourceId =
-            resources.getIdentifier(systemFile.player!!.avatar, "drawable", packageName)
+//        val resourceId =
+//            resources.getIdentifier(systemFile.player!!.avatar, "drawable", packageName)
 //        binding.yourCharacter.setImageResource(resourceId)
 //        characterMove()
 
@@ -237,7 +237,6 @@ class MainActivity : AppCompatActivity() {
         val mediaPlayer = MediaPlayer.create(applicationContext, mediaResource)
         mediaPlayer.start()
 
-        // アニメーションの開始
         judgeAnimation.playAnimation()
 
         judgeAnimation.postDelayed({
@@ -285,11 +284,8 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
 
         } else {
-
             quizCount++
-
             viewActivity()
-
             showNextQuiz()
         }
     }
