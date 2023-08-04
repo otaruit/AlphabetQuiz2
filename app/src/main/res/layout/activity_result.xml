@@ -1,183 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/orange"
-    android:gravity="center_vertical"
-    android:orientation="vertical"
-    android:padding="10dp">
+    android:gravity="center|center_vertical"
+    android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/label_name"
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/itemFragment"
+        android:name="com.android.example.myapplication.ItemFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:layout="@layout/fragment_item"
+        tools:visibility="gone" />
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/scoreFragment"
+        android:name="com.android.example.myapplication.ScoreFragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:layout="@layout/fragment_score" />
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/navigationFragment"
+        android:name="com.android.example.myapplication.NavigationFragment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="start"
-        android:layout_marginBottom="10dp"
-        android:background="@drawable/blue_square"
-        android:fontFamily="@font/kosugimaru"
-        android:padding="5dp"
-        android:text="@string/text_name"
-        android:textAlignment="center"
-        android:textColor="@color/black"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:backgroundTint="@null" />
-
-    <LinearLayout
-        android:id="@+id/linearLayout6"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-
-        android:background="@drawable/white_bg"
-        android:gravity="start"
-        android:orientation="vertical"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="136dp">
-
-        <TextView
-            android:id="@+id/resultLabel2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="start"
-            android:layout_marginStart="10dp"
-            android:fontFamily="@font/kosugimaru"
-            android:gravity="start"
-            android:text="@string/five_question"
-            android:textColor="@color/black"
-            android:textSize="24sp"
-            android:textStyle="bold" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="5dp"
-            android:background="@color/red"
-            android:gravity="center"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/resultLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:width="50dp"
-                android:height="50dp"
-                android:background="@drawable/question_num_btn_bg"
-                android:backgroundTint="@color/yellow"
-                android:text="@string/result_score"
-                android:textAlignment="center"
-                android:textColor="@color/black"
-                android:textSize="34sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/num_answer_str"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/kosugimaru"
-                android:text="@string/str_correct_q_num"
-                android:textColor="@color/black"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-
-        </LinearLayout>
-
-        <TextView
-            android:id="@+id/total_score"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="10dp"
-            android:fontFamily="@font/kosugimaru"
-            android:text="ぜんぶで %d てん かくとく！"
-            android:textColor="@color/black"
-            android:textSize="20sp"
-            android:textStyle="bold" />
-
-        <ProgressBar
-            android:id="@+id/progressBar1"
-            style="?android:attr/progressBarStyleHorizontal"
-            android:layout_width="280dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="16dp"
-            android:progressDrawable="@drawable/progressbar" />
-
-        <ImageView
-            android:id="@+id/your_avatar"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="50dp"
-            android:elevation="5dp"
-            android:src="@drawable/woman" />
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:id="@+id/mapTile_left"
-                android:layout_width="70dp"
-                android:layout_height="70dp"
-                android:src="@drawable/maptile_jimen_sogen_02_left" />
-
-            <ImageView
-                android:id="@+id/mapTile_center"
-                android:layout_width="70dp"
-                android:layout_height="70dp"
-                android:src="@drawable/green_center" />
-
-            <ImageView
-                android:id="@+id/mapTile_center2"
-                android:layout_width="70dp"
-                android:layout_height="70dp"
-                android:layout_weight="1"
-                android:src="@drawable/green_center" />
-
-            <ImageView
-                android:id="@+id/mapTile_right"
-                android:layout_width="70dp"
-                android:layout_height="70dp"
-                android:src="@drawable/maptile_jimen_sogen_02_right" />
-        </LinearLayout>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout6">
-
-        <Button
-            android:id="@+id/back_to_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/incorrect_btn_color"
-            android:fontFamily="@font/kosugimaru"
-            android:text="タイトルへ"
-            android:textStyle="bold" />
-
-        <Button
-            android:id="@+id/tryAgainBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/correct_btn_color"
-            android:fontFamily="@font/kosugimaru"
-            android:text="@string/btn_try_again"
-            android:textStyle="bold" />
-
-    </LinearLayout>
+        android:layout_marginTop="10dp"
+        tools:layout="@layout/fragment_navigation" />
 
 </LinearLayout>

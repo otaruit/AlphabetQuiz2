@@ -1,6 +1,5 @@
 package com.android.example.myapplication
 
-import Player
 import android.content.Intent
 import android.os.Bundle
 import android.view.View

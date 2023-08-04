@@ -6,13 +6,14 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.animation.AnimationUtils
 import android.widget.ImageView
+import android.widget.ProgressBar
 import androidx.appcompat.app.AppCompatActivity
 import com.android.example.myapplication.databinding.ActivityTitleBinding
 
-class TitleActivity : AppCompatActivity() {
+class TitleActivity : AppCompatActivity()  {
 
-    private lateinit var systemFile: SystemFile
     private lateinit var binding: ActivityTitleBinding
+    private lateinit var player:Player
 
     @SuppressLint("DiscouragedApi")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -22,16 +23,18 @@ class TitleActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
+        val prefs = getSharedPreferences("userInformation", MODE_PRIVATE)
+        player = Player(prefs)
         getPlayer()
 
         // 「いちもじ」ボタン
         binding.buttonOneAlphabet.setOnClickListener {
-            startActivity(Intent(this@TitleActivity, MainActivity::class.java))
+            startActivity(Intent(this@TitleActivity, AlphabetQuizActivity::class.java))
         }
 
         // 「たんご」ボタン
         binding.buttonWord.setOnClickListener {
-            startActivity(Intent(this@TitleActivity, WordTestActivity::class.java))
+            startActivity(Intent(this@TitleActivity, WordQuizActivity::class.java))
         }
 
         // 「あたらしくはじめる」ボタン
@@ -41,14 +44,18 @@ class TitleActivity : AppCompatActivity() {
 
     }
 
-    @SuppressLint("DiscouragedApi")
-    private fun getPlayer() {      // プレイヤー表示
-        systemFile = applicationContext as SystemFile
-        val prefs = getSharedPreferences("userInformation", MODE_PRIVATE)
-        systemFile.player = Player(prefs)
-
-        binding.yourCharacter.setImageResource(systemFile.player!!.imgResources)
+    @SuppressLint("DiscouragedApi", "SetTextI18n")
+    private fun getPlayer() {
+        var level = player.level
+        binding.labelLevel.text = "Lv.$level"
+        binding.labelName.text = "${player.name}ちゃん"
+        binding.yourCharacter.setImageResource(player.imgResources)
         characterMove()
+        cloudMove()
+
+        // プログレスバー設定
+        var bar: ProgressBar = findViewById(R.id.progressBar1)
+        bar.max = player.levelThresholds[level-1]
     }
 
     // キャラクターを動かす
@@ -67,6 +74,12 @@ class TitleActivity : AppCompatActivity() {
 
     }
 
+    private fun cloudMove() {
+        val cloud: ImageView = binding.cloud
+        val animation = AnimationUtils.loadAnimation(this, R.anim.cloud_move_anim)
+        cloud.startAnimation(animation)
+
+    }
 
 }
 

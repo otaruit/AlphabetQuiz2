@@ -1,7 +1,6 @@
 package com.android.example.myapplication
 
 import Player
-import android.animation.Animator
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.media.MediaPlayer
@@ -19,12 +18,9 @@ import java.io.InputStreamReader
 import java.lang.Character.isUpperCase
 
 
-class MainActivity : AppCompatActivity() {
-
-    private lateinit var systemFile: SystemFile
-    private lateinit var player: Player
-
+class AlphabetQuizActivity: AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
+    private lateinit var player:Player
 
     private var rightAnswer: String? = null
     private var rightAnswerCount = 0
@@ -44,6 +40,10 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        val prefs = getSharedPreferences("userInformation", MODE_PRIVATE)
+        player = Player(prefs)
+
+
         viewActivity()
 
         // quiz_data.txtからクイズデータ読み取り
@@ -58,7 +58,6 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
-
 
         option1Button = binding.answer1
         option2Button = binding.answer2
@@ -139,16 +138,8 @@ class MainActivity : AppCompatActivity() {
     // ラベルの更新
     private fun updateCountLabel(quiz: MutableList<String>) {
         // プレイヤー表示
-        systemFile = applicationContext as SystemFile
-        player = systemFile.player!!
-
-        val setName = player.name + "ちゃん"
+        val setName= "${player.name}ちゃん"
         binding.labelName.text = setName
-
-//        val resourceId =
-//            resources.getIdentifier(systemFile.player!!.avatar, "drawable", packageName)
-//        binding.yourCharacter.setImageResource(resourceId)
-//        characterMove()
 
         binding.quizNum.text = quizCount.toString()
         binding.correctAnswerNum.text = "せいかい　${rightAnswerCount}もん"
@@ -276,10 +267,10 @@ class MainActivity : AppCompatActivity() {
 
             // スコアを保存
             player.savePlayerScore(rightAnswerCount)
-            systemFile.player = player
 
             // 結果画面を表示
-            val intent = Intent(this@MainActivity, ResultActivity::class.java)
+            val intent = Intent(this@AlphabetQuizActivity, ResultActivity::class.java)
+            intent.putExtra("FROM_ACTIVITY_NAME","one_alphabet")
             intent.putExtra("RIGHT_ANSWER_COUNT", rightAnswerCount)
             startActivity(intent)
 

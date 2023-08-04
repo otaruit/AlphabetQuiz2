@@ -1,13 +1,14 @@
 import android.content.SharedPreferences
 import com.android.example.myapplication.R
 
-class Player(private val prefs: SharedPreferences) {
-
+class Player(preferences: SharedPreferences) {
+    private var prefs = preferences
     var name: String = "ななしのごんべ"
     var avatar: Int = 0
-    var score: Int = 0
+    var totalScore: Int = 0
     var imgResources: Int = R.drawable.vikinghelmet_blue
     var level: Int = 1
+    val levelThresholds = listOf(10, 30, 60, 120, 200)
 
     init {
         getPlayerInformation()
@@ -15,14 +16,12 @@ class Player(private val prefs: SharedPreferences) {
     }
 
     private fun increaseScore(points: Int) {
-        score += points
+        totalScore += points
         checkLevelUp()
     }
 
     private fun checkLevelUp() {
-        val levelThresholds = listOf(10, 30, 60, 120, 200)
-
-        while (level < levelThresholds.size && score >= levelThresholds[level - 1]) {
+        while (level < levelThresholds.size && totalScore >= levelThresholds[level - 1]) {
             level++
         }
     }
@@ -37,27 +36,27 @@ class Player(private val prefs: SharedPreferences) {
 //        avatarImg?.setImageResource(resourceId)
     }
 
-    fun getPlayerInformation() {
+    private fun getPlayerInformation() {
         name = prefs.getString("userName", "ななしのごんべ").toString()
         avatar = prefs.getInt("avatarNum", 0)
         setAvatarImage()
-        score = prefs.getInt("totalScore", 0)
+        totalScore = prefs.getInt("totalScore", 0)
     }
 
     fun savePlayerInformation() {
         val editor: SharedPreferences.Editor = prefs.edit()
         if (name == "") name = "ななしのごんべ"
         editor.putString("userName", name)
-        editor.putInt("totalScore", score)
+        editor.putInt("totalScore", totalScore)
         editor.putInt("avatarNum", avatar)
         editor.apply()
     }
 
-    fun savePlayerScore(score: Int) {
-        increaseScore(score)
+    fun savePlayerScore(points: Int) {
+        increaseScore(points)
 
         val editor: SharedPreferences.Editor = prefs.edit()
-        editor.putInt("totalScore", score)
+        editor.putInt("totalScore", totalScore)
         editor.apply()
     }
 }

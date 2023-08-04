@@ -2,25 +2,18 @@ package com.android.example.myapplication
 
 import Player
 import android.animation.ObjectAnimator
-import android.annotation.SuppressLint
-import android.content.Context.MODE_PRIVATE
 import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.webkit.WebView
-import android.widget.Button
 import android.widget.ImageView
-import androidx.core.content.ContextCompat.startActivity
-import androidx.viewpager2.widget.ViewPager2
 import com.android.example.myapplication.databinding.ActivityChooseAvatarBinding
-import com.android.example.myapplication.databinding.ActivityInputNameBinding
-import com.android.example.myapplication.databinding.ActivityNewgameBinding
-import kotlinx.coroutines.NonCancellable.start
 
 class ChooseAvatarActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityChooseAvatarBinding
+    private lateinit var player:Player
     var lastSelectedButton: ImageView? = null
     private var lastSelectedButtonAnimator: ObjectAnimator? = null
     var avatarInt = 0
@@ -31,37 +24,24 @@ class ChooseAvatarActivity : AppCompatActivity() {
         binding = ActivityChooseAvatarBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
-
-
     }
 
-    private fun savePlayer() {
+    private fun savePlayer(prefs:SharedPreferences) {
         // 正解数を取得
         var name = intent.getStringExtra("INPUTTED_NAME")
-        if (name == "") {
-            name = "ななしのごんべ"
-        }
-
-        val systemFile = applicationContext as SystemFile
-        val prefs = getSharedPreferences("userInformation", MODE_PRIVATE)
-        systemFile.player = Player(prefs)
-        if (name != null) {
-            systemFile.player!!.name = name
-        }
-        systemFile.player!!.avatar = avatarInt
-        systemFile.player!!.score = 0
-        systemFile.player!!.savePlayerInformation()
-
+        if (name == "") name = "ななしのごんべ"
+        val editor: SharedPreferences.Editor = prefs.edit()
+        editor.putString("userName", name)
+        editor.putInt("totalScore", 0)
+        editor.putInt("avatarNum", avatarInt)
+        editor.apply()
     }
 
     fun getAvatarId(view: View) {
         lastSelectedButton?.let { resetButtonBackgrounds(it) }
-
         lastSelectedButtonAnimator?.cancel()
 
-        val buttonId = view.id
-
-        when (buttonId) {
+        when (view.id) {
             R.id.avatar1 -> {
                 avatarInt = 0
             }
@@ -93,10 +73,11 @@ class ChooseAvatarActivity : AppCompatActivity() {
 
     // スタートボタン
     fun goToNextActivity(view: View) {
-        savePlayer()
+        val prefs = getSharedPreferences("userInformation", MODE_PRIVATE)
+        savePlayer(prefs)
 
         //次のActivityへ
-        startActivity(Intent(this@ChooseAvatarActivity, MainActivity::class.java))
+        startActivity(Intent(this@ChooseAvatarActivity, AlphabetQuizActivity::class.java))
     }
 }
 
