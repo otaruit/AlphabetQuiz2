@@ -4,26 +4,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/orange"
     android:paddingStart="20dp"
     android:paddingEnd="20dp">
-
-    <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/lottie_treasure"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:visibility="visible" />
 
     <LinearLayout
         android:id="@+id/item"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
-        android:background="@drawable/white_bg"
+        android:background="@drawable/green_display"
         android:gravity="center"
         android:orientation="vertical"
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
+        android:visibility="visible"
         tools:visibility="visible">
 
         <TextView
@@ -59,8 +53,9 @@
             android:id="@+id/button_get"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:onClick="showMainView"
+            android:clickable="true"
             android:text="GET!" />
+
     </LinearLayout>
 
 </FrameLayout>

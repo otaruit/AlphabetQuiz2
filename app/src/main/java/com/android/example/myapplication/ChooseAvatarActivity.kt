@@ -1,13 +1,17 @@
 package com.android.example.myapplication
 
 import Player
+import android.animation.ArgbEvaluator
 import android.animation.ObjectAnimator
+import android.animation.ValueAnimator
 import android.content.Intent
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.Button
 import android.widget.ImageView
+import androidx.core.content.ContextCompat
 import com.android.example.myapplication.databinding.ActivityChooseAvatarBinding
 
 class ChooseAvatarActivity : AppCompatActivity() {
@@ -52,11 +56,12 @@ class ChooseAvatarActivity : AppCompatActivity() {
                 avatarInt = 2
             }
         }
+
         val animator = ObjectAnimator.ofArgb(
             view,
             "backgroundColor",
-            /* Start color(original color) */ resources.getColor(R.color.black),
-            /* End color (desired color) */ resources.getColor(R.color.red)
+            /* Start color(original color) */ resources.getColor(R.color.light_blue_600),
+            /* End color (desired color) */ resources.getColor(R.color.yellow)
         )
         animator.duration = 1000 // Animation duration in milliseconds (adjust as needed)
         animator.start()

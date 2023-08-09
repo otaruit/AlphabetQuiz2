@@ -12,7 +12,7 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/white_bg"
+        android:background="@drawable/green_display"
         android:orientation="vertical"
         android:padding="10dp" >
 
@@ -33,7 +33,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:background="@drawable/white_bg"
+        android:background="@drawable/green_display"
         android:orientation="vertical"
         android:paddingTop="30dp"
         android:paddingBottom="30dp">
@@ -41,36 +41,40 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:orientation="horizontal">
 
             <ImageView
                 android:id="@+id/avatar1"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:layout_margin="10dp"
+                android:layout_marginEnd="5dp"
                 android:clickable="true"
                 android:contentDescription="TODO"
                 android:onClick="getAvatarId"
+                android:padding="10dp"
                 app:srcCompat="@drawable/character_ningyo_01_blue_purple" />
 
             <ImageView
                 android:id="@+id/avatar2"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:layout_margin="10dp"
+                android:backgroundTintMode="src_in"
                 android:clickable="true"
                 android:contentDescription="TODO"
                 android:onClick="getAvatarId"
+                android:padding="10dp"
                 app:srcCompat="@drawable/woman" />
 
             <ImageView
                 android:id="@+id/avatar3"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:layout_margin="10dp"
+                android:layout_marginStart="5dp"
                 android:clickable="true"
                 android:contentDescription="TODO"
                 android:onClick="getAvatarId"
+                android:padding="10dp"
                 app:srcCompat="@drawable/crown_02_gold_blue" />
         </LinearLayout>
 

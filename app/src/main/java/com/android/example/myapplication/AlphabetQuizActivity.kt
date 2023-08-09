@@ -240,12 +240,28 @@ class AlphabetQuizActivity: AppCompatActivity() {
                 }
         }, 1500)
 
+        val nextBtn = binding.nextBtn
+        nextBtn.setAnimation(R.raw.next)
+        nextBtn.setOnClickListener {
+            if (nextBtn.isAnimating) {
+                nextBtn.pauseAnimation()
+            } else {
+                nextBtn.playAnimation()
+                nextBtn.postDelayed({
+                    nextBtn.cancelAnimation()
+                    nextBtn.animate()
+                        .setDuration(300)
+                }, 1000)
+                checkQuizCount(view)
+            }
+        }
+
         // 「つぎへ」ボタン表示
         val afterAnsweredView: View = findViewById(R.id.after_answered)
         afterAnsweredView.visibility = View.VISIBLE
 
-    }
 
+    }
 
     private fun btnNotEnabled(boolean: Boolean) {
         if (boolean) {

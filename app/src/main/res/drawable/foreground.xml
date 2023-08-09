@@ -1,0 +1,3 @@
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:foreground="@color/black_overlay" /> <!-- ここに任意の色を指定 -->
+</shape>

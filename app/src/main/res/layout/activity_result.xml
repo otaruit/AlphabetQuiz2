@@ -7,28 +7,16 @@
     android:gravity="center|center_vertical"
     android:orientation="vertical">
 
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/lottie_treasure"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
     <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/itemFragment"
+        android:id="@+id/container"
         android:name="com.android.example.myapplication.ItemFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:layout="@layout/fragment_item"
-        tools:visibility="gone" />
-
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/scoreFragment"
-        android:name="com.android.example.myapplication.ScoreFragment"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:layout="@layout/fragment_score" />
-
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/navigationFragment"
-        android:name="com.android.example.myapplication.NavigationFragment"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        tools:layout="@layout/fragment_navigation" />
+        tools:layout="@layout/fragment_item" />
 
 </LinearLayout>

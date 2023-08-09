@@ -7,7 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="center_vertical"
-    android:background="@android:drawable/progress_indeterminate_horizontal"
+    android:background="@color/orange"
     android:gravity="center_vertical"
     android:orientation="vertical"
     android:scaleType="centerInside">
@@ -39,7 +39,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
 
-            android:background="@drawable/white_bg"
+            android:background="@drawable/green_display"
             android:gravity="start"
             android:orientation="vertical"
             android:paddingTop="10dp"
@@ -47,26 +47,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             tools:layout_editor_absoluteY="136dp">
-
-            <TextView
-                android:id="@+id/label_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginStart="6dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="6dp"
-                android:background="@color/light_blue_A200"
-                android:fontFamily="@font/kosugimaru"
-                android:padding="5dp"
-                android:paddingEnd="6dp"
-                android:text="@string/text_name"
-                android:textAlignment="center"
-                android:textColor="@color/black"
-                android:textSize="15sp"
-                android:textStyle="bold"
-                app:backgroundTint="@null"
-                tools:ignore="RtlCompat" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -147,6 +127,27 @@
                     android:src="@drawable/maptile_jimen_sogen_02_right" />
             </LinearLayout>
 
+            <TextView
+                android:id="@+id/label_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="25dp"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/black_overlay_square"
+                android:fontFamily="@font/kosugimaru"
+                android:padding="5dp"
+                android:paddingEnd="6dp"
+                android:text="@string/text_name"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                app:backgroundTint="@null"
+                tools:ignore="RtlCompat" />
+
         </LinearLayout>
 
         <LinearLayout
@@ -160,7 +161,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="65dp"
                 android:layout_marginBottom="16dp"
-                android:background="@drawable/btn_selector"
+                android:background="@drawable/green_display"
                 android:fontFamily="sans-serif"
                 android:text="@string/one"
                 android:textAllCaps="false"
@@ -174,7 +175,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="65dp"
                 android:layout_marginBottom="16dp"
-                android:background="@drawable/btn_selector"
+                android:background="@drawable/green_display"
                 android:fontFamily="sans-serif"
                 android:text="@string/oneWord"
                 android:textAllCaps="false"
@@ -188,7 +189,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="66dp"
                 android:layout_marginBottom="16dp"
-                android:background="@drawable/btn_selector"
+                android:background="@drawable/green_display"
                 android:fontFamily="@font/kosugimaru"
                 android:text="@string/newGame"
                 android:textColor="@color/black"

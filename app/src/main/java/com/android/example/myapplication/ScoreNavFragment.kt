@@ -1,10 +1,12 @@
 package com.android.example.myapplication
 
 import Player
+import SharedViewModel
 import android.animation.ObjectAnimator
 import android.animation.PropertyValuesHolder
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -13,55 +15,90 @@ import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import android.widget.ProgressBar
-import com.android.example.myapplication.databinding.FragmentScoreBinding
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import com.android.example.myapplication.databinding.FragmentScoreNavBinding
+import java.lang.reflect.Modifier
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "points"
+private const val ARG_PARAM2 = "activityName"
 
 /**
  * A simple [Fragment] subclass.
  * Use the [ScoreFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class ScoreFragment : Fragment() {
+class ScoreNavFragment : Fragment() {
 
-    private lateinit var binding: FragmentScoreBinding
+    private lateinit var binding: FragmentScoreNavBinding
     private lateinit var player: Player
+    private lateinit var fragmentView: View
+    private lateinit var viewModel: SharedViewModel
 
     // TODO: Rename and change types of parameters
     private var points: Int = 0
+    private var activityName: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
             points = it.getInt(ARG_PARAM1)
+            activityName = it.getString(ARG_PARAM2)
         }
-
-        binding = FragmentScoreBinding.inflate(layoutInflater)
-
-        val prefs = requireContext().getSharedPreferences("userInformation", Context.MODE_PRIVATE)
-        player = Player(prefs)
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_score, container, false)
+        binding = FragmentScoreNavBinding.inflate(inflater, container, false)
+        return binding.root
+
 
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        viewModel = ViewModelProvider(requireActivity()).get(SharedViewModel::class.java)
+
+        viewModel.isForegroundChanged.observe(viewLifecycleOwner, Observer { isForegroundChanged ->
+            if (isForegroundChanged) {
+                // foreground属性を変更
+                binding.scoreNavContainer.foreground = null// 新しいforeground Drawable
+            }
+        })
+
+        when (activityName) {
+            "one_alphabet" -> {
+                binding.tryAgainBtn.setOnClickListener {
+                    startActivity(Intent(requireContext(), AlphabetQuizActivity::class.java))
+                }
+            }
+            else -> {
+                binding.tryAgainBtn.setOnClickListener {
+                    startActivity(Intent(requireContext(), WordQuizActivity::class.java))
+                }
+            }
+        }
+
+        binding.backToTitle.setOnClickListener {
+            startActivity(Intent(requireContext(), TitleActivity::class.java))
+        }
+
+        val prefs = requireContext().getSharedPreferences("userInformation", Context.MODE_PRIVATE)
+        player = Player(prefs)
+
         displayScore(points)
         getPlayer()
     }
+
+
     private fun displayScore(point: Int) {
         // スコアをセット
-        binding.resultLabel.text = getString(R.string.result_score, point)
+        binding.resultLabel.text = point.toString()
 
         //アニメーション表示
         val inflateX = PropertyValuesHolder.ofFloat(View.SCALE_X, 1.0f, 1.5f)
@@ -103,17 +140,19 @@ class ScoreFragment : Fragment() {
     // キャラクターを動かす
     private fun moveCharacter() {
         val character: ImageView = binding.yourAvatar
-        val animation = AnimationUtils.loadAnimation(context, R.anim.character_move_anim)
+        val animation = AnimationUtils.loadAnimation(requireContext(), R.anim.character_move_anim)
         character.startAnimation(animation)
     }
+
     companion object {
         private const val ARG_PARAM1 = "points"
 
         @JvmStatic
-        fun newInstance(param1: Int) =
-            ScoreFragment().apply {
+        fun newInstance(param1: Int, param2: String) =
+            ScoreNavFragment().apply {
                 arguments = Bundle().apply {
                     putInt(ARG_PARAM1, param1)
+                    putString(ARG_PARAM2, param2)
                 }
             }
     }

@@ -1,90 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/score_nav_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/orange"
+    android:foreground="@color/black_overlay"
+    android:gravity="center"
+    android:orientation="vertical"
     android:paddingStart="20dp"
     android:paddingEnd="20dp">
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/after_answered"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:elevation="1dp"
-        android:visibility="visible"
-        tools:visibility="visible">
-
-        <LinearLayout
-            android:id="@+id/item"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/white_bg"
-            android:gravity="center"
-            android:orientation="vertical"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.5"
-            tools:visibility="visible">
-
-            <ImageView
-                android:id="@+id/imageView"
-                android:layout_width="150dp"
-                android:layout_height="150dp"
-                app:srcCompat="@drawable/crown_02_gold_blue" />
-
-            <TextView
-                android:id="@+id/textView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:fontFamily="@font/kosugimaru"
-                android:text="を てにいれた！"
-                android:textColor="@color/black"
-                android:textSize="24sp"
-                android:textStyle="bold" />
-
-            <Button
-                android:id="@+id/button_get"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="showMainView"
-                android:text="GET!" />
-        </LinearLayout>
-
-        <com.airbnb.lottie.LottieAnimationView
-            android:id="@+id/lottie_treasure"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:visibility="visible"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.5"
-            tools:visibility="visible" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <LinearLayout
         android:id="@+id/after_animation"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:gravity="center_vertical"
-        android:orientation="vertical"
-        android:visibility="gone"
-        tools:visibility="visible">
+        android:orientation="vertical">
 
 
         <TextView
             android:id="@+id/label_name"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="start"
             android:layout_marginBottom="10dp"
-            android:background="@drawable/blue_square"
+            android:background="@drawable/black_overlay_square"
             android:fontFamily="@font/kosugimaru"
             android:padding="10dp"
             android:text="@string/text_name"
@@ -100,7 +41,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
 
-            android:background="@drawable/white_bg"
+            android:background="@drawable/green_display"
             android:gravity="start"
             android:orientation="vertical"
             android:paddingTop="10dp"
@@ -215,8 +156,8 @@
                     style="?android:attr/progressBarStyleHorizontal"
                     android:layout_width="240dp"
                     android:layout_height="match_parent"
-                    android:layout_marginStart="5dp"
-                    android:progressDrawable="@drawable/progressbar" />
+                    android:progressDrawable="@drawable/progressbar"
+                    />
 
             </LinearLayout>
 
@@ -267,40 +208,33 @@
 
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:backgroundTint="@color/green"
-            android:gravity="center"
-            android:orientation="horizontal"
-            android:paddingTop="10dp"
-            android:paddingBottom="5dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout6">
+    </LinearLayout>
 
-            <ImageButton
-                android:id="@+id/back_to_title"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:background="@drawable/question_num_btn_bg"
-                android:scaleType="centerCrop"
-                android:src="@android:drawable/ic_media_play"
-                app:backgroundTint="@color/yellow" />
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="30dp"
+        android:gravity="clip_horizontal"
+        android:orientation="horizontal">
 
-            <ImageButton
-                android:id="@+id/tryAgainBtn"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="90dp"
-                android:background="@drawable/green_oval"
-                android:scaleType="centerCrop"
-                android:src="@android:drawable/stat_notify_sync"
-                app:backgroundTint="@null" />
+        <ImageButton
+            android:id="@+id/back_to_title"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/question_num_btn_bg"
+            android:scaleType="centerCrop"
+            android:src="@android:drawable/ic_media_play"
+            app:backgroundTint="@color/yellow" />
 
-        </LinearLayout>
+        <ImageButton
+            android:id="@+id/tryAgainBtn"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:background="@drawable/green_oval"
+            android:scaleType="centerCrop"
+            android:src="@android:drawable/stat_notify_sync"
+            app:backgroundTint="@null" />
 
     </LinearLayout>
-</FrameLayout>
+</LinearLayout>

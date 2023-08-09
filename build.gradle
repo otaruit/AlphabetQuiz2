@@ -8,3 +8,4 @@ plugins {
 ext {
     lottieVersion = "3.5.0"
 }
+
