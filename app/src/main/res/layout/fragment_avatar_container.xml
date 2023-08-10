@@ -7,9 +7,6 @@
 
     <LinearLayout
         android:id="@+id/avatar_container"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/green_display"
@@ -59,30 +56,70 @@
                 android:src="@drawable/character_yusha_01_red" />
 
             <ImageView
-                android:id="@+id/item_yama"
+                android:id="@+id/item_building"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_gravity="bottom|center"
                 android:elevation="5dp"
                 android:src="@drawable/yama_01"
                 android:translationX="-90dp"
-                android:translationY="8dp" />
+                android:translationY="8dp"
+                android:visibility="gone" />
 
             <ImageView
-                android:id="@+id/your_avatar3"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:id="@+id/item_flying1"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:layout_gravity="bottom|center"
                 android:elevation="5dp"
-                android:src="@drawable/character_yusha_01_red" />
+                android:src="@drawable/ufo_08"
+                android:translationX="-90dp"
+                android:translationY="-150dp"
+                android:visibility="gone" />
 
             <ImageView
-                android:id="@+id/your_avatar4"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:id="@+id/item_ground1"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:layout_gravity="bottom|center"
                 android:elevation="5dp"
-                android:src="@drawable/character_yusha_01_red" />
+                android:src="@drawable/kinoko_blue"
+                android:translationX="90dp"
+                android:translationY="8dp"
+                android:visibility="gone" />
+
+            <ImageView
+                android:id="@+id/item_ground2"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_gravity="bottom|center"
+                android:elevation="5dp"
+                android:src="@drawable/takibi_on"
+                android:translationX="-60dp"
+                android:translationY="8dp"
+                android:visibility="gone" />
+
+            <ImageView
+                android:id="@+id/item_ground3"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_gravity="bottom|center"
+                android:elevation="5dp"
+                android:src="@drawable/pancake_butter_dish_three"
+                android:translationX="50dp"
+                android:translationY="8dp"
+                android:visibility="gone" />
+
+            <ImageView
+                android:id="@+id/item_flying2"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_gravity="bottom|center"
+                android:elevation="5dp"
+                android:src="@drawable/star_lightyellow"
+                android:translationX="80dp"
+                android:translationY="-130dp"
+                android:visibility="gone" />
         </FrameLayout>
 
         <LinearLayout

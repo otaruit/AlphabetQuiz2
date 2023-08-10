@@ -35,7 +35,7 @@ class ScoreNavFragment : Fragment() {
 
     private lateinit var binding: FragmentScoreNavBinding
     private lateinit var player: Player
-    private lateinit var viewModel: SharedViewModel
+
 
     // TODO: Rename and change types of parameters
     private var points: Int = 0
@@ -59,30 +59,37 @@ class ScoreNavFragment : Fragment() {
         return binding.root
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         val prefs = requireContext().getSharedPreferences("userInformation", Context.MODE_PRIVATE)
         player = Player(prefs)
-        getPlayer()
+
+//        binding.labelLevel.text = "Lv.${player.level}"
+        binding.totalScore.text = "${player.totalScore}"
+        binding.labelName.text = "${player.name}ちゃん"
+
+//        binding.yourAvatar.setImageResource(player.imgResources)
         binding.resultLabel.text = points.toString()
 
-        if (booleanLevelUp){
-            viewModel = ViewModelProvider(requireActivity())[SharedViewModel::class.java]
-            viewModel.isForegroundChanged.observe(viewLifecycleOwner, Observer { isForegroundChanged ->
-                if (isForegroundChanged) {
-                    // foreground属性を変更
-                    binding.scoreNavContainer.foreground = null// 新しいforeground Drawable
-
-                    displayScore(points)
-                    moveCharacter()
-                }
-        })
-        }else{
-            binding.scoreNavContainer.foreground = null// 新しいforeground Drawable
-            displayScore(points)
-            moveCharacter()
-        }
+//
+//        if (booleanLevelUp){
+//            viewModel = ViewModelProvider(requireActivity())[SharedViewModel::class.java]
+//            viewModel.isForegroundChanged.observe(viewLifecycleOwner, Observer { isForegroundChanged ->
+//                if (isForegroundChanged) {
+//                    // foreground属性を変更
+//                    binding.scoreNavContainer.foreground = null// 新しいforeground Drawable
+//
+//                    displayScore(points)
+//                    moveCharacter()
+//                }
+//        })
+//        }else{
+//            binding.scoreNavContainer.foreground = null// 新しいforeground Drawable
+//            displayScore(points)
+//            moveCharacter()
+//        }
 
 
 
@@ -105,49 +112,49 @@ class ScoreNavFragment : Fragment() {
     }
 
 
-    private fun displayScore(point: Int) {
-        //アニメーション表示
-        val inflateX = PropertyValuesHolder.ofFloat(View.SCALE_X, 1.0f, 1.5f)
-        val inflateY = PropertyValuesHolder.ofFloat(View.SCALE_Y, 1.0f, 1.5f)
-        val animator =
-            ObjectAnimator.ofPropertyValuesHolder(binding.resultLabel, inflateX, inflateY).apply {
-                duration = 1000
-            }
-        animator.start()
-        showProgressBar(point)
-    }
+//    private fun displayScore(point: Int) {
+//        //アニメーション表示
+//        val inflateX = PropertyValuesHolder.ofFloat(View.SCALE_X, 1.0f, 1.5f)
+//        val inflateY = PropertyValuesHolder.ofFloat(View.SCALE_Y, 1.0f, 1.5f)
+//        val animator =
+//            ObjectAnimator.ofPropertyValuesHolder(binding.resultLabel, inflateX, inflateY).apply {
+//                duration = 1000
+//            }
+//        animator.start()
+//        showProgressBar(point)
+//    }
 
-    @SuppressLint("DiscouragedApi", "SetTextI18n")
-    private fun getPlayer() {
-        binding.labelLevel.text = "Lv.${player.level}"
-        binding.totalScore.text = "${player.totalScore}"
-        binding.labelName.text = "${player.name}ちゃん"
+//    @SuppressLint("DiscouragedApi", "SetTextI18n")
+//    private fun getPlayer() {
+//        binding.labelLevel.text = "Lv.${player.level}"
+//        binding.totalScore.text = "${player.totalScore}"
+//        binding.labelName.text = "${player.name}ちゃん"
+//
+//        binding.yourAvatar.setImageResource(player.imgResources)
+//
+//    }
 
-        binding.yourAvatar.setImageResource(player.imgResources)
+//    // トータルスコア表示
+//    private fun showProgressBar(score: Int) {
+//        // プログレスバー設定
+//        var bar: ProgressBar = binding.progressBar1
+//        bar.max = player.levelThresholds[player.level - 1]
+//
+//        val anim = ProgressBarAnimation(
+//            bar,
+//            (player.totalScore - score).toFloat(),
+//            player.totalScore.toFloat()
+//        )
+//        anim.duration = 2000
+//        bar.startAnimation(anim)
+//    }
 
-    }
-
-    // トータルスコア表示
-    private fun showProgressBar(score: Int) {
-        // プログレスバー設定
-        var bar: ProgressBar = binding.progressBar1
-        bar.max = player.levelThresholds[player.level - 1]
-
-        val anim = ProgressBarAnimation(
-            bar,
-            (player.totalScore - score).toFloat(),
-            player.totalScore.toFloat()
-        )
-        anim.duration = 2000
-        bar.startAnimation(anim)
-    }
-
-    // キャラクターを動かす
-    private fun moveCharacter() {
-        val character: ImageView = binding.yourAvatar
-        val animation = AnimationUtils.loadAnimation(requireContext(), R.anim.character_move_anim)
-        character.startAnimation(animation)
-    }
+//    // キャラクターを動かす
+//    private fun moveCharacter() {
+//        val character: ImageView = binding.yourAvatar
+//        val animation = AnimationUtils.loadAnimation(requireContext(), R.anim.character_move_anim)
+//        character.startAnimation(animation)
+//    }
 
     companion object {
         private const val ARG_PARAM1 = "points"

@@ -36,9 +36,8 @@ class Player(preferences: SharedPreferences) {
             1 -> imgResources = R.drawable.character_yusha_01_red
             2 -> imgResources = R.drawable.character_tenshi_brown
         }
-//        val resourceId = context.resources.getIdentifier(avatar, "drawable", context.packageName)
-//        avatarImg?.setImageResource(resourceId)
     }
+
 
     private fun getPlayerInformation() {
         name = prefs.getString("userName", "ななしのごんべ").toString()
