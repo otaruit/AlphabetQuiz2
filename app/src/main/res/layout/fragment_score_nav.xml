@@ -37,10 +37,100 @@
             tools:ignore="RtlCompat" />
 
         <LinearLayout
-            android:id="@+id/linearLayout6"
+            android:id="@+id/avatar_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+            android:background="@drawable/green_display"
+            android:gravity="start"
+            android:orientation="vertical"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:layout_editor_absoluteY="136dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/label_level"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif"
+                    android:text="Lv.%d"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <ProgressBar
+                    android:id="@+id/progressBar1"
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="240dp"
+                    android:layout_height="match_parent"
+                    android:progressDrawable="@drawable/progressbar" />
+
+            </LinearLayout>
+
+            <FrameLayout
+                android:layout_width="280dp"
+                android:layout_height="200dp"
+                android:layout_gravity="center"
+                android:elevation="3dp">
+
+                <ImageView
+                    android:id="@+id/your_avatar"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_gravity="bottom|center"
+                    android:elevation="5dp"
+                    android:src="@drawable/woman" />
+            </FrameLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/mapTile_left"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:src="@drawable/maptile_jimen_sogen_02_left" />
+
+                <ImageView
+                    android:id="@+id/mapTile_center"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:src="@drawable/green_center"
+                    tools:ignore="ImageContrastCheck" />
+
+                <ImageView
+                    android:id="@+id/mapTile_center2"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:src="@drawable/green_center"
+                    tools:ignore="ImageContrastCheck" />
+
+                <ImageView
+                    android:id="@+id/mapTile_right"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:src="@drawable/maptile_jimen_sogen_02_right" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/quiz_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
 
+            android:layout_marginTop="10dp"
             android:background="@drawable/green_display"
             android:gravity="start"
             android:orientation="vertical"
@@ -119,7 +209,7 @@
                     android:layout_marginEnd="5dp"
                     android:fontFamily="sans-serif"
                     android:text="%d "
-                    android:textColor="@color/red"
+                    android:textColor="@color/orange"
                     android:textSize="34sp"
                     android:textStyle="bold" />
 
@@ -133,79 +223,6 @@
                     android:textColor="@color/black"
                     android:textSize="20sp"
                     android:textStyle="bold" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/label_level"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="sans-serif"
-                    android:text="Lv.%d"
-                    android:textColor="@color/purple_700"
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
-
-                <ProgressBar
-                    android:id="@+id/progressBar1"
-                    style="?android:attr/progressBarStyleHorizontal"
-                    android:layout_width="240dp"
-                    android:layout_height="match_parent"
-                    android:progressDrawable="@drawable/progressbar" />
-
-            </LinearLayout>
-
-            <FrameLayout
-                android:layout_width="280dp"
-                android:layout_height="200dp"
-                android:layout_gravity="center"
-                android:elevation="3dp">
-
-                <ImageView
-                    android:id="@+id/your_avatar"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:layout_gravity="bottom|center"
-                    android:elevation="5dp"
-                    android:src="@drawable/woman" />
-            </FrameLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:id="@+id/mapTile_left"
-                    android:layout_width="70dp"
-                    android:layout_height="70dp"
-                    android:src="@drawable/maptile_jimen_sogen_02_left" />
-
-                <ImageView
-                    android:id="@+id/mapTile_center"
-                    android:layout_width="70dp"
-                    android:layout_height="70dp"
-                    android:src="@drawable/green_center"
-                    tools:ignore="ImageContrastCheck" />
-
-                <ImageView
-                    android:id="@+id/mapTile_center2"
-                    android:layout_width="70dp"
-                    android:layout_height="70dp"
-                    android:src="@drawable/green_center"
-                    tools:ignore="ImageContrastCheck" />
-
-                <ImageView
-                    android:id="@+id/mapTile_right"
-                    android:layout_width="70dp"
-                    android:layout_height="70dp"
-                    android:src="@drawable/maptile_jimen_sogen_02_right" />
             </LinearLayout>
 
         </LinearLayout>

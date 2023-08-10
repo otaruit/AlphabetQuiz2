@@ -53,7 +53,7 @@
                 android:contentDescription="TODO"
                 android:onClick="getAvatarId"
                 android:padding="10dp"
-                app:srcCompat="@drawable/character_ningyo_01_blue_purple" />
+                app:srcCompat="@drawable/character_hime_01_blue_gold" />
 
             <ImageView
                 android:id="@+id/avatar2"
@@ -64,7 +64,7 @@
                 android:contentDescription="TODO"
                 android:onClick="getAvatarId"
                 android:padding="10dp"
-                app:srcCompat="@drawable/woman" />
+                app:srcCompat="@drawable/character_yusha_01_red" />
 
             <ImageView
                 android:id="@+id/avatar3"
@@ -75,7 +75,7 @@
                 android:contentDescription="TODO"
                 android:onClick="getAvatarId"
                 android:padding="10dp"
-                app:srcCompat="@drawable/crown_02_gold_blue" />
+                app:srcCompat="@drawable/character_tenshi_brown" />
         </LinearLayout>
 
     </LinearLayout>

@@ -21,7 +21,6 @@ private const val ARG_PARAM1 = "level"
  * create an instance of this fragment.
  */
 class ItemFragment : Fragment() {
-    private lateinit var viewModel: SharedViewModel
     private lateinit var binding: FragmentItemBinding
 
     // TODO: Rename and change types of parameters
@@ -44,7 +43,6 @@ class ItemFragment : Fragment() {
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = ViewModelProvider(requireActivity()).get(SharedViewModel::class.java)
 
         val args = arguments
         if (args != null) {
@@ -55,7 +53,6 @@ class ItemFragment : Fragment() {
             parentFragmentManager.beginTransaction()
                 .remove(this)
                 .commit()
-            viewModel.isForegroundChanged.value = true
         }
     }
 

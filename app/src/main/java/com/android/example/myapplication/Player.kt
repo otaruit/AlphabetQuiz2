@@ -32,9 +32,9 @@ class Player(preferences: SharedPreferences) {
 
     private fun setAvatarImage() {
         when (avatar) {
-            0 -> imgResources = R.drawable.character_ningyo_01_blue_purple
-            1 -> imgResources = R.drawable.woman
-            2 -> imgResources = R.drawable.vikinghelmet_blue
+            0 -> imgResources = R.drawable.character_hime_01_blue_gold
+            1 -> imgResources = R.drawable.character_yusha_01_red
+            2 -> imgResources = R.drawable.character_tenshi_brown
         }
 //        val resourceId = context.resources.getIdentifier(avatar, "drawable", context.packageName)
 //        avatarImg?.setImageResource(resourceId)

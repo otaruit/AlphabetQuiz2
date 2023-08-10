@@ -47,7 +47,7 @@ class ResultActivity : AppCompatActivity() {
         } else {
             val scoreNavFragment = newInstance(points, activityName,false)
             supportFragmentManager.beginTransaction()
-                .add(R.id.container, scoreNavFragment, "scoreNav")
+                .replace(R.id.container, scoreNavFragment, "scoreNav")
                 .commit()
         }
 
