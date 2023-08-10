@@ -31,12 +31,12 @@
                 android:textColor="@color/black"
                 android:textSize="20sp"
                 android:textStyle="bold" />
-
             <ProgressBar
                 android:id="@+id/progressBar1"
                 style="?android:attr/progressBarStyleHorizontal"
                 android:layout_width="240dp"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
                 android:progressDrawable="@drawable/progressbar" />
 
         </LinearLayout>
@@ -155,6 +155,24 @@
                 android:src="@drawable/maptile_jimen_sogen_02_right" />
         </LinearLayout>
 
+        <TextView
+            android:id="@+id/label_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="25dp"
+            android:layout_marginBottom="5dp"
+            android:background="@drawable/black_overlay_square"
+            android:fontFamily="@font/kosugimaru"
+            android:padding="5dp"
+            android:text="@string/text_name"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            tools:ignore="RtlCompat" />
     </LinearLayout>
 
 </FrameLayout>

@@ -19,23 +19,6 @@
         android:orientation="vertical">
 
 
-        <TextView
-            android:id="@+id/label_name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="start"
-            android:layout_marginBottom="10dp"
-            android:background="@drawable/black_overlay_square"
-            android:fontFamily="@font/kosugimaru"
-            android:padding="10dp"
-            android:text="@string/text_name"
-            android:textAlignment="center"
-            android:textColor="@color/white"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            app:backgroundTint="@null"
-            tools:ignore="RtlCompat" />
-
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/fragmentContainerView"
             android:name="com.android.example.myapplication.AvatarContainerFragment"
