@@ -3,6 +3,8 @@ package com.android.example.myapplication
 import Player
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.media.MediaPlayer
 import android.os.Build
 import android.os.Bundle
@@ -10,6 +12,7 @@ import android.view.View
 import android.widget.Button
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat.startActivity
 import com.airbnb.lottie.LottieAnimationView
 import com.android.example.myapplication.databinding.ActivityMainBinding
 import java.io.BufferedReader
@@ -18,9 +21,11 @@ import java.io.InputStreamReader
 import java.lang.Character.isUpperCase
 
 
-class AlphabetQuizActivity: AppCompatActivity() {
+class AlphabetQuizActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
-    private lateinit var player:Player
+    private lateinit var player: Player
+    private var level: Int = 0
+
 
     private var rightAnswer: String? = null
     private var rightAnswerCount = 0
@@ -42,7 +47,8 @@ class AlphabetQuizActivity: AppCompatActivity() {
 
         val prefs = getSharedPreferences("userInformation", MODE_PRIVATE)
         player = Player(prefs)
-
+        level = player.level
+        println("れべる${player.level}")
 
         viewActivity()
 
@@ -138,7 +144,7 @@ class AlphabetQuizActivity: AppCompatActivity() {
     // ラベルの更新
     private fun updateCountLabel(quiz: MutableList<String>) {
         // プレイヤー表示
-        val setName= "${player.name}ちゃん"
+        val setName = "${player.name}ちゃん"
         binding.labelName.text = setName
 
         binding.quizNum.text = quizCount.toString()
@@ -182,6 +188,12 @@ class AlphabetQuizActivity: AppCompatActivity() {
     @SuppressLint("ClickableViewAccessibility", "ResourceType")
     @RequiresApi(Build.VERSION_CODES.O)
     fun checkAnswer(view: View) {
+        // 黒いオーバーレイエフェクトの色
+        val overlayColor = getColor(android.R.color.black)
+        // カスタムエフェクトを作成
+        val blackOverlay = ColorDrawable(overlayColor)
+        blackOverlay.alpha = 100 // 透明度を設定（0〜255の範囲で設定）
+        binding.quizContainer.foreground = blackOverlay
 
         btnNotEnabled(false)
 
@@ -243,17 +255,8 @@ class AlphabetQuizActivity: AppCompatActivity() {
         val nextBtn = binding.nextBtn
         nextBtn.setAnimation(R.raw.next)
         nextBtn.setOnClickListener {
-            if (nextBtn.isAnimating) {
-                nextBtn.pauseAnimation()
-            } else {
-                nextBtn.playAnimation()
-                nextBtn.postDelayed({
-                    nextBtn.cancelAnimation()
-                    nextBtn.animate()
-                        .setDuration(300)
-                }, 1000)
-                checkQuizCount(view)
-            }
+            nextBtn.playAnimation()
+            checkQuizCount(view)
         }
 
         // 「つぎへ」ボタン表示
@@ -286,7 +289,8 @@ class AlphabetQuizActivity: AppCompatActivity() {
 
             // 結果画面を表示
             val intent = Intent(this@AlphabetQuizActivity, ResultActivity::class.java)
-            intent.putExtra("FROM_ACTIVITY_NAME","one_alphabet")
+            intent.putExtra("FROM_ACTIVITY_NAME", "one_alphabet")
+            intent.putExtra("LEVEL_UP_BOOLEAN", player.checkLevelUp())
             intent.putExtra("RIGHT_ANSWER_COUNT", rightAnswerCount)
             startActivity(intent)
 

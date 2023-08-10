@@ -23,7 +23,6 @@ private const val ARG_PARAM1 = "level"
 class ItemFragment : Fragment() {
     private lateinit var viewModel: SharedViewModel
     private lateinit var binding: FragmentItemBinding
-    private lateinit var itemView: LinearLayout
 
     // TODO: Rename and change types of parameters
     private var level: Int? = null

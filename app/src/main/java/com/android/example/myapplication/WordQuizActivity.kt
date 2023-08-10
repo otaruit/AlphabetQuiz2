@@ -82,7 +82,7 @@ class WordQuizActivity : AppCompatActivity(), TextWatcher {
 //        manager.toggleSoftInput(1, InputMethodManager.SHOW_IMPLICIT)
 
         val imm = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
-        imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0)
+        imm.toggleSoftInput(InputMethodManager.SHOW_IMPLICIT, 0)
 
 
         // クイズを１問取り出す
@@ -152,6 +152,14 @@ class WordQuizActivity : AppCompatActivity(), TextWatcher {
                         }
                 }, 1500)
                 judgeAnimation.playAnimation()
+
+                val nextBtn = binding.nextBtn
+                nextBtn.setAnimation(R.raw.next)
+                nextBtn.setOnClickListener {
+                    nextBtn.playAnimation()
+                    checkQuizCount()
+                }
+
                 binding.afterAnswered.visibility = View.VISIBLE
             }
         }
@@ -195,7 +203,7 @@ class WordQuizActivity : AppCompatActivity(), TextWatcher {
 
     // 出題数をチェックする
     @RequiresApi(Build.VERSION_CODES.O)
-    fun checkQuizCount(view: View) {
+    fun checkQuizCount() {
         if (quizCount == maxQuizCount) {
             // スコアを保存
             player.savePlayerScore(rightAnswerCount)

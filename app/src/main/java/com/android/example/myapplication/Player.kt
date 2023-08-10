@@ -8,7 +8,7 @@ class Player(preferences: SharedPreferences) {
     var totalScore: Int = 0
     var imgResources: Int = R.drawable.vikinghelmet_blue
     var level: Int = 1
-    val levelThresholds = listOf(10, 30, 60, 120, 200)
+    val levelThresholds = listOf(10, 20, 30, 40, 50)
 
     init {
         getPlayerInformation()
@@ -17,13 +17,17 @@ class Player(preferences: SharedPreferences) {
 
     private fun increaseScore(points: Int) {
         totalScore += points
-        checkLevelUp()
     }
 
-    private fun checkLevelUp() {
+    fun checkLevelUp(): Boolean {
+        var levelUpOccurred = false
+
         while (level < levelThresholds.size && totalScore >= levelThresholds[level - 1]) {
             level++
+            levelUpOccurred = true
         }
+
+        return levelUpOccurred
     }
 
     private fun setAvatarImage() {

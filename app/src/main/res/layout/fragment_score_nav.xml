@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/score_nav_container"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:foreground="@color/black_overlay"
     android:gravity="center"
     android:orientation="vertical"
@@ -30,7 +30,7 @@
             android:padding="10dp"
             android:text="@string/text_name"
             android:textAlignment="center"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:textSize="20sp"
             android:textStyle="bold"
             app:backgroundTint="@null"
@@ -156,21 +156,22 @@
                     style="?android:attr/progressBarStyleHorizontal"
                     android:layout_width="240dp"
                     android:layout_height="match_parent"
-                    android:progressDrawable="@drawable/progressbar"
-                    />
+                    android:progressDrawable="@drawable/progressbar" />
 
             </LinearLayout>
 
             <FrameLayout
                 android:layout_width="280dp"
                 android:layout_height="200dp"
-                android:layout_gravity="center">
+                android:layout_gravity="center"
+                android:elevation="3dp">
 
                 <ImageView
                     android:id="@+id/your_avatar"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:layout_gravity="bottom|center"
+                    android:elevation="5dp"
                     android:src="@drawable/woman" />
             </FrameLayout>
 
@@ -190,14 +191,15 @@
                     android:id="@+id/mapTile_center"
                     android:layout_width="70dp"
                     android:layout_height="70dp"
-                    android:src="@drawable/green_center" />
+                    android:src="@drawable/green_center"
+                    tools:ignore="ImageContrastCheck" />
 
                 <ImageView
                     android:id="@+id/mapTile_center2"
                     android:layout_width="70dp"
                     android:layout_height="70dp"
-                    android:layout_weight="1"
-                    android:src="@drawable/green_center" />
+                    android:src="@drawable/green_center"
+                    tools:ignore="ImageContrastCheck" />
 
                 <ImageView
                     android:id="@+id/mapTile_right"
@@ -210,31 +212,36 @@
 
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="30dp"
-        android:gravity="clip_horizontal"
-        android:orientation="horizontal">
-
-        <ImageButton
-            android:id="@+id/back_to_title"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:layout_marginEnd="16dp"
-            android:background="@drawable/question_num_btn_bg"
-            android:scaleType="centerCrop"
-            android:src="@android:drawable/ic_media_play"
-            app:backgroundTint="@color/yellow" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="10dp">
 
         <ImageButton
             android:id="@+id/tryAgainBtn"
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:background="@drawable/green_oval"
+            android:contentDescription="@string/btn_try_again"
             android:scaleType="centerCrop"
             android:src="@android:drawable/stat_notify_sync"
-            app:backgroundTint="@null" />
+            app:backgroundTint="@null"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="ImageContrastCheck" />
 
-    </LinearLayout>
+        <ImageButton
+            android:id="@+id/back_to_title"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/question_num_btn_bg"
+            android:contentDescription="@string/もどる"
+            android:scaleType="centerCrop"
+            android:src="@android:drawable/ic_media_play"
+            app:backgroundTint="@color/yellow"
+            app:layout_constraintEnd_toStartOf="@+id/tryAgainBtn"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </LinearLayout>

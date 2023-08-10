@@ -7,46 +7,289 @@
     android:id="@+id/top_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/orange"
-    android:padding="15dp">
+    android:background="@color/orange">
 
 
-    <LinearLayout
+    <FrameLayout
+        android:id="@+id/quiz_container"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="54dp"
-        android:orientation="vertical">
+        android:layout_height="match_parent"
+        android:padding="15dp">
 
-        <TextView
-            android:id="@+id/correct_answer_num"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            tools:visibility="visible">
+
+            <TextView
+                android:id="@+id/label_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@drawable/black_overlay_square"
+                android:fontFamily="@font/kosugimaru"
+                android:padding="10dp"
+                android:text="@string/text_name"
+                android:textAlignment="center"
+                android:textColor="@color/yellow"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:id="@+id/linearLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:orientation="horizontal"
+                tools:visibility="visible">
+
+                <TextView
+                    android:id="@+id/mon2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/kosugimaru"
+                    android:text="@string/numberOfQuestion"
+                    android:textColor="@color/black"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/quiz_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:width="50dp"
+                    android:height="50dp"
+                    android:background="@drawable/question_num_btn_bg"
+                    android:fontFamily="sans-serif"
+                    android:text="@string/question_num"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:textSize="34sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/mon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/kosugimaru"
+                    android:text="@string/mon"
+                    android:textColor="@color/black"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <FrameLayout
+                android:id="@+id/fragment_container"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:background="@drawable/green_display"
+                        android:orientation="vertical"
+                        android:paddingTop="20dp"
+                        android:paddingBottom="20dp">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/quiz_text"
+                                android:layout_width="100dp"
+                                android:layout_height="100dp"
+                                android:layout_marginStart="50dp"
+                                android:layout_marginTop="8dp"
+                                android:elevation="1dp"
+                                android:fontFamily="sans-serif"
+                                android:text="@string/question_alphabet"
+                                android:textAlignment="center"
+                                android:textColor="@color/black"
+                                android:textSize="60sp"
+                                android:textStyle="bold"
+                                tools:visibility="visible" />
+
+                            <Button
+                                android:id="@+id/sound_btn"
+                                android:layout_width="48dp"
+                                android:layout_height="48dp"
+                                android:layout_gravity="bottom"
+                                android:background="@drawable/volume"
+                                android:contentDescription="@string/alphabet_voice"
+                                android:onClick="soundPlay"
+                                app:backgroundTint="@color/purple_700" />
+
+                        </LinearLayout>
+
+                        <TextView
+                            android:id="@+id/text_question"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/kosugimaru"
+                            android:gravity="center_horizontal"
+                            android:text="@string/question_text"
+                            android:textColor="@color/black"
+                            android:textSize="24sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/quiz_text"
+                            tools:visibility="visible" />
+
+                        <LinearLayout
+                            android:id="@+id/linearLayout2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="16dp"
+                            android:orientation="vertical"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/text_question"
+                            tools:visibility="visible">
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <Button
+                                    android:id="@+id/answer1"
+                                    style="?android:attr/buttonBarButtonStyle"
+                                    android:layout_width="100dp"
+                                    android:layout_height="100dp"
+                                    android:layout_marginBottom="15dp"
+                                    android:background="@drawable/black_overlay_square"
+                                    android:fontFamily="sans-serif"
+                                    android:onClick="checkAnswer"
+                                    android:text="@string/selection"
+                                    android:textAllCaps="false"
+                                    android:textColor="@color/white"
+                                    android:textSize="60sp"
+                                    android:textStyle="bold"
+                                    app:backgroundTint="@null"
+                                    tools:ignore="DuplicateSpeakableTextCheck" />
+
+                                <Button
+                                    android:id="@+id/answer2"
+                                    style="?android:attr/buttonBarButtonStyle"
+                                    android:layout_width="100dp"
+                                    android:layout_height="100dp"
+                                    android:layout_marginStart="15dp"
+                                    android:background="@drawable/black_overlay_square"
+                                    android:fontFamily="sans-serif"
+                                    android:onClick="checkAnswer"
+                                    android:text="@string/selection"
+                                    android:textAllCaps="false"
+                                    android:textColor="@color/white"
+                                    android:textSize="60sp"
+                                    android:textStyle="bold"
+                                    app:backgroundTint="@null" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <Button
+                                    android:id="@+id/answer3"
+                                    android:layout_width="100dp"
+                                    android:layout_height="100dp"
+                                    android:background="@drawable/black_overlay_square"
+                                    android:fontFamily="sans-serif"
+                                    android:onClick="checkAnswer"
+                                    android:text="@string/selection"
+                                    android:textAllCaps="false"
+                                    android:textColor="@color/white"
+                                    android:textSize="60sp"
+                                    android:textStyle="bold"
+                                    app:backgroundTint="@null" />
+
+                                <FrameLayout
+                                    android:id="@+id/main_fragment"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent">
+
+                                </FrameLayout>
+
+                                <Button
+                                    android:id="@+id/answer4"
+                                    android:layout_width="100dp"
+                                    android:layout_height="100dp"
+                                    android:layout_marginStart="15dp"
+                                    android:background="@drawable/black_overlay_square"
+                                    android:fontFamily="sans-serif"
+                                    android:onClick="checkAnswer"
+                                    android:text="@string/selection"
+                                    android:textAllCaps="false"
+                                    android:textColor="@color/white"
+                                    android:textSize="60sp"
+                                    android:textStyle="bold"
+                                    app:backgroundTint="@null" />
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+            </FrameLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:fontFamily="@font/kosugimaru"
-            android:text="@string/correct_num_str"
-            android:textColor="@color/black"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            tools:visibility="visible" />
+            android:layout_marginTop="54dp"
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/wrong_answer_num"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:layout_marginTop="16dp"
-            android:fontFamily="@font/kosugimaru"
-            android:text="@string/incorrect_num_str"
-            android:textColor="@color/black"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.4"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/correct_answer_num"
-            tools:visibility="visible" />
+            <TextView
+                android:id="@+id/correct_answer_num"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:fontFamily="@font/kosugimaru"
+                android:text="@string/correct_num_str"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                tools:visibility="visible" />
 
-    </LinearLayout>
+            <TextView
+                android:id="@+id/wrong_answer_num"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/kosugimaru"
+                android:text="@string/incorrect_num_str"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.4"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/correct_answer_num"
+                tools:visibility="visible" />
+
+        </LinearLayout>
+    </FrameLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/after_answered"
@@ -69,7 +312,9 @@
             android:id="@+id/next_btn"
             android:layout_width="300dp"
             android:layout_height="300dp"
+
             android:clickable="true"
+            android:contentDescription="@string/next"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -78,242 +323,5 @@
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        tools:visibility="visible">
-
-        <TextView
-            android:id="@+id/label_name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:background="@drawable/black_overlay_square"
-            android:fontFamily="@font/kosugimaru"
-            android:padding="10dp"
-            android:text="@string/text_name"
-            android:textAlignment="center"
-            android:textColor="@color/yellow"
-            android:textSize="24sp"
-            android:textStyle="bold" />
-
-        <LinearLayout
-            android:id="@+id/linearLayout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="start"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            android:orientation="horizontal"
-            tools:visibility="visible">
-
-            <TextView
-                android:id="@+id/mon2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/kosugimaru"
-                android:text="@string/numberOfQuestion"
-                android:textColor="@color/black"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/quiz_num"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:width="50dp"
-                android:height="50dp"
-                android:background="@drawable/question_num_btn_bg"
-                android:fontFamily="sans-serif"
-                android:text="@string/question_num"
-                android:textAlignment="center"
-                android:textColor="@color/black"
-                android:textSize="34sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/mon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/kosugimaru"
-                android:text="@string/mon"
-                android:textColor="@color/black"
-                android:textStyle="bold" />
-
-        </LinearLayout>
-
-        <FrameLayout
-            android:id="@+id/fragment_container"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:background="@drawable/green_display"
-                    android:orientation="vertical"
-                    android:paddingTop="20dp"
-                    android:paddingBottom="20dp">
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:id="@+id/quiz_text"
-                            android:layout_width="100dp"
-                            android:layout_height="100dp"
-                            android:layout_marginStart="50dp"
-                            android:layout_marginTop="8dp"
-                            android:elevation="1dp"
-                            android:fontFamily="sans-serif"
-                            android:text="@string/question_alphabet"
-                            android:textAlignment="center"
-                            android:textColor="@color/black"
-                            android:textSize="60sp"
-                            android:textStyle="bold"
-                            tools:visibility="visible" />
-
-                        <Button
-                            android:id="@+id/sound_btn"
-                            android:layout_width="48dp"
-                            android:layout_height="48dp"
-                            android:layout_gravity="bottom"
-                            android:background="@drawable/volume"
-                            android:contentDescription="@string/alphabet_voice"
-                            android:onClick="soundPlay"
-                            app:backgroundTint="@color/purple_700" />
-
-                    </LinearLayout>
-
-                    <TextView
-                        android:id="@+id/text_question"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/kosugimaru"
-                        android:gravity="center_horizontal"
-                        android:text="@string/question_text"
-                        android:textColor="@color/black"
-                        android:textSize="24sp"
-                        android:textStyle="bold"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.0"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/quiz_text"
-                        tools:visibility="visible" />
-
-                    <LinearLayout
-                        android:id="@+id/linearLayout2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginTop="16dp"
-                        android:orientation="vertical"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/text_question"
-                        tools:visibility="visible">
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal">
-
-                            <Button
-                                android:id="@+id/answer1"
-                                style="?android:attr/buttonBarButtonStyle"
-                                android:layout_width="100dp"
-                                android:layout_height="100dp"
-                                android:layout_marginBottom="15dp"
-                                android:background="@drawable/black_overlay_square"
-                                android:fontFamily="sans-serif"
-                                android:onClick="checkAnswer"
-                                android:text="@string/selection"
-                                android:textAllCaps="false"
-                                android:textColor="@color/white"
-                                android:textSize="60sp"
-                                android:textStyle="bold"
-                                app:backgroundTint="@null"
-                                tools:ignore="DuplicateSpeakableTextCheck" />
-
-                            <Button
-                                android:id="@+id/answer2"
-                                style="?android:attr/buttonBarButtonStyle"
-                                android:layout_width="100dp"
-                                android:layout_height="100dp"
-                                android:layout_marginStart="15dp"
-                                android:background="@drawable/black_overlay_square"
-                                android:fontFamily="sans-serif"
-                                android:onClick="checkAnswer"
-                                android:text="@string/selection"
-                                android:textAllCaps="false"
-                                android:textColor="@color/white"
-                                android:textSize="60sp"
-                                android:textStyle="bold"
-                                app:backgroundTint="@null" />
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal">
-
-                            <Button
-                                android:id="@+id/answer3"
-                                android:layout_width="100dp"
-                                android:layout_height="100dp"
-                                android:background="@drawable/black_overlay_square"
-                                android:fontFamily="sans-serif"
-                                android:onClick="checkAnswer"
-                                android:text="@string/selection"
-                                android:textAllCaps="false"
-                                android:textColor="@color/white"
-                                android:textSize="60sp"
-                                android:textStyle="bold"
-                                app:backgroundTint="@null" />
-
-                            <FrameLayout
-                                android:id="@+id/main_fragment"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent">
-
-                            </FrameLayout>
-
-                            <Button
-                                android:id="@+id/answer4"
-                                android:layout_width="100dp"
-                                android:layout_height="100dp"
-                                android:layout_marginStart="15dp"
-                                android:background="@drawable/black_overlay_square"
-                                android:fontFamily="sans-serif"
-                                android:onClick="checkAnswer"
-                                android:text="@string/selection"
-                                android:textAllCaps="false"
-                                android:textColor="@color/white"
-                                android:textSize="60sp"
-                                android:textStyle="bold"
-                                app:backgroundTint="@null" />
-                        </LinearLayout>
-
-                    </LinearLayout>
-
-                </LinearLayout>
-
-            </LinearLayout>
-
-
-        </FrameLayout>
-
-    </LinearLayout>
 
 </FrameLayout>

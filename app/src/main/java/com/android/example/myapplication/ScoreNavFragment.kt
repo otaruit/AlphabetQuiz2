@@ -24,6 +24,7 @@ import java.lang.reflect.Modifier
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "points"
 private const val ARG_PARAM2 = "activityName"
+private const val ARG_PARAM3 = "booleanLevelUp"
 
 /**
  * A simple [Fragment] subclass.
@@ -34,18 +35,19 @@ class ScoreNavFragment : Fragment() {
 
     private lateinit var binding: FragmentScoreNavBinding
     private lateinit var player: Player
-    private lateinit var fragmentView: View
     private lateinit var viewModel: SharedViewModel
 
     // TODO: Rename and change types of parameters
     private var points: Int = 0
     private var activityName: String? = null
+    private var booleanLevelUp: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
             points = it.getInt(ARG_PARAM1)
             activityName = it.getString(ARG_PARAM2)
+            booleanLevelUp = it.getBoolean(ARG_PARAM3)
         }
     }
 
@@ -55,21 +57,34 @@ class ScoreNavFragment : Fragment() {
     ): View? {
         binding = FragmentScoreNavBinding.inflate(inflater, container, false)
         return binding.root
-
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel = ViewModelProvider(requireActivity()).get(SharedViewModel::class.java)
+        val prefs = requireContext().getSharedPreferences("userInformation", Context.MODE_PRIVATE)
+        player = Player(prefs)
+        getPlayer()
+        binding.resultLabel.text = points.toString()
 
-        viewModel.isForegroundChanged.observe(viewLifecycleOwner, Observer { isForegroundChanged ->
-            if (isForegroundChanged) {
-                // foreground属性を変更
-                binding.scoreNavContainer.foreground = null// 新しいforeground Drawable
-            }
+        if (booleanLevelUp){
+            viewModel = ViewModelProvider(requireActivity())[SharedViewModel::class.java]
+            viewModel.isForegroundChanged.observe(viewLifecycleOwner, Observer { isForegroundChanged ->
+                if (isForegroundChanged) {
+                    // foreground属性を変更
+                    binding.scoreNavContainer.foreground = null// 新しいforeground Drawable
+
+                    displayScore(points)
+                    moveCharacter()
+                }
         })
+        }else{
+            binding.scoreNavContainer.foreground = null// 新しいforeground Drawable
+            displayScore(points)
+            moveCharacter()
+        }
+
+
 
         when (activityName) {
             "one_alphabet" -> {
@@ -83,23 +98,14 @@ class ScoreNavFragment : Fragment() {
                 }
             }
         }
-
         binding.backToTitle.setOnClickListener {
             startActivity(Intent(requireContext(), TitleActivity::class.java))
         }
 
-        val prefs = requireContext().getSharedPreferences("userInformation", Context.MODE_PRIVATE)
-        player = Player(prefs)
-
-        displayScore(points)
-        getPlayer()
     }
 
 
     private fun displayScore(point: Int) {
-        // スコアをセット
-        binding.resultLabel.text = point.toString()
-
         //アニメーション表示
         val inflateX = PropertyValuesHolder.ofFloat(View.SCALE_X, 1.0f, 1.5f)
         val inflateY = PropertyValuesHolder.ofFloat(View.SCALE_Y, 1.0f, 1.5f)
@@ -108,7 +114,6 @@ class ScoreNavFragment : Fragment() {
                 duration = 1000
             }
         animator.start()
-
         showProgressBar(point)
     }
 
@@ -119,7 +124,7 @@ class ScoreNavFragment : Fragment() {
         binding.labelName.text = "${player.name}ちゃん"
 
         binding.yourAvatar.setImageResource(player.imgResources)
-        moveCharacter()
+
     }
 
     // トータルスコア表示
@@ -148,11 +153,12 @@ class ScoreNavFragment : Fragment() {
         private const val ARG_PARAM1 = "points"
 
         @JvmStatic
-        fun newInstance(param1: Int, param2: String) =
+        fun newInstance(param1: Int, param2: String,param3: Boolean) =
             ScoreNavFragment().apply {
                 arguments = Bundle().apply {
                     putInt(ARG_PARAM1, param1)
                     putString(ARG_PARAM2, param2)
+                    putBoolean(ARG_PARAM3, param3)
                 }
             }
     }

@@ -142,7 +142,7 @@
                 android:paddingEnd="6dp"
                 android:text="@string/text_name"
                 android:textAlignment="center"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:textSize="24sp"
                 android:textStyle="bold"
                 app:backgroundTint="@null"
