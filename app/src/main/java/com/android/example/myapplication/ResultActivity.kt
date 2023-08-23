@@ -10,12 +10,10 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProvider
 import com.airbnb.lottie.LottieAnimationView
 import com.android.example.myapplication.ScoreNavFragment.Companion.newInstance
 import com.android.example.myapplication.databinding.ActivityResultBinding
 import java.util.*
-import kotlin.random.Random
 
 
 class ResultActivity : AppCompatActivity() {

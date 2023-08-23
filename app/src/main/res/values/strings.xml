@@ -46,5 +46,6 @@
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="alphabet_voice">alphabet voice</string>
     <string name="もどる">return</string>
+    <string name="skipQuiz">skip</string>
 
 </resources>

@@ -23,7 +23,8 @@ import com.android.example.myapplication.databinding.FragmentScoreNavBinding
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM6 = "booleanLevelUp"
+private const val ARG_PARAM1 = "booleanLevelUp"
+private const val ARG_PARAM2 = "points"
 
 /**
  * A simple [Fragment] subclass.
@@ -36,12 +37,14 @@ class AvatarContainerFragment : Fragment() {
     private lateinit var binding: FragmentAvatarContainerBinding
     private lateinit var viewModel: SharedViewModel
 
-    private var param6: Boolean = false
+    private var param1: Boolean = false
+    private var param2: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            param6 = it.getBoolean(ARG_PARAM6)
+            param1 = it.getBoolean(ARG_PARAM1)
+            param2 = it.getInt(ARG_PARAM2)
         }
     }
 
@@ -75,18 +78,18 @@ class AvatarContainerFragment : Fragment() {
         }
         binding.yourAvatar.setImageResource(imgResources)
 
-        if (param6) {
+        if (param1) {
             viewModel = ViewModelProvider(requireActivity())[SharedViewModel::class.java]
             viewModel.isForegroundChanged.observe(
                 viewLifecycleOwner,
                 Observer { isForegroundChanged ->
                     if (isForegroundChanged) {
-                        showProgressBar(player.totalScore)
+                        showProgressBar(param2)
                         moveCharacter()
                     }
                 })
         } else {
-            showProgressBar(player.totalScore)
+            showProgressBar(param2)
             moveCharacter()
         }
     }
@@ -99,19 +102,61 @@ class AvatarContainerFragment : Fragment() {
                 when (formattedItem) {
                     "item_1_1" -> {
                         resourceId = R.drawable.yama_01
-                        var item = binding.itemBuilding
+                        val item = binding.itemBuilding
                         item.setImageResource(resourceId)
                         item.visibility = View.VISIBLE
                     }
                     "item_1_2" -> {
                         resourceId = R.drawable.shiro_02_brown_roof_red
-                        var item = binding.itemBuilding
+                        val item = binding.itemBuilding
                         item.setImageResource(resourceId)
                         item.visibility = View.VISIBLE
                     }
                     "item_2_1" -> {
                         resourceId = R.drawable.takibi_on
-                        var item = binding.itemGround1
+                        val item = binding.itemGround1
+                        item.setImageResource(resourceId)
+                        item.visibility = View.VISIBLE
+                    }
+                    "item_2_2" -> {
+                        resourceId = R.drawable.cosmos_lightpink
+                        val item = binding.itemGround1
+                        item.setImageResource(resourceId)
+                        item.visibility = View.VISIBLE
+                    }
+                    "item_3_1" -> {
+                        resourceId = R.drawable.snowman_red
+                        val item = binding.itemGround2
+                        item.setImageResource(resourceId)
+                        item.visibility = View.VISIBLE
+                    }
+                    "item_3_2" -> {
+                        resourceId = R.drawable.kingchair_gold_red
+                        val item = binding.itemGround2
+                        item.setImageResource(resourceId)
+                        item.visibility = View.VISIBLE
+                    }
+                    "item_4_1" -> {
+                        resourceId = R.drawable.kirikabu_01
+                        val item = binding.itemGround3
+                        item.setImageResource(resourceId)
+                        item.visibility = View.VISIBLE
+                    }
+                    "item_4_2" -> {
+                        resourceId = R.drawable.kusa_02
+                        val item = binding.itemGround3
+                        item.setImageResource(resourceId)
+                        item.visibility = View.VISIBLE
+                    }
+                    "item_5_1" -> {
+                        resourceId = R.drawable.ufo_08
+                        val item = binding.itemFlying1
+                        item.setImageResource(resourceId)
+                        item.visibility = View.VISIBLE
+                    }
+                    "item_5_2" -> {
+                        resourceId = R.drawable.star_lightyellow
+                        val item = binding.itemFlying1
                         item.setImageResource(resourceId)
                         item.visibility = View.VISIBLE
                     }
@@ -124,7 +169,7 @@ class AvatarContainerFragment : Fragment() {
     // トータルスコア表示
     private fun showProgressBar(score: Int) {
         // プログレスバー設定
-        var bar: ProgressBar = binding.progressBar1
+        val bar: ProgressBar = binding.progressBar1
         bar.max = player.levelThresholds[player.level - 1]
 
         val anim = ProgressBarAnimation(
@@ -155,11 +200,13 @@ class AvatarContainerFragment : Fragment() {
         // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(
-            param6: Boolean
+            param1: Boolean,
+            param2: Int
         ) =
             AvatarContainerFragment().apply {
                 arguments = Bundle().apply {
-                    putBoolean(ARG_PARAM6, param6)
+                    putBoolean(ARG_PARAM1, param1)
+                    putInt(ARG_PARAM2, param2)
                 }
             }
     }

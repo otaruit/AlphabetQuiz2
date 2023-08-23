@@ -61,7 +61,7 @@ class ItemFragment : Fragment() {
         val buttonGet = binding.buttonGet
         buttonGet.setOnClickListener {
             // Fragmentを非表示にする
-            viewModel = ViewModelProvider(this)[SharedViewModel::class.java]
+            viewModel = ViewModelProvider(requireActivity())[SharedViewModel::class.java]
             viewModel.isForegroundChanged.value = true
 
             val transaction = parentFragmentManager.beginTransaction()

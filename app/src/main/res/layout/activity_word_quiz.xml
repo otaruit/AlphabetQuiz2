@@ -35,6 +35,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:lottie_autoPlay="true"
             app:lottie_loop="false" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -202,6 +203,20 @@
             </FrameLayout>
 
         </LinearLayout>
+
+        <ImageView
+            android:id="@+id/skip_quiz"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/green_oval"
+            android:clickable="true"
+            android:contentDescription="@string/skipQuiz"
+            android:onClick="checkQuizCount"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout7"
+            app:srcCompat="@android:drawable/ic_media_ff" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

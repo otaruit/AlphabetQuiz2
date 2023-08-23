@@ -2,7 +2,6 @@ package com.android.example.myapplication
 
 import Player
 import android.annotation.SuppressLint
-import android.content.Context
 import android.content.Intent
 import android.media.MediaPlayer
 import android.os.Build

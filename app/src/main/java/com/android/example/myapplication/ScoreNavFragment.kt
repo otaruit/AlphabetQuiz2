@@ -66,6 +66,16 @@ class ScoreNavFragment : Fragment() {
         binding.totalScore.text = "${player.totalScore}"
         binding.resultLabel.text = points.toString()
 
+
+        // よう修正　、ポイントがうまく引き継がれていない
+//        val fragmentManager2 = parentFragmentManager // 親Fragmentの場合
+        val fragmentManager = requireActivity().supportFragmentManager // Activityの場合
+        val avatarContainerFragment = AvatarContainerFragment.newInstance(false,points)
+        fragmentManager.beginTransaction()
+            .replace(R.id.fragmentContainerView, avatarContainerFragment, "AvatarContainer")
+            .commit()
+
+
         if (booleanLevelUp) {
             viewModel = ViewModelProvider(requireActivity())[SharedViewModel::class.java]
             viewModel.isForegroundChanged.observe(
@@ -81,8 +91,6 @@ class ScoreNavFragment : Fragment() {
             binding.scoreNavContainer.foreground = null// 新しいforeground Drawable
             displayScore(points)
         }
-
-
 
         when (activityName) {
             "one_alphabet" -> {
