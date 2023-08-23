@@ -44,7 +44,7 @@ class WordQuizActivity : AppCompatActivity(), TextWatcher {
         viewActivity()
 
         val prefs = getSharedPreferences("userInformation", MODE_PRIVATE)
-        player = Player(prefs)
+        player = Player(prefs,this)
 
         // quiz_data.txtからクイズデータ読み取り
         readFile(getString(R.string.wordTextFileName))
@@ -211,9 +211,9 @@ class WordQuizActivity : AppCompatActivity(), TextWatcher {
             // 結果画面を表示
             val intent = Intent(this@WordQuizActivity, ResultActivity::class.java)
             intent.putExtra("FROM_ACTIVITY_NAME","one_word")
+            intent.putExtra("LEVEL_UP_BOOLEAN", player.checkLevelUp())
             intent.putExtra("RIGHT_ANSWER_COUNT", rightAnswerCount)
             startActivity(intent)
-
         } else {
             quizCount++
             binding.afterAnswered.visibility = View.INVISIBLE

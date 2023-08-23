@@ -33,7 +33,7 @@
             android:textStyle="bold" />
 
         <ImageView
-            android:id="@+id/imageView"
+            android:id="@+id/treasure"
             android:layout_width="150dp"
             android:layout_height="150dp"
             app:srcCompat="@drawable/crown_02_gold_blue" />

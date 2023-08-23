@@ -14,10 +14,9 @@
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/container"
-        android:name="com.android.example.myapplication.ItemFragment"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_gravity="center_vertical"
-        tools:layout="@layout/fragment_item" />
+        tools:visibility="gone" />
 
 </LinearLayout>

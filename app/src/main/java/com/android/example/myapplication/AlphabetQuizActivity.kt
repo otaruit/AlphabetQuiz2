@@ -3,7 +3,6 @@ package com.android.example.myapplication
 import Player
 import android.annotation.SuppressLint
 import android.content.Intent
-import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.media.MediaPlayer
 import android.os.Build
@@ -12,7 +11,6 @@ import android.view.View
 import android.widget.Button
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat.startActivity
 import com.airbnb.lottie.LottieAnimationView
 import com.android.example.myapplication.databinding.ActivityMainBinding
 import java.io.BufferedReader
@@ -25,7 +23,6 @@ class AlphabetQuizActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var player: Player
     private var level: Int = 0
-
 
     private var rightAnswer: String? = null
     private var rightAnswerCount = 0
@@ -46,9 +43,8 @@ class AlphabetQuizActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         val prefs = getSharedPreferences("userInformation", MODE_PRIVATE)
-        player = Player(prefs)
+        player = Player(prefs,this)
         level = player.level
-        println("れべる${player.level}")
 
         viewActivity()
 
@@ -283,8 +279,6 @@ class AlphabetQuizActivity : AppCompatActivity() {
     // 出題数をチェックする
     fun checkQuizCount(view: View) {
         if (quizCount == maxQuizCount) {
-
-            // スコアを保存
             player.savePlayerScore(rightAnswerCount)
 
             // 結果画面を表示
