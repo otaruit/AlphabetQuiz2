@@ -212,7 +212,6 @@
             android:background="@drawable/green_oval"
             android:clickable="true"
             android:contentDescription="@string/skipQuiz"
-            android:onClick="checkQuizCount"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout7"

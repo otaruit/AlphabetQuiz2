@@ -1,4 +1,4 @@
-package com.android.example.myapplication
+package my.app.example.myapplication
 
 import Player
 import android.annotation.SuppressLint
@@ -14,7 +14,7 @@ import android.widget.EditText
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import com.airbnb.lottie.LottieAnimationView
-import com.android.example.myapplication.databinding.ActivityWordQuizBinding
+import my.app.example.myapplication.databinding.ActivityWordQuizBinding
 import java.io.BufferedReader
 import java.io.InputStream
 import java.io.InputStreamReader
@@ -53,6 +53,11 @@ class WordQuizActivity : AppCompatActivity(), TextWatcher {
         answerEditor.isFocusableInTouchMode = true
         answerEditor.requestFocus()
         answerEditor.addTextChangedListener(this)
+
+        val skipBtn = binding.skipQuiz
+        skipBtn.setOnClickListener {
+            checkQuizCount()
+        }
 
         showNextQuiz()
     }

@@ -1,7 +1,8 @@
-package com.android.example.myapplication
+package my.app.example.myapplication
 
 import Player
 import android.annotation.SuppressLint
+import android.content.Context.MODE_PRIVATE
 import android.content.Intent
 import android.graphics.drawable.ColorDrawable
 import android.media.MediaPlayer
@@ -12,7 +13,7 @@ import android.widget.Button
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import com.airbnb.lottie.LottieAnimationView
-import com.android.example.myapplication.databinding.ActivityMainBinding
+import my.app.example.myapplication.databinding.ActivityMainBinding
 import java.io.BufferedReader
 import java.io.InputStream
 import java.io.InputStreamReader

@@ -1,18 +1,14 @@
-package com.android.example.myapplication
+package my.app.example.myapplication
 
 import Player
-import android.animation.ArgbEvaluator
 import android.animation.ObjectAnimator
-import android.animation.ValueAnimator
 import android.content.Intent
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.widget.Button
 import android.widget.ImageView
-import androidx.core.content.ContextCompat
-import com.android.example.myapplication.databinding.ActivityChooseAvatarBinding
+import my.app.example.myapplication.databinding.ActivityChooseAvatarBinding
 
 class ChooseAvatarActivity : AppCompatActivity() {
 

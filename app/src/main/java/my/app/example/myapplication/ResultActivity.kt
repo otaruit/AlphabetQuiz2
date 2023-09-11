@@ -1,7 +1,6 @@
-package com.android.example.myapplication
+package my.app.example.myapplication
 
 import Player
-import SharedViewModel
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
 import android.annotation.SuppressLint
@@ -11,8 +10,8 @@ import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.airbnb.lottie.LottieAnimationView
-import com.android.example.myapplication.ScoreNavFragment.Companion.newInstance
-import com.android.example.myapplication.databinding.ActivityResultBinding
+import my.app.example.myapplication.ScoreNavFragment.Companion.newInstance
+import my.app.example.myapplication.databinding.ActivityResultBinding
 import java.util.*
 
 

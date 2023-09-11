@@ -1,4 +1,4 @@
-package com.android.example.myapplication
+package my.app.example.myapplication
 
 import Player
 import SharedViewModel
@@ -14,7 +14,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.android.example.myapplication.databinding.FragmentScoreNavBinding
+import my.app.example.myapplication.databinding.FragmentScoreNavBinding
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -70,7 +70,7 @@ class ScoreNavFragment : Fragment() {
         // よう修正　、ポイントがうまく引き継がれていない
 //        val fragmentManager2 = parentFragmentManager // 親Fragmentの場合
         val fragmentManager = requireActivity().supportFragmentManager // Activityの場合
-        val avatarContainerFragment = AvatarContainerFragment.newInstance(false,points)
+        val avatarContainerFragment = AvatarContainerFragment.newInstance(false, points)
         fragmentManager.beginTransaction()
             .replace(R.id.fragmentContainerView, avatarContainerFragment, "AvatarContainer")
             .commit()

@@ -1,18 +1,10 @@
-package com.android.example.myapplication
+package my.app.example.myapplication
 
-import Player
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
-import android.view.animation.AnimationUtils
-import android.widget.ImageView
-import android.widget.ProgressBar
 import androidx.appcompat.app.AppCompatActivity
-import com.android.example.myapplication.databinding.ActivityTitleBinding
-import java.io.BufferedReader
-import java.io.IOException
-import java.io.InputStream
-import java.io.InputStreamReader
+import my.app.example.myapplication.databinding.ActivityTitleBinding
 
 class TitleActivity : AppCompatActivity() {
 

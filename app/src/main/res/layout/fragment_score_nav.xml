@@ -30,7 +30,7 @@
 
             <androidx.fragment.app.FragmentContainerView
                 android:id="@+id/fragmentContainerView"
-                android:name="com.android.example.myapplication.AvatarContainerFragment"
+                android:name="my.app.example.myapplication.AvatarContainerFragment"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 tools:layout="@layout/fragment_avatar_container" />

@@ -1,11 +1,8 @@
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.SharedPreferences
-import com.android.example.myapplication.R
-import java.io.BufferedReader
-import java.io.IOException
-import java.io.InputStream
-import java.io.InputStreamReader
+import my.app.example.myapplication.R
+
 
 
 class Player(preferences: SharedPreferences, context: Context) {
