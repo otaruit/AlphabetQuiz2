@@ -1,4 +1,4 @@
-package my.app.example.myapplication
+package alpha.app.example.myapplication
 
 import Player
 import SharedViewModel
@@ -14,7 +14,7 @@ import android.widget.ImageView
 import android.widget.ProgressBar
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import my.app.example.myapplication.databinding.FragmentAvatarContainerBinding
+import alpha.app.example.myapplication.databinding.FragmentAvatarContainerBinding
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -60,7 +60,11 @@ class AvatarContainerFragment : Fragment() {
         val activity = requireActivity()
 
         player = Player(prefs, activity)
-        itemSet(player.itemList)
+        player.itemSet(activity)
+
+        itemSet(player
+
+            .itemList)
 
         binding.labelLevel.text = "Lv.${player.level}"
         binding.labelName.text = "${player.name}ちゃん"

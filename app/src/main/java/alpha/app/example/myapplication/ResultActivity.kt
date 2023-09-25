@@ -1,4 +1,4 @@
-package my.app.example.myapplication
+package alpha.app.example.myapplication
 
 import Player
 import android.animation.Animator
@@ -10,8 +10,8 @@ import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.airbnb.lottie.LottieAnimationView
-import my.app.example.myapplication.ScoreNavFragment.Companion.newInstance
-import my.app.example.myapplication.databinding.ActivityResultBinding
+import alpha.app.example.myapplication.ScoreNavFragment.Companion.newInstance
+import alpha.app.example.myapplication.databinding.ActivityResultBinding
 import java.util.*
 
 

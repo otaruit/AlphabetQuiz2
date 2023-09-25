@@ -30,7 +30,7 @@
 
             <androidx.fragment.app.FragmentContainerView
                 android:id="@+id/fragmentContainerView"
-                android:name="my.app.example.myapplication.AvatarContainerFragment"
+                android:name="alpha.app.example.myapplication.AvatarContainerFragment"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 tools:layout="@layout/fragment_avatar_container" />
@@ -54,13 +54,12 @@
                     android:id="@+id/resultLabel2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginEnd="80dp"
+                    android:layout_marginStart="10dp"
                     android:fontFamily="@font/kosugimaru"
                     android:gravity="start"
                     android:text="@string/five_question"
                     android:textColor="@color/black"
-                    android:textSize="24sp"
+                    android:textSize="16sp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -84,12 +83,12 @@
                     android:id="@+id/num_answer_str"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginStart="80dp"
+                    android:layout_gravity="end"
+                    android:layout_marginEnd="10dp"
                     android:fontFamily="@font/kosugimaru"
                     android:text="@string/str_correct_q_num"
                     android:textColor="@color/black"
-                    android:textSize="20sp"
+                    android:textSize="16sp"
                     android:textStyle="bold" />
 
                 <LinearLayout
@@ -107,7 +106,7 @@
                         android:fontFamily="@font/kosugimaru"
                         android:text="ぜんぶで"
                         android:textColor="@color/black"
-                        android:textSize="20sp"
+                        android:textSize="16sp"
                         android:textStyle="bold" />
 
                     <TextView
@@ -131,7 +130,7 @@
                         android:fontFamily="@font/kosugimaru"
                         android:text="てんかくとく！"
                         android:textColor="@color/black"
-                        android:textSize="20sp"
+                        android:textSize="16sp"
                         android:textStyle="bold" />
                 </LinearLayout>
 

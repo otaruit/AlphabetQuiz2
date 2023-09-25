@@ -7,14 +7,15 @@
     android:background="@color/orange"
     android:gravity="center_horizontal|center_vertical"
     android:orientation="vertical"
-    android:padding="15dp">
+    android:padding="10dp">
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/green_display"
+        android:gravity="center_horizontal"
         android:orientation="vertical"
-        android:padding="10dp" >
+        android:padding="10dp">
 
         <TextView
             android:id="@+id/text_whatname"
@@ -25,14 +26,14 @@
             android:textAlignment="center"
 
             android:textColor="@color/black"
-            android:textSize="24sp"
+            android:textSize="20sp"
             android:textStyle="bold" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:background="@drawable/green_display"
         android:orientation="vertical"
         android:paddingTop="30dp"
@@ -46,35 +47,35 @@
 
             <ImageView
                 android:id="@+id/avatar1"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
                 android:layout_marginEnd="5dp"
                 android:clickable="true"
                 android:contentDescription="TODO"
                 android:onClick="getAvatarId"
-                android:padding="10dp"
+                android:padding="5dp"
                 app:srcCompat="@drawable/character_hime_01_blue_gold" />
 
             <ImageView
                 android:id="@+id/avatar2"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
                 android:backgroundTintMode="src_in"
                 android:clickable="true"
                 android:contentDescription="TODO"
                 android:onClick="getAvatarId"
-                android:padding="10dp"
+                android:padding="5dp"
                 app:srcCompat="@drawable/character_yusha_01_red" />
 
             <ImageView
                 android:id="@+id/avatar3"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
                 android:layout_marginStart="5dp"
                 android:clickable="true"
                 android:contentDescription="TODO"
                 android:onClick="getAvatarId"
-                android:padding="10dp"
+                android:padding="5dp"
                 app:srcCompat="@drawable/character_tenshi_brown" />
         </LinearLayout>
 
@@ -90,10 +91,10 @@
             android:id="@+id/button_next"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:onClick="goToNextActivity"
-            android:clickable="true"
             android:layout_marginTop="20dp"
             android:background="@drawable/green_oval"
+            android:clickable="true"
+            android:onClick="goToNextActivity"
             app:srcCompat="@android:drawable/ic_media_ff" />
     </LinearLayout>
 

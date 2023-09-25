@@ -1,4 +1,4 @@
-package my.app.example.myapplication
+package alpha.app.example.myapplication
 
 import Player
 import SharedViewModel
@@ -14,7 +14,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import my.app.example.myapplication.databinding.FragmentScoreNavBinding
+import alpha.app.example.myapplication.databinding.FragmentScoreNavBinding
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER

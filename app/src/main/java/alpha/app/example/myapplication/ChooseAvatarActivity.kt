@@ -1,6 +1,7 @@
-package my.app.example.myapplication
+package alpha.app.example.myapplication
 
 import Player
+import TextWriter
 import android.animation.ObjectAnimator
 import android.content.Intent
 import android.content.SharedPreferences
@@ -8,7 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
-import my.app.example.myapplication.databinding.ActivityChooseAvatarBinding
+import alpha.app.example.myapplication.databinding.ActivityChooseAvatarBinding
 
 class ChooseAvatarActivity : AppCompatActivity() {
 
@@ -27,7 +28,10 @@ class ChooseAvatarActivity : AppCompatActivity() {
     }
 
     private fun savePlayer(prefs:SharedPreferences) {
-        // 正解数を取得
+        // 獲得アイテム初期化
+        val textWriter = TextWriter(this)
+        textWriter.clearFile()
+
         var name = intent.getStringExtra("INPUTTED_NAME")
         if (name == "") name = "ななしのごんべ"
         val editor: SharedPreferences.Editor = prefs.edit()

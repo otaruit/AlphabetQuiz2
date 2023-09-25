@@ -1,10 +1,10 @@
-package my.app.example.myapplication
+package alpha.app.example.myapplication
 
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import my.app.example.myapplication.databinding.ActivityInputNameBinding
+import alpha.app.example.myapplication.databinding.ActivityInputNameBinding
 
 class InputNameActivity : AppCompatActivity() {
 

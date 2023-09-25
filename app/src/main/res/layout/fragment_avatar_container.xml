@@ -12,8 +12,7 @@
         android:background="@drawable/green_display"
         android:gravity="start"
         android:orientation="vertical"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp"
+        android:padding="10dp"
         tools:layout_editor_absoluteY="136dp">
 
         <LinearLayout
@@ -27,23 +26,26 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="sans-serif"
+                android:paddingLeft="15dp"
                 android:text="Lv.%d"
                 android:textColor="@color/black"
                 android:textSize="20sp"
                 android:textStyle="bold" />
+
             <ProgressBar
                 android:id="@+id/progressBar1"
                 style="?android:attr/progressBarStyleHorizontal"
-                android:layout_width="240dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
+                android:paddingEnd="15dp"
                 android:progressDrawable="@drawable/progressbar" />
 
         </LinearLayout>
 
         <FrameLayout
-            android:layout_width="280dp"
-            android:layout_height="200dp"
+            android:layout_width="match_parent"
+            android:layout_height="190dp"
             android:layout_gravity="center"
             android:elevation="3dp">
 
@@ -57,12 +59,12 @@
 
             <ImageView
                 android:id="@+id/item_building"
-                android:layout_width="160dp"
-                android:layout_height="160dp"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
                 android:layout_gravity="bottom|center"
                 android:elevation="5dp"
                 android:src="@drawable/yama_01"
-                android:translationX="-60dp"
+                android:translationX="-70dp"
                 android:translationY="8dp"
                 android:visibility="gone"
                 tools:visibility="visible" />
@@ -75,19 +77,19 @@
                 android:elevation="5dp"
                 android:src="@drawable/ufo_08"
                 android:translationX="-90dp"
-                android:translationY="-150dp"
+                android:translationY="-130dp"
                 android:visibility="gone"
                 tools:visibility="visible" />
 
             <ImageView
                 android:id="@+id/item_ground1"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:layout_gravity="bottom|center"
                 android:elevation="5dp"
                 android:src="@drawable/kinoko_blue"
                 android:translationX="90dp"
-                android:translationY="8dp"
+                android:translationY="0dp"
                 android:visibility="gone"
                 tools:visibility="visible" />
 
@@ -123,41 +125,49 @@
                 android:elevation="5dp"
                 android:src="@drawable/star_lightyellow"
                 android:translationX="80dp"
-                android:translationY="-130dp"
+                android:translationY="-110dp"
                 android:visibility="gone"
                 tools:visibility="visible" />
         </FrameLayout>
 
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
             android:layout_gravity="center"
+            android:gravity="center_horizontal"
             android:orientation="horizontal">
 
             <ImageView
                 android:id="@+id/mapTile_left"
-                android:layout_width="70dp"
-                android:layout_height="70dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:src="@drawable/maptile_jimen_sogen_02_left" />
 
             <ImageView
                 android:id="@+id/mapTile_center"
-                android:layout_width="70dp"
-                android:layout_height="70dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/green_center"
+                tools:ignore="ImageContrastCheck" />
+
+            <ImageView
+                android:id="@+id/mapTile_center3"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:src="@drawable/green_center"
                 tools:ignore="ImageContrastCheck" />
 
             <ImageView
                 android:id="@+id/mapTile_center2"
-                android:layout_width="70dp"
-                android:layout_height="70dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:src="@drawable/green_center"
                 tools:ignore="ImageContrastCheck" />
 
             <ImageView
                 android:id="@+id/mapTile_right"
-                android:layout_width="70dp"
-                android:layout_height="70dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:src="@drawable/maptile_jimen_sogen_02_right" />
         </LinearLayout>
 
@@ -166,17 +176,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginStart="25dp"
             android:layout_marginTop="5dp"
-            android:layout_marginEnd="25dp"
-            android:layout_marginBottom="5dp"
             android:background="@drawable/black_overlay_square"
             android:fontFamily="@font/kosugimaru"
             android:padding="5dp"
             android:text="@string/text_name"
             android:textAlignment="center"
             android:textColor="@color/white"
-            android:textSize="24sp"
+            android:textSize="16sp"
             android:textStyle="bold"
             tools:ignore="RtlCompat" />
     </LinearLayout>

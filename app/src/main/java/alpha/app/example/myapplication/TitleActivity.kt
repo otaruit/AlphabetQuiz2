@@ -1,10 +1,10 @@
-package my.app.example.myapplication
+package alpha.app.example.myapplication
 
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import my.app.example.myapplication.databinding.ActivityTitleBinding
+import alpha.app.example.myapplication.databinding.ActivityTitleBinding
 
 class TitleActivity : AppCompatActivity() {
 

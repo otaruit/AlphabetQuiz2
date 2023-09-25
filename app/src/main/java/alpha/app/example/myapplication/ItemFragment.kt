@@ -1,7 +1,9 @@
-package my.app.example.myapplication
+package alpha.app.example.myapplication
 
 import Player
 import SharedViewModel
+import TextWriter
+import android.app.Activity
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,7 +11,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import my.app.example.myapplication.databinding.FragmentItemBinding
+import alpha.app.example.myapplication.databinding.FragmentItemBinding
 import java.util.*
 
 // TODO: Rename parameter arguments, choose names that match
@@ -163,11 +165,9 @@ class ItemFragment : Fragment() {
     }
 
     private fun itemSave(context: Context, itemName: String) {
-        val textWriter = TextWriter(context)
+        val textWriter = TextWriter(context as Activity)
         player.itemList += itemName
-        println(player.itemList)
-        textWriter.writeItemsToFile("item_list.txt", player.itemList)
-
+        textWriter.saveText(player.itemList)
     }
 
     companion object {

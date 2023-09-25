@@ -1,4 +1,4 @@
-package my.app.example.myapplication
+package alpha.app.example.myapplication
 
 import Player
 import android.annotation.SuppressLint
@@ -14,7 +14,7 @@ import android.widget.EditText
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import com.airbnb.lottie.LottieAnimationView
-import my.app.example.myapplication.databinding.ActivityWordQuizBinding
+import alpha.app.example.myapplication.databinding.ActivityWordQuizBinding
 import java.io.BufferedReader
 import java.io.InputStream
 import java.io.InputStreamReader

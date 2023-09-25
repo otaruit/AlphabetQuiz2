@@ -1,7 +1,7 @@
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.SharedPreferences
-import my.app.example.myapplication.R
+import alpha.app.example.myapplication.R
 
 
 
@@ -23,7 +23,7 @@ class Player(preferences: SharedPreferences, context: Context) {
     }
 
     // アイテムゲットシステムここから
-    private fun itemSet(context: Context) {
+    fun itemSet(context: Context) {
         val textReader = TextReader(context)
         itemList = textReader.readItemFromFile("item_list.txt").toMutableList()
         }
